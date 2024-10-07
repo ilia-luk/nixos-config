@@ -1,0 +1,11 @@
+keys:
+  - &users:
+    - &ilia age129uftx2c3pddv4s3fr87x3vj63lvv6vwndery8yy64q085yavsksueyy2y
+  - &hosts:
+    - &nexus age1v2ms5jlr9qegseqxw55ga8jkwg8n4wwhy0mmftwedjdd9d37jgasfqxfqa
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+          - *ilia
+          - *nexus
