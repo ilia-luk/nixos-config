@@ -16,6 +16,7 @@
     ../../system/hardware/opengl.nix
     ../../system/hardware/bluetooth.nix
     ../../system/hardware/nvidia.nix
+    ../../system/lang/node.nix
     ../../system/wm/hyprland.nix
     ../../system/security/firewall.nix
     ../../system/security/openvpn.nix
@@ -77,6 +78,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     vim
+    lunarvim
     wget
     zsh
     git

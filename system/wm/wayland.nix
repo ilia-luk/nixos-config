@@ -29,9 +29,9 @@
     enable = true;
     videoDrivers = ["nvidia"];
     xkb = {
-      layout = "us, he";
+      layout = "us, il";
       variant = "";
-      options = "caps:escape";
+      options = "grp:alt_shift_toggle";
     };
   };
 
