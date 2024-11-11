@@ -19,6 +19,8 @@
     ../../system/lang/node.nix
     ../../system/lang/python.nix
     ../../system/lang/rust.nix
+    ../../system/lang/cc.nix
+    ../../system/lang/haskell.nix
     ../../system/wm/hyprland.nix
     ../../system/security/firewall.nix
     ../../system/security/openvpn.nix
