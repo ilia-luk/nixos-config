@@ -92,7 +92,6 @@
     age
     sops
     dig
-    gnumake
   ];
 
   # Enable zsh
