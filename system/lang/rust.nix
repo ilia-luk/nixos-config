@@ -2,7 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-      pnpm_8 
-      nodejs_22
+      cargo
   ];
 }

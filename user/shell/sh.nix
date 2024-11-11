@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-  # My shell aliases
   myAliases = {
     ll = "eza --icons --group-directories-first --total-size -l -a -@ -T -L=1";
     cat = "bat";
@@ -13,6 +12,11 @@
     fetch = "disfetch";
     gitfetch = "onefetch";
   };
+
+  myVariables = {
+    LV_BRANCH = "release-1.4/neovim-0.9";
+  };
+
 in {
   programs.zsh = {
     enable = true;
@@ -20,6 +24,7 @@ in {
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     shellAliases = myAliases;
+    variables = myVariables;
   };
 
   programs.bash = {

@@ -17,6 +17,8 @@
     ../../system/hardware/bluetooth.nix
     ../../system/hardware/nvidia.nix
     ../../system/lang/node.nix
+    ../../system/lang/python.nix
+    ../../system/lang/rust.nix
     ../../system/wm/hyprland.nix
     ../../system/security/firewall.nix
     ../../system/security/openvpn.nix
@@ -88,6 +90,7 @@
     age
     sops
     dig
+    gnumake
   ];
 
   # Enable zsh

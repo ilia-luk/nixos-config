@@ -12,6 +12,7 @@
 
   environment.systemPackages = with pkgs; [
     wayland
+    wl-clipboard-rs
     (sddm-chili-theme.override {
       themeConfig = {
         # background = config.stylix.image;
