@@ -25,6 +25,7 @@
       ilia-password = {};
       ilia-nordtoken = {};
       gh-oauth = {};
+      gh-access-token = {};
     };
   };
 }

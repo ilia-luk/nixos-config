@@ -87,6 +87,7 @@
     wget
     zsh
     git
+    gh
     home-manager
     rabbitmq-server
     redis
