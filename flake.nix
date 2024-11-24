@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
@@ -67,6 +68,17 @@
       config = {
         allowUnfree = true;
         allowUnfreePredicate = _: true;
+        permittedInsecurePackages = [ "openssl-1.1.1w" ];
+      };
+    };
+    overlay-unstable = final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+          permittedInsecurePackages = [ "openssl-1.1.1w" ];
+        };
       };
     };
 
@@ -84,13 +96,14 @@
     forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
     # Attribute set of nixpkgs for each system:
-    nixpkgsFor =
-      forAllSystems (system: import inputs.nixpkgs {inherit system;});
+    nixpkgsFor = forAllSystems (system: import inputs.nixpkgs {inherit system;});
+
   in {
     nixosConfigurations = {
       nexus = lib.nixosSystem {
         system = systemSettings.system;
         modules = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
           (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
         ];
         specialArgs = {
@@ -107,6 +120,7 @@
       ilia = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
           (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")
         ];
         extraSpecialArgs = {

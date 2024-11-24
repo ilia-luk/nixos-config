@@ -6,6 +6,7 @@
   pkgs,
   systemSettings,
   userSettings,
+  lib,
   ...
 }: {
   imports = [
@@ -98,7 +99,14 @@
   environment.shells = with pkgs; [zsh];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-
+  
+  # Global variables
+  environment.variables = {
+    MONGOMS_DISTRO = "ubuntu-22.04";
+    NIX_LD_LIBRARY_PATH = lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl_1_1 curlFull ]);
+    NIX_LD = builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";  
+  };
+  
   # Enable fontdir
   fonts.fontDir.enable = true;
 
