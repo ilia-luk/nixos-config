@@ -46,7 +46,7 @@
     discord
     slack
     _1password-gui
-    qbittorrent
+    # qbittorrent
     postman
     figma-linux
   ];
