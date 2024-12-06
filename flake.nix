@@ -13,60 +13,8 @@
     stylix.inputs.home-manager.follows = "home-manager";
     nixvim.url = "github:nix-community/nixvim/nixos-24.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
-    emacs-pin-nixpkgs.url = "nixpkgs/f72123158996b8d4449de481897d855bc47c7bf6";
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-    nix-doom-emacs.inputs.nixpkgs.follows = "emacs-pin-nixpkgs";
-    # nix-straight.url = "github:librephoenix/nix-straight.el/pgtk-patch";
-    # nix-straight.flake = false;
-    # nix-doom-emacs.inputs.nix-straight.follows = "nix-straight";
-    eaf = {
-      url = "github:emacs-eaf/emacs-application-framework";
-      flake = false;
-    };
-    eaf-browser = {
-      url = "github:emacs-eaf/eaf-browser";
-      flake = false;
-    };
-    org-nursery = {
-      url = "github:chrisbarrett/nursery";
-      flake = false;
-    };
-    org-yaap = {
-      url = "gitlab:tygrdev/org-yaap";
-      flake = false;
-    };
-    org-side-tree = {
-      url = "github:localauthor/org-side-tree";
-      flake = false;
-    };
-    org-timeblock = {
-      url = "github:ichernyshovvv/org-timeblock";
-      flake = false;
-    };
-    org-krita = {
-      url = "github:librephoenix/org-krita";
-      flake = false;
-    };
-    org-xournalpp = {
-      url = "gitlab:vherrmann/org-xournalpp";
-      flake = false;
-    };
-    org-sliced-images = {
-      url = "github:jcfk/org-sliced-images";
-      flake = false;
-    };
-    magit-file-icons = {
-      url = "github:librephoenix/magit-file-icons/abstract-icon-getters-compat";
-      flake = false;
-    };
-    phscroll = {
-      url = "github:misohena/phscroll";
-      flake = false;
-    };
-    mini-frame = {
-      url = "github:muffinmad/emacs-mini-frame";
-      flake = false;
-    };
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -129,11 +77,6 @@
         };
       };
     };
-    overlay-emacs = final: prev: {
-      emacs = import inputs.emacs-pin-nixpkgs {
-        system = systemSettings.system;
-      };
-    };
     pkgs = import inputs.nixpkgs {
       system = systemSettings.system;
       config = {
@@ -141,7 +84,7 @@
         allowUnfreePredicate = _: true;
         permittedInsecurePackages = [ "openssl-1.1.1w" ];
       };
-      overlays = [ overlay-unstable overlay-emacs];
+      overlays = [ overlay-unstable ];
     };
 
     # ---------- LIB ---------- #
@@ -183,6 +126,7 @@
         inherit pkgs;
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+          inputs.nix-doom-emacs-unstraightened.hmModule
           (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")
         ];
         extraSpecialArgs = {
