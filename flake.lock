@@ -639,9 +639,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "format-all": "format-all",
-        "nix-straight": [
-          "nix-straight"
-        ],
+        "nix-straight": "nix-straight",
         "nixpkgs": [
           "emacs-pin-nixpkgs"
         ],
@@ -674,16 +672,15 @@
     "nix-straight": {
       "flake": false,
       "locked": {
-        "lastModified": 1692033740,
-        "narHash": "sha256-oCd0yJiMArPr20nYVz/HGU1bmZnmiS30n9Z4MKZUHj0=",
-        "owner": "librephoenix",
+        "lastModified": 1694361489,
+        "narHash": "sha256-kjDp+j6OtrmqbtjQB5uuOtjS08+kgJQuxFqhWE1Y9Rw=",
+        "owner": "nix-community",
         "repo": "nix-straight.el",
-        "rev": "1e4a1375b04acb8a88d123a91585734410192d42",
+        "rev": "748be99b84be0b130e946288099806a0f16d6e57",
         "type": "github"
       },
       "original": {
-        "owner": "librephoenix",
-        "ref": "pgtk-patch",
+        "owner": "nix-community",
         "repo": "nix-straight.el",
         "type": "github"
       }
@@ -1011,7 +1008,6 @@
         "magit-file-icons": "magit-file-icons",
         "mini-frame": "mini-frame",
         "nix-doom-emacs": "nix-doom-emacs",
-        "nix-straight": "nix-straight",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
