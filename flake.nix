@@ -13,6 +13,60 @@
     stylix.inputs.home-manager.follows = "home-manager";
     nixvim.url = "github:nix-community/nixvim/nixos-24.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-pin-nixpkgs.url = "nixpkgs/f72123158996b8d4449de481897d855bc47c7bf6";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-doom-emacs.inputs.nixpkgs.follows = "emacs-pin-nixpkgs";
+    nix-straight.url = "github:librephoenix/nix-straight.el/pgtk-patch";
+    nix-straight.flake = false;
+    nix-doom-emacs.inputs.nix-straight.follows = "nix-straight";
+    eaf = {
+      url = "github:emacs-eaf/emacs-application-framework";
+      flake = false;
+    };
+    eaf-browser = {
+      url = "github:emacs-eaf/eaf-browser";
+      flake = false;
+    };
+    org-nursery = {
+      url = "github:chrisbarrett/nursery";
+      flake = false;
+    };
+    org-yaap = {
+      url = "gitlab:tygrdev/org-yaap";
+      flake = false;
+    };
+    org-side-tree = {
+      url = "github:localauthor/org-side-tree";
+      flake = false;
+    };
+    org-timeblock = {
+      url = "github:ichernyshovvv/org-timeblock";
+      flake = false;
+    };
+    org-krita = {
+      url = "github:librephoenix/org-krita";
+      flake = false;
+    };
+    org-xournalpp = {
+      url = "gitlab:vherrmann/org-xournalpp";
+      flake = false;
+    };
+    org-sliced-images = {
+      url = "github:jcfk/org-sliced-images";
+      flake = false;
+    };
+    magit-file-icons = {
+      url = "github:librephoenix/magit-file-icons/abstract-icon-getters-compat";
+      flake = false;
+    };
+    phscroll = {
+      url = "github:misohena/phscroll";
+      flake = false;
+    };
+    mini-frame = {
+      url = "github:muffinmad/emacs-mini-frame";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -46,31 +100,25 @@
       font = "Inconsolata"; # Selected font
       fontPkg = pkgs.inconsolata; # Font package
       editor = "nvim"; # Default editor;
-
+      defaultRoamDir = "Personal.p"; # Default org roam directory relative to ~/Org
       # editor spawning translator
       # generates a command that can be used to spawn editor inside a gui
       # EDITOR and TERM session variables must be set in home.nix or other module
       # I set the session variable SPAWNEDITOR to this in my home.nix for convenience
-      spawnEditor =
-        if
-          (
-            (editor == "vim")
-            || (editor == "nvim")
-            || (editor == "nano")
-          )
-        then "exec " + term + " -e " + editor
-        else editor;
+      spawnEditor = if (editor == "emacsclient") then
+                      "emacsclient -c -a 'emacs'"
+                    else
+                      (if
+                        (
+                          (editor == "vim")
+                          || (editor == "nvim")
+                          || (editor == "nano")
+                        )
+                      then "exec " + term + " -e " + editor
+                      else editor);
     };
 
     # ---------- PKGS --------- #
-    pkgs = import inputs.nixpkgs {
-      system = systemSettings.system;
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = _: true;
-        permittedInsecurePackages = [ "openssl-1.1.1w" ];
-      };
-    };
     overlay-unstable = final: prev: {
       unstable = import inputs.nixpkgs-unstable {
         system = systemSettings.system;
@@ -81,6 +129,20 @@
         };
       };
     };
+    overlay-emacs = final: prev: {
+      emacs = import inputs.emacs-pin-nixpkgs {
+        system = systemSettings.system;
+      };
+    };
+    pkgs = import inputs.nixpkgs {
+      system = systemSettings.system;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+        permittedInsecurePackages = [ "openssl-1.1.1w" ];
+      };
+      overlays = [ overlay-unstable overlay-emacs];
+    };
 
     # ---------- LIB ---------- #
     lib = inputs.nixpkgs.lib;
@@ -90,13 +152,13 @@
 
     # -------- SYSTEMS -------- #
     # Systems that can run tests:
-    supportedSystems = ["aarch64-linux" "i686-linux" "x86_64-linux"];
+    # supportedSystems = ["aarch64-linux" "i686-linux" "x86_64-linux"];
 
     # Function to generate a set based on supported systems:
-    forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
+    # forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
     # Attribute set of nixpkgs for each system:
-    nixpkgsFor = forAllSystems (system: import inputs.nixpkgs {inherit system;});
+    # nixpkgsFor = forAllSystems (system: import inputs.nixpkgs {inherit system;});
 
   in {
     nixosConfigurations = {

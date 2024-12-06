@@ -13,9 +13,9 @@
     gitfetch = "onefetch";
   };
 
-  myVariables = {
-    LV_BRANCH = "release-1.4/neovim-0.9";
-  };
+  # myVariables = {
+  #   LV_BRANCH = "release-1.4/neovim-0.9";
+  # };
 
 in {
   programs.zsh = {
@@ -24,7 +24,7 @@ in {
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     shellAliases = myAliases;
-    variables = myVariables;
+    # variables = myVariables;
   };
 
   programs.bash = {

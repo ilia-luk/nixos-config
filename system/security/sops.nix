@@ -1,6 +1,11 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   imports = with inputs; [
     sops-nix.nixosModules.sops
+  ];
+
+  environment.systemPackages = with pkgs; [
+    age
+    sops
   ];
 
   # Enable sops

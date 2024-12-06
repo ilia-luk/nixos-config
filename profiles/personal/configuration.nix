@@ -89,10 +89,6 @@
     git
     gh
     home-manager
-    rabbitmq-server
-    redis
-    age
-    sops
     dig
   ];
 
@@ -101,12 +97,8 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
   
-  # Global variables
-  environment.variables = {
-    MONGOMS_DISTRO = "ubuntu-22.04";
-    NIX_LD_LIBRARY_PATH = lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl_1_1 curlFull ]);
-    NIX_LD = builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";  
-  };
+  # Enable nix-ld
+  programs.nix-ld.enable = true;
   
   # Enable fontdir
   fonts.fontDir.enable = true;

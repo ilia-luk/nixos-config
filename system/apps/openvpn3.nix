@@ -5,7 +5,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    openvpn3
+    unstable.openvpn3
   ];
 
   programs.openvpn3.enable = true;
