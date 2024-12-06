@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-(setq doom-font (font-spec :family "Inconsolata" :size 27.0))
+(setq doom-font (font-spec :family "Inconsolata" :size 20.0))
 
 ;; I prefer visual lines
 (setq display-line-numbers-type 'visual
