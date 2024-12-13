@@ -106,6 +106,9 @@
   # Enable polkit
   security.polkit.enable = true;
 
+  # Enable direnv
+  programs.direnv.enable = true;
+
   # Desktop portals
   xdg.portal.enable = true;
 
