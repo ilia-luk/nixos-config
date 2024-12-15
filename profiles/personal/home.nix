@@ -39,7 +39,6 @@
 
   home.packages = with pkgs; [
     zsh
-    git
     firefox
     vlc
     libreoffice-fresh

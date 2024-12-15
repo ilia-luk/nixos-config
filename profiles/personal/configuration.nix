@@ -73,7 +73,17 @@
   };
 
   # Enable ssh
-  programs.ssh.startAgent = true;
+  programs.ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+    extraConfig = ''
+      Host github
+        AddKeysToAgent yes
+        Hostname github.com
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519
+    '';
+  };
 
   # openssh.authorizedKeys.keys = [
   #   (builtins.readFile ./keys/id_ed25519.pub)
@@ -86,8 +96,6 @@
     lunarvim
     wget
     zsh
-    git
-    gh
     home-manager
     dig
   ];
@@ -105,9 +113,6 @@
 
   # Enable polkit
   security.polkit.enable = true;
-
-  # Enable direnv
-  programs.direnv.enable = true;
 
   # Desktop portals
   xdg.portal.enable = true;

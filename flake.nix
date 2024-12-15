@@ -37,6 +37,7 @@
     # ----- USER SETTINGS ----- #
     userSettings = rec {
       username = "ilia"; # username
+      ghUsername = "ilia-luk"; 
       name = "Ilia"; # name/identifier
       email = "ilia@domusnetwork.io"; # email (used for certain configurations)
       dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
