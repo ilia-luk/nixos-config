@@ -31,6 +31,7 @@
     #../../user/lang/cc.nix
     #../../user/lang/haskell.nix
     ../../user/shell/sh.nix
+    ../../user/shell/direnv.nix
     ../../user/wm/hyprland.nix
   ];
 

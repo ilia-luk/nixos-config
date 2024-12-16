@@ -18,6 +18,27 @@
   # };
 
 in {
+  home.packages = with pkgs; [
+    disfetch
+    onefetch
+    gnugrep
+    gnused
+    gawk
+    eza
+    bottom
+    fd
+    bc
+    z-lua
+    vim
+    unzip
+    ripgrep
+    libnotify
+    killall
+    jq
+    grc
+    ack
+  ];
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -32,31 +53,4 @@ in {
     enableCompletion = true;
     shellAliases = myAliases;
   };
-
-  home.packages = with pkgs; [
-    disfetch
-    onefetch
-    gnugrep
-    gnused
-    gawk
-    eza
-    bottom
-    fd
-    bc
-    direnv
-    nix-direnv
-    z-lua
-    vim
-    unzip
-    ripgrep
-    libnotify
-    killall
-    jq
-    grc
-    ack
-  ];
-
-  programs.direnv.enable = true;
-  programs.direnv.enableZshIntegration = true;
-  programs.direnv.nix-direnv.enable = true;
 }

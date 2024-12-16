@@ -21,7 +21,7 @@
     LD_LIBRARY_PATH="${
       lib.makeLibraryPath (with pkgs; [
         stdenv.cc.cc
-        openssl
+        # openssl
         openssl_1_1 # https://discourse.nixos.org/t/how-to-fix-library-is-missing-or-cannot-be-opened-libcrypto-so-1-1/30730, https://github.com/nodkz/mongodb-memory-server/issues/782
         lzlib # related https://github.com/NixOS/nix/issues/1550
         libGL
