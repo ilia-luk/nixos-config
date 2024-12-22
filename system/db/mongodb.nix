@@ -1,6 +1,6 @@
 {pkgs, lib, ...}: {
   environment.systemPackages = with pkgs; [
-    unstable.mongodb
+    unstable.mongodb-7_0
     robo3t
     mongodb-compass
     lsb-release # For mongodb-memory-server 
@@ -16,8 +16,8 @@
   environment.variables = {
     MONGOMS_PLATFORM = "linux";
     MONGOMS_DISTRO = "ubuntu-22.04";
-    MONGOMS_VERSION = "7.0.14";
-    MONGOMS_DOWNLOAD_URL = "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.14.tgz";
+    MONGOMS_VERSION = "7.0.16";
+    MONGOMS_DOWNLOAD_URL = "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.16.tgz";
     LD_LIBRARY_PATH="${
       lib.makeLibraryPath (with pkgs; [
         stdenv.cc.cc
@@ -33,5 +33,12 @@
     # NIX_LD = builtins.readFile "${pkgs.unstable.stdenv.cc}/nix-support/dynamic-linker";  
   };
 
-  services.mongodb.enable = true;
+  services.mongodb = {
+    package = pkgs.unstable.mongodb-7_0;
+    enable = true;
+    extraConfig = ''
+      operationProfiling.mode: all
+      systemLog.quiet: false
+    '';
+  };
 }

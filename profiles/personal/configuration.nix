@@ -24,7 +24,7 @@
     ../../system/lang/haskell.nix
     ../../system/wm/hyprland.nix
     ../../system/security/firewall.nix
-    ../../system/security/openvpn.nix
+    # ../../system/security/openvpn.nix
     ../../system/style/stylix.nix
     ../../system/db/mongodb.nix
     ../../system/db/redis.nix
