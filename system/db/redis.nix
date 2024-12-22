@@ -4,6 +4,9 @@
     redisinsight
   ];
 
-  services.redis.servers."talos".enable = true;
-  services.redis.servers."talos".port = 6379;
+  services.redis.servers."talos" = {
+    enable = true;
+    port = 6379;
+    logLevel = "debug";
+  };
 }

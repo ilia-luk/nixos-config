@@ -4,6 +4,11 @@
     rabbitmq-server
   ];
 
-  services.rabbitmq.enable = true;
-  services.rabbitmq.managementPlugin.enable = true;
+  services.rabbitmq = {
+    enable = true;
+    plugins = [
+      "rabbitmq_tracing"
+    ];
+    managementPlugin.enable = true;
+  };
 }
