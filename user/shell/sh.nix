@@ -6,7 +6,7 @@
     grep = "batgrep";
     watch = "batwatch";
     diff = "batdiff";
-    htop = "btm";
+    top = "btm";
     fd = "fd -Lu";
     neofetch = "disfetch";
     fetch = "disfetch";
@@ -26,6 +26,7 @@ in {
     gawk
     eza
     bottom
+    htop
     fd
     bc
     z-lua
