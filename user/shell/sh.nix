@@ -38,6 +38,7 @@ in {
     jq
     grc
     ack
+    ngrok
   ];
 
   programs.zsh = {
@@ -53,5 +54,10 @@ in {
     enable = true;
     enableCompletion = true;
     shellAliases = myAliases;
+  };
+
+  programs.htop.settings = {
+    hide_userland_threads = 1;
+    hide_threads = 1;
   };
 }
