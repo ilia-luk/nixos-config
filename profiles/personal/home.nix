@@ -27,6 +27,7 @@
     ../../user/app/nixvim/nixvim.nix
     ../../user/app/thunderbird.nix
     #../../user/app/doom-emacs/doom.nix
+    ../../user/app/emacs.nix
     #../../user/hardware/bluetooth.nix
     #../../user/lang/cc.nix
     #../../user/lang/haskell.nix
