@@ -15,8 +15,8 @@
     stylix.inputs.home-manager.follows = "home-manager";
     nixvim.url = "github:nix-community/nixvim/nixos-24.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
-    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened/170784d586ef0a64a4a6717ad30d7371e4648fd4";
-    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # nix-doom-emacs-unstraightened.inputs.home-manager.follows = "home-manager-unstable";
   };
 

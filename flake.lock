@@ -411,7 +411,9 @@
       "inputs": {
         "doomemacs": "doomemacs",
         "emacs-overlay": "emacs-overlay",
-        "nixpkgs": [],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
         "systems": "systems"
       },
       "locked": {
@@ -425,7 +427,6 @@
       "original": {
         "owner": "marienz",
         "repo": "nix-doom-emacs-unstraightened",
-        "rev": "170784d586ef0a64a4a6717ad30d7371e4648fd4",
         "type": "github"
       }
     },

@@ -49,16 +49,16 @@
   t)
 
 ;; I also like evil mode visual movement
-(map! :map evil-normal-state-map
-      :desc "Move to next visual line"
-      "j" 'evil-next-visual-line
-      :desc "Move to previous visual line"
-      "k" 'evil-previous-visual-line)
+;; (map! :map evil-normal-state-map
+;;       :desc "Move to next visual line"
+;;       "j" 'evil-next-visual-line
+;;       :desc "Move to previous visual line"
+;;       "k" 'evil-previous-visual-line)
 
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+#| (setq org-directory "~/org/") |#
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -93,8 +93,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;
-
-
 ;; (use-package flycheck
 ;;   :ensure t
 ;;   :config

@@ -50,13 +50,13 @@
 
 
 
-;;(package! typescript-mode)
-;;(package! indium)
-;;(package! reason-mode)
-;;(package! prettier-js)
-;;(package! org-fancy-priorities)
-;;(package! move-text)
-;;(package! origami)
+;; (package! typescript-mode)
+;; (package! indium)
+;; (package! reason-mode)
+;; (package! prettier-js)
+;; (package! org-fancy-priorities)
+;; (package! move-text)
+;; (package! origami)
 (package! catppuccin-theme)
-;;(package! evil-escape :disable t)
-;;(package! dotenv-mode)
+;; (package! evil-escape :disable t)
+;; (package! dotenv-mode)
