@@ -39,6 +39,8 @@ in {
     grc
     ack
     ngrok
+    shfmt
+    shellcheck
   ];
 
   programs.zsh = {

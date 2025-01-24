@@ -1,5 +1,3 @@
-;; -*- no-byte-compile: t; -*-
-
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -20,13 +18,13 @@
 ;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-
-(setq doom-font (font-spec :family "Inconsolata" :size 16.0))
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
+;;(setq doom-font (font-spec :family "Inconsolata" :size 16.0))
+(setq doom-font (font-spec :family "Fira Code" :size 16 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 17))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -47,14 +45,6 @@
   :pre-init
   (setq evil-respect-visual-line-mode t) ;; sane j and k behavior
   t)
-
-;; I also like evil mode visual movement
-(map! :map evil-normal-state-map
-      :desc "Move to next visual line"
-      "j" 'evil-next-visual-line
-      :desc "Move to previous visual line"
-      "k" 'evil-previous-visual-line)
-
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -92,66 +82,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;;
 
-
-;; (use-package flycheck
-;;   :ensure t
-;;   :config
-;;   (add-hook 'typescript-mode-hook 'flycheck-mode))
-
-;; (defun setup-tide-mode ()
-;;   (interactive)
-;;   (tide-setup)
-;;   (flycheck-mode +1)
-;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-;;   (eldoc-mode +1)
-;;   (tide-hl-identifier-mode +1)
-;;   (company-mode +1))
-
-;; (use-package company
-;;   :ensure t
-;;   :config
-;;   (setq company-show-numbers t)
-;;   (setq company-tooltip-align-annotations t)
-;;   (setq company-tooltip-flip-when-above t)
-;;   (global-company-mode))
-
-;; (use-package web-mode
-;;   :ensure t
-;;   :mode (("\\.html?\\'" . web-mode)
-;;          ("\\.tsx\\'" . web-mode)
-;;          ("\\.jsx\\'" . web-mode))
-;;   :config
-;;   (setq web-mode-markup-indent-offset 2
-;;         web-mode-css-indent-offset 2
-;;         web-mode-code-indent-offset 2
-;;         web-mode-block-padding 2
-;;         web-mode-comment-style 2
-
-;;         web-mode-enable-css-colorization t
-;;         web-mode-enable-auto-pairing t
-;;         web-mode-enable-comment-keywords t
-;;         web-mode-enable-current-element-highlight t
-;;         )
-;;   (add-hook 'web-mode-hook
-;;             (lambda ()
-;;               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-;; 		(setup-tide-mode))))
-;;   (flycheck-add-mode 'typescript-tslint 'web-mode))
-
-;; (use-package typescript-mode
-;;   :ensure t
-;;   :config
-;;   (setq typescript-indent-level 2)
-;;   (add-hook 'typescript-mode #'subword-mode))
-
-;; (use-package tide
-;;   :init
-;;   :ensure t
-;;   :after (typescript-mode company flycheck)
-;;   :hook ((typescript-mode . tide-setup)
-;;          (typescript-mode . tide-hl-identifier-mode)
-;;          (before-save . tide-format-before-save)))
-
-;; (provide 'typescript)
+;; fixes laggy insert mode
+(add-hook 'evil-insert-state-entry-hook (lambda () 
+                                                    (font-lock-mode -1)
+                                                    (font-lock-mode 1)
+                                                    ))

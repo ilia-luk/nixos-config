@@ -48,15 +48,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-
-
-;;(package! typescript-mode)
-;;(package! indium)
-;;(package! reason-mode)
-;;(package! prettier-js)
-;;(package! org-fancy-priorities)
-;;(package! move-text)
-;;(package! origami)
 (package! catppuccin-theme)
-;;(package! evil-escape :disable t)
-;;(package! dotenv-mode)
