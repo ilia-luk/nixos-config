@@ -7,6 +7,6 @@
     doomDir = ./doom.d;  # or e.g. `./doom.d` for a local configuration
   };
 
-  # services.emacs.enable = true;
+  services.emacs.enable = true;
 }
 

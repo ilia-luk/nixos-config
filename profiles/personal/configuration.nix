@@ -6,7 +6,6 @@
   pkgs,
   systemSettings,
   userSettings,
-  lib,
   ...
 }: {
   imports = [
