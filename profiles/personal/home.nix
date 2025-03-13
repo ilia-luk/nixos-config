@@ -24,7 +24,8 @@
     ../../user/app/tmux.nix
     ../../user/app/zellij.nix
     ../../user/app/hyprpaper.nix
-    ../../user/app/nixvim/nixvim.nix
+    # ../../user/app/nixvim/nixvim.nix
+    ../../user/app/neovim/neovim.nix
     ../../user/app/thunderbird.nix
     ../../user/app/doom-emacs/doom.nix
     #../../user/hardware/bluetooth.nix
