@@ -100,10 +100,11 @@
     dig
   ];
 
-  # Enable zsh
-  environment.shells = with pkgs; [zsh];
-  users.defaultUserShell = pkgs.zsh;
+  # Enable zsh and nushell
+  environment.shells = with pkgs; [zsh nushell];
+  users.defaultUserShell = pkgs.nushell;
   programs.zsh.enable = true;
+  programs.nushell.enable = true;
   
   # Enable nix-ld
   programs.nix-ld.enable = true;
