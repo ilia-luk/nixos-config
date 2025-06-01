@@ -42,7 +42,7 @@
 
   home.packages = with pkgs; [
     zsh
-    firefox
+    unstable.firefox
     vlc
     libreoffice-fresh
     discord

@@ -28,6 +28,7 @@
     ../../system/db/mongodb.nix
     ../../system/db/redis.nix
     ../../system/db/rabbitmq.nix
+    ../../system/db/postgresql.nix
     ../../system/apps/dropbox.nix
     ../../system/apps/wgnord.nix
     ../../system/apps/openvpn3.nix
@@ -92,10 +93,9 @@
   # System packages
   environment.systemPackages = with pkgs; [
     nixfmt-classic
-    vim
-    lunarvim
     wget
     zsh
+    nushell
     home-manager
     dig
   ];

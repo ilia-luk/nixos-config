@@ -5,8 +5,8 @@
 }:
 with config.lib.stylix.colors; {
   home.packages = with pkgs; [
-    unstable.neovim
+    unstable.neovim-unwrapped
   ];
 
-  programs.neovim.enable = true;
+#programs.neovim.enable = true;
 }
