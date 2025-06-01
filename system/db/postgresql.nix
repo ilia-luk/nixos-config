@@ -20,11 +20,11 @@
     ];
   };
 
-  services.pgadmin = {
-    enable = true;
-    initialEmail = userSettings.email; 
-    initialPasswordFile = pkgs.writeText "pgadminPW" ''
-      admin
-    '';
-  };
+  # services.pgadmin = {
+  #   enable = true;
+  #   initialEmail = userSettings.email; 
+  #   initialPasswordFile = pkgs.writeText "pgadminPW" ''
+  #     admin
+  #   '';
+  # };
 }
