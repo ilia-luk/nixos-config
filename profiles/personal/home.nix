@@ -25,6 +25,7 @@
     ../../user/app/tmux.nix
     ../../user/app/zellij.nix
     ../../user/app/hyprpaper.nix
+    ../../user/app/carapace.nix
     # ../../user/app/nixvim/nixvim.nix
     ../../user/app/thunderbird.nix
     ../../user/app/doom-emacs/doom.nix
@@ -41,7 +42,6 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    zsh
     unstable.firefox
     vlc
     libreoffice-fresh

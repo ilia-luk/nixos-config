@@ -62,6 +62,7 @@ in {
   stylix.targets.hyprland.enable = true;
   # stylix.targets.hyprpaper.enable = true;
   stylix.targets.waybar.enable = true;
+  stylix.targets.nushell.enable = true;
 
   fonts.fontconfig.defaultFonts = {
     monospace = [userSettings.font];
