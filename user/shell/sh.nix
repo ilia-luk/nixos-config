@@ -76,6 +76,12 @@ in {
         }
       } 
       $env.PATH = ($env.PATH | split row (char esep) | prepend /home/myuser/.apps | append /usr/bin/env)
+      { ||
+        if (which direnv | is-empty) {
+          return
+        }
+        direnv export json | from json | default {} | load-env
+      }
     '';
     shellAliases = myAliases;
   };  
