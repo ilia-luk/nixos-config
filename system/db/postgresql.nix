@@ -10,9 +10,9 @@
     ensureUsers = [
       {
         name = "lamp";
-        ensurePermissions = {
-          "DATABASE lamp" = "ALL PRIVILEGES";
-        };
+        # ensurePermissions = {
+        #   "DATABASE lamp" = "ALL PRIVILEGES";
+        # };
       }
     ];
     ensureDatabases = [
