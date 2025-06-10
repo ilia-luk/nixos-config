@@ -13,7 +13,7 @@ with config.lib.stylix.colors; {
   programs.starship.enableNushellIntegration = true;
   programs.starship.settings = {
     format = "[┌─$git_branch$git_status$git_commit$git_state$git_metrics$fill─> ](bold green)$character$cmd_duration$time
-[│](bold green) $directory$rust$nodejs$bun$python$conda$package
+[│](bold green) $directory$direnv$rust$nodejs$bun$python$conda$package
 [└──>](bold green) ";
     scan_timeout = 10;
     add_newline = true;
@@ -99,7 +99,15 @@ with config.lib.stylix.colors; {
       format = "| [🍔 $version](bold green) ";
     };
     direnv = {
+      format = "[$symbol $loaded / $allowed]($style) ";
       disabled = false;
+      symbol = "🗁  ";
+      style = "yellow";
+      allowed_msg = "Allowed: [✓]";
+      not_allowed_msg = "Allowed: [x]";
+      denied_msg = "Denied [🛑]";
+      loaded_msg = "Loaded: [✓]";
+      unloaded_msg = "Loaded: [x]";
     };
     time = {
       disabled = false;
