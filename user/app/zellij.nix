@@ -19,7 +19,7 @@ with config.lib.stylix.colors; {
       };
       simplified_ui = false;
       copy_on_select = true;
-      default_shell = "zsh";
+      default_shell = "nu";
       theme = "catppuccin";
       themes = {
         catppuccin = {
@@ -37,7 +37,6 @@ with config.lib.stylix.colors; {
         };
       };
     };
-    # enableZshIntegration = true;
   };
 
   home.shellAliases = {

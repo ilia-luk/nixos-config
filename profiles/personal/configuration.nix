@@ -96,6 +96,7 @@
     wget
     zsh
     nushell
+    fish
     home-manager
     dig
   ];

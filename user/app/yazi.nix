@@ -9,6 +9,7 @@ with config.lib.stylix.colors; {
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    enableNushellIntegration = true;
     settings = {
       show_hidden = true;
       sort_dir_first = true;

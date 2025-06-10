@@ -10,41 +10,38 @@ with config.lib.stylix.colors; {
   ];
 
   programs.starship.enable = true;
+  programs.starship.enableNushellIntegration = true;
   programs.starship.settings = {
-    format = lib.concatStrings [
-      "$git_branch"
-      "$git_status"
-      "$line_break"
-      "$directory"
-      "$character"
-    ];
+    format = "[┌─$git_branch$git_status$git_commit$git_state$git_metrics$fill─> ](bold green)$character$cmd_duration$time
+[│](bold green) $directory$rust$nodejs$bun$python$conda$package
+[└──>](bold green) ";
     scan_timeout = 10;
     add_newline = true;
     command_timeout = 1000;
+    fill = {
+      symbol = "─";
+      style = "bold green";
+    };
     character = {
-      success_symbol = "[](magenta)";
-      error_symbol = "[](red)";
-    };
-    username = {
-      style_user = "white";
-      style_root = "white";
-      format = "[$user]($style) ";
-      disabled = false;
-      show_always = true;
-    };
-    hostname = {
-      ssh_only = false;
-      format = "@ [$hostname](bold yellow) ";
-      disabled = false;
+      success_symbol = "[✓ ](green)";
+      error_symbol = "[ ](red)";
     };
     directory = {
-      home_symbol = "󰋞 ~";
-      read_only_style = "197";
-      read_only = "  ";
-      style = "bold blue";
       format = "[$path]($style)[$read_only]($read_only_style) ";
+      home_symbol = "󰋞 ~";
+      read_only = "  ";
+      read_only_style = "197";
+      style = "bold blue";
+      truncation_symbol = "...";
+      fish_style_pwd_dir_length = 8;
     };
-    git_branch = {
+    package = {
+      format = " | [$symbol$version]($style) ";
+      symbol = "📦 ";
+      version_format = "v$raw";
+      style = "bold 208";
+    };
+     git_branch = {
       symbol = " ";
       format = "[$symbol $branch]($style) ";
       style = "bold green";
@@ -63,6 +60,64 @@ with config.lib.stylix.colors; {
       staged = "[++\($count\)](green)";
       renamed = "襁 ";
       deleted = " ";
+    };
+    git_commit = {
+      commit_hash_length = 4;
+      tag_symbol = "🔖 ";
+    };
+     hostname = {
+      ssh_only = false;
+      format = "@ [$hostname](bold yellow) ";
+      disabled = false;
+    };
+    username = {
+      style_user = "white";
+      style_root = "white";
+      format = "[$user]($style) ";
+      disabled = false;
+      show_always = true;
+    };
+    sudo = {
+      style = "bold green";
+      symbol = "👩‍💻 ";
+      disabled = false;
+    };
+    rust = {
+      format = "| [🦀 $version](red bold)";
+    };
+    python = {
+      symbol = "| 👾 ";
+      pyenv_version_name = true;
+    };
+    conda = {
+      format = "| [$symbol$environment](dimmed green) ";
+    };
+    nodejs = {
+      format = "| [🤖 $version](bold green) ";
+    };
+    bun = {
+      format = "| [🍔 $version](bold green) ";
+    };
+    direnv = {
+      disabled = false;
+    };
+    time = {
+      disabled = false;
+      format = "[\\[ $time \\]]($style)";
+      style = "bold yellow";
+      time_format = "%T";
+      utc_time_offset = "local";
+    };
+    cmd_duration = {
+      min_time = 500;
+      format = "[\\[ $duration \\]](bold cyan) | ";
+    };
+    shell = {
+      disabled = false;
+      nu_indicator = "❯";
+      unknown_indicator = "❯";
+      format = "[$indicator]($style) ";
+      style = "bold green";
     };
   };
 }

@@ -26,6 +26,8 @@
     ../../user/app/zellij.nix
     ../../user/app/hyprpaper.nix
     ../../user/app/carapace.nix
+    ../../user/app/atuin.nix
+    ../../user/app/zoxide.nix
     # ../../user/app/nixvim/nixvim.nix
     ../../user/app/thunderbird.nix
     ../../user/app/doom-emacs/doom.nix
