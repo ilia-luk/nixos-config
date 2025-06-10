@@ -99,6 +99,7 @@
     fish
     home-manager
     dig
+    xh
   ];
 
   # Enable zsh and nushell
