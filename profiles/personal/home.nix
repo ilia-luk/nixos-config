@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  userSettings,
-  ...
-}: {
+{ config, pkgs, userSettings, ... }: {
   # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = userSettings.username;
   home.homeDirectory = "/home/" + userSettings.username;
@@ -34,6 +29,7 @@
     #../../user/hardware/bluetooth.nix
     #../../user/lang/cc.nix
     #../../user/lang/haskell.nix
+    ../../user/security/sops.nix
     ../../user/shell/sh.nix
     ../../user/shell/direnv.nix
     ../../user/shell/devenv.nix

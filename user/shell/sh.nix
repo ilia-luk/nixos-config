@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, config, ... }:
+let
   myAliases = {
     ll = "ls -a";
     cat = "bat";
@@ -51,11 +52,14 @@ in {
     # variables = myVariables;
   };
 
-  programs.nushell = { 
+  programs.nushell = {
     enable = true;
     # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
     # configFile.source = ./.../config.nu;
     # for editing directly to config.nu 
+    envFile.text = ''
+      $env.OPENAI_API_KEY = (cat ${config.sops.secrets.openai-api-key.path})
+    '';
     configFile.text = ''
       # Defaults
       $env.config = ($env.config? | default {})
@@ -146,7 +150,7 @@ in {
       }
     '';
     shellAliases = myAliases;
-  };  
+  };
 
   programs.bash = {
     enable = true;

@@ -1,11 +1,5 @@
-{
-  inputs,
-  userSettings,
-  ...
-}: {
-  imports = with inputs; [
-    sops-nix.homeManagerModules.sops
-  ];
+{ inputs, userSettings, ... }: {
+  imports = with inputs; [ sops-nix.homeManagerModules.sops ];
 
   # Enable sops
   sops = {
@@ -25,8 +19,9 @@
       "private_keys/${userSettings.username}" = {
         path = "/home/${userSettings.username}/.ssh/id_ed25519";
       };
-      ilia-password = {};
-      gh-oauth = {};
+      ilia-password = { };
+      gh-oauth = { };
+      openai-api-key = { };
     };
   };
 }
