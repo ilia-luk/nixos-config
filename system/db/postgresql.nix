@@ -1,23 +1,16 @@
-{pkgs, userSettings, ...}: {
-  environment.systemPackages = with pkgs; [
-    postgresql
-    pgadmin
-  ];
+{ pkgs, userSettings, ... }: {
+  environment.systemPackages = with pkgs; [ postgresql pgadmin ];
 
   services.postgresql = {
     enable = true;
-    port = 15432;
-    ensureUsers = [
-      {
-        name = "lamp";
-        # ensurePermissions = {
-        #   "DATABASE lamp" = "ALL PRIVILEGES";
-        # };
-      }
-    ];
-    ensureDatabases = [
-      "lamp"
-    ];
+    settings = { port = 15432; };
+    ensureUsers = [{
+      name = "lamp";
+      # ensurePermissions = {
+      #   "DATABASE lamp" = "ALL PRIVILEGES";
+      # };
+    }];
+    ensureDatabases = [ "lamp" ];
   };
 
   # services.pgadmin = {
