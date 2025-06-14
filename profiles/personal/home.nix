@@ -40,13 +40,13 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    unstable.firefox
+    firefox
+    unstable.discord
+    unstable.qbittorrent
     vlc
     libreoffice-fresh
-    discord
     slack
     _1password-gui
-    unstable.qbittorrent
     postman
     figma-linux
   ];
