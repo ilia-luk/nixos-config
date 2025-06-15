@@ -41,26 +41,13 @@ in {
       package = pkgs.noto-fonts-monochrome-emoji;
     };
     sizes = {
-      terminal = 16;
+      terminal = 14;
       applications = 12;
       popups = 12;
       desktop = 12;
     };
   };
-  stylix.targets.kitty.enable = true;
-  # stylix.targets.yazi.enable = true;
-  stylix.targets.zellij.enable = true;
-  stylix.targets.tmux.enable = true;
-  # stylix.targets.mako.enable = true;
-  # stylix.targets.fuzzel.enable = true;
-  # stylix.targets.lazyvim.enable = true;
-  stylix.targets.fzf.enable = true;
   stylix.targets.firefox.enable = true;
-  # stylix.targets.bat.enable = true;
-  stylix.targets.hyprland.enable = true;
-  # stylix.targets.hyprpaper.enable = true;
-  stylix.targets.waybar.enable = true;
-  stylix.targets.nushell.enable = true;
 
   fonts.fontconfig.defaultFonts = {
     monospace = [ userSettings.font ];

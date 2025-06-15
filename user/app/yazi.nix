@@ -88,7 +88,7 @@ with config.lib.stylix.colors; {
       };
       status = {
         overall = {
-          fg = "#${base03}";
+          fg = "#${base05}";
           bg = "#${base03}";
         };
         sep_left = {
