@@ -1,12 +1,13 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 
 {
   # Allow unfree software per-package
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ];
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -36,6 +37,6 @@
     "loglevel=4"
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
-    "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1" 
+    "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
   ];
 }

@@ -1,23 +1,21 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  userSettings,
-  ...
-}: let
-  themePath = "../../../themes" + ("/" + userSettings.theme + "/" + userSettings.theme) + ".yaml";
-  themePolarity = lib.removeSuffix "\n" (builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/polarity.txt"));
-  backgroundUrl = builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/backgroundurl.txt");
-  backgroundSha256 = builtins.readFile (./. + "../../../themes/" + ("/" + userSettings.theme) + "/backgroundsha256.txt");
+{ lib, pkgs, inputs, userSettings, ... }:
+let
+  themePath = "../../../themes"
+    + ("/" + userSettings.theme + "/" + userSettings.theme) + ".yaml";
+  themePolarity = lib.removeSuffix "\n" (builtins.readFile
+    (./. + "../../../themes" + ("/" + userSettings.theme) + "/polarity.txt"));
+  backgroundUrl = builtins.readFile (./. + "../../../themes"
+    + ("/" + userSettings.theme) + "/backgroundurl.txt");
+  backgroundSha256 = builtins.readFile (./. + "../../../themes/"
+    + ("/" + userSettings.theme) + "/backgroundsha256.txt");
 in {
-  home.packages = with pkgs; [
-    noto-fonts-monochrome-emoji
-  ];
+  home.packages = with pkgs; [ noto-fonts-monochrome-emoji ];
 
-  imports = [inputs.stylix.homeManagerModules.stylix];
+  imports = [ inputs.stylix.homeModules.stylix ];
 
   home.file.".currenttheme".text = userSettings.theme;
 
+  stylix.enable = true;
   stylix.autoEnable = false;
   stylix.polarity = themePolarity;
   stylix.image = pkgs.fetchurl {
@@ -50,23 +48,23 @@ in {
     };
   };
   stylix.targets.kitty.enable = true;
-  stylix.targets.yazi.enable = true;
+  # stylix.targets.yazi.enable = true;
   stylix.targets.zellij.enable = true;
   stylix.targets.tmux.enable = true;
-  stylix.targets.mako.enable = true;
-  stylix.targets.fuzzel.enable = true;
+  # stylix.targets.mako.enable = true;
+  # stylix.targets.fuzzel.enable = true;
   # stylix.targets.lazyvim.enable = true;
   stylix.targets.fzf.enable = true;
   stylix.targets.firefox.enable = true;
-  stylix.targets.bat.enable = true;
+  # stylix.targets.bat.enable = true;
   stylix.targets.hyprland.enable = true;
   # stylix.targets.hyprpaper.enable = true;
   stylix.targets.waybar.enable = true;
   stylix.targets.nushell.enable = true;
 
   fonts.fontconfig.defaultFonts = {
-    monospace = [userSettings.font];
-    sansSerif = [userSettings.font];
-    serif = [userSettings.font];
+    monospace = [ userSettings.font ];
+    sansSerif = [ userSettings.font ];
+    serif = [ userSettings.font ];
   };
 }

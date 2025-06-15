@@ -1,34 +1,13 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    ./pipewire.nix
-    ./dbus.nix
-    ./gnome-keyring.nix
-    ./fonts.nix
-  ];
+{ config, pkgs, ... }: {
+  imports =
+    [ ./pipewire.nix ./dbus.nix ./gnome-keyring.nix ./fonts.nix ./sddm.nix ];
 
-  environment.systemPackages = with pkgs; [
-    wayland
-    wl-clipboard-rs
-    (sddm-chili-theme.override {
-      themeConfig = {
-        # background = config.stylix.image;
-        ScreenWidth = 3840;
-        ScreenHeight = 1800;
-        blur = true;
-        recursiveBlurLoops = 3;
-        recursiveBlurRadius = 5;
-      };
-    })
-  ];
+  environment.systemPackages = with pkgs; [ wayland wl-clipboard-rs ];
 
   # Configure xwayland
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
+    videoDrivers = [ "nvidia" ];
     xkb = {
       layout = "us, il";
       variant = "";
@@ -36,16 +15,7 @@
     };
   };
 
-  # Configure Login manager
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    enableHidpi = true;
-    theme = "chili";
-    package = pkgs.sddm;
-  };
-
-  # COnfigure environment
+  # Configure environment
   environment.sessionVariables = {
     # If your cursor becomes invisible
     # WLR_NO_HARDWARE_CURSORS = "1";

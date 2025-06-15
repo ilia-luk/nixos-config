@@ -1,12 +1,4 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  userSettings,
-  systemSettings,
-  ...
-}: {
+{ inputs, config, lib, pkgs, userSettings, systemSettings, ... }: {
   imports = [
     ../app/kitty.nix
     # (import ../../app/dmenu-scripts/networkmanager-dmenu.nix {
@@ -16,10 +8,10 @@
   ];
   gtk.cursorTheme = {
     package = pkgs.quintom-cursor-theme;
-    name =
-      if (config.stylix.polarity == "light")
-      then "Quintom_Ink"
-      else "Quintom_Snow";
+    name = if (config.stylix.polarity == "light") then
+      "Quintom_Ink"
+    else
+      "Quintom_Snow";
     size = 36;
   };
 
@@ -29,120 +21,106 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    settings = {};
-    xwayland = {enable = true;};
-    systemd.enable = true;
-    extraConfig =
-      ''
-        ################
-        ### MONITORS ###
-        ################
+    xwayland = { enable = true; };
+    systemd = {
+      enable = true;
+      variables = [ "--all" ];
+    };
+    package = null;
+    portalPackage = null;
+    extraConfig = ''
+      ################
+      ### MONITORS ###
+      ################
 
-        # See https://wiki.hyprland.org/Configuring/Monitors/
-        monitor=DP-1,3840x1600@60,0x0,1.0
-        workspace=1, monitor:DP-1
-        workspace=2, monitor:DP-1
-        workspace=3, monitor:DP-1
-        workspace=4, monitor:DP-1
-        workspace=5, monitor:DP-1
-        workspace=6, monitor:DP-1
-        workspace=7, monitor:DP-1
-        workspace=8, monitor:DP-1
-        workspace=9, monitor:DP-1
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      monitor=DP-1,3840x1600@60,0x0,1.0
+      workspace=1, monitor:DP-1
+      workspace=2, monitor:DP-1
+      workspace=3, monitor:DP-1
+      workspace=4, monitor:DP-1
+      workspace=5, monitor:DP-1
+      workspace=6, monitor:DP-1
+      workspace=7, monitor:DP-1
+      workspace=8, monitor:DP-1
+      workspace=9, monitor:DP-1
 
 
-        ###################
-        ### MY PROGRAMS ###
-        ###################
-        
-        # See https://wiki.hyprland.org/Configuring/Keywords/
-        
-        # Set programs that you use
-        $terminal = kitty
-        $fileManager = kitty yazi
-        $menu = fuzzel
-        
-        
-        #################
-        ### AUTOSTART ###
-        #################
-        
-        # Autostart necessary processes (like notifications daemons, status bars, etc.)
-        # Or execute your favorite apps at launch like this:
-        
-        exec-once = nm-applet -- indicator
-        exec-once = waybar
-        # exec-once = hyprpaper
-        
-        
-        #############################
-        ### ENVIRONMENT VARIABLES ###
-        #############################
-        
-        # See https://wiki.hyprland.org/Configuring/Environment-variables/
-        
-        env = XCURSOR_SIZE,24
-        env = HYPRCURSOR_SIZE,24
+      ###################
+      ### MY PROGRAMS ###
+      ###################
 
-        # nvidia patch
-        env = LIBVA_DRIVER_NAME,nvidia
-        env = XDG_SESSION_TYPE,wayland
-        env = GBM_BACKEND,nvidia-drm
-        env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-        
-        
-        #####################
-        ### LOOK AND FEEL ###
-        #####################
-        
-        # Refer to https://wiki.hyprland.org/Configuring/Variables/
-        
-        # https://wiki.hyprland.org/Configuring/Variables/#general
-        general { 
-          gaps_in = 6
-          gaps_out = 12
+      # See https://wiki.hyprland.org/Configuring/Keywords/
 
-          border_size = 2
+      # Set programs that you use
+      $terminal = kitty
+      $fileManager = kitty yazi
+      $menu = fuzzel
 
-          # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-          col.active_border = 0xff''
-      + config.lib.stylix.colors.base08
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base09
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0A
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0B
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0C
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0D
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0E
-      + " "
-      + ''0xff''
-      + config.lib.stylix.colors.base0F
-      + " "
-      + ''        270deg
-                col.inactive_border = 0xaa''
-      + config.lib.stylix.colors.base02
+
+      #################
+      ### AUTOSTART ###
+      #################
+
+      # Autostart necessary processes (like notifications daemons, status bars, etc.)
+      # Or execute your favorite apps at launch like this:
+
+      exec-once = nm-applet -- indicator
+      exec-once = waybar
+      # exec-once = hyprpaper
+
+
+      #############################
+      ### ENVIRONMENT VARIABLES ###
+      #############################
+
+      # See https://wiki.hyprland.org/Configuring/Environment-variables/
+
+      env = XCURSOR_SIZE,24
+      env = HYPRCURSOR_SIZE,24
+
+      # nvidia patch
+      env = LIBVA_DRIVER_NAME,nvidia
+      env = XDG_SESSION_TYPE,wayland
+      env = GBM_BACKEND,nvidia-drm
+      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+
+
+      #####################
+      ### LOOK AND FEEL ###
+      #####################
+
+      # Refer to https://wiki.hyprland.org/Configuring/Variables/
+
+      # https://wiki.hyprland.org/Configuring/Variables/#general
+      general { 
+        gaps_in = 6
+        gaps_out = 12
+
+        border_size = 2
+
+        # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
+        col.active_border = 0xff'' + config.lib.stylix.colors.base08 + " "
+      + "0xff" + config.lib.stylix.colors.base09 + " " + "0xff"
+      + config.lib.stylix.colors.base0A + " " + "0xff"
+      + config.lib.stylix.colors.base0B + " " + "0xff"
+      + config.lib.stylix.colors.base0C + " " + "0xff"
+      + config.lib.stylix.colors.base0D + " " + "0xff"
+      + config.lib.stylix.colors.base0E + " " + "0xff"
+      + config.lib.stylix.colors.base0F + " " + ''
+        270deg
+                col.inactive_border = 0xaa'' + config.lib.stylix.colors.base02
       + ''
 
           # Set to true enable resizing windows by clicking and dragging on borders and gaps
           resize_on_border = false 
-        
+
           # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
           allow_tearing = false
 
           layout = dwindle
         }
-        
+
         # https://wiki.hyprland.org/Configuring/Variables/#decoration
         decoration {
           rounding = 8
@@ -150,12 +128,12 @@
           # Change transparency of focused and unfocused windows
           active_opacity = 1.0
           inactive_opacity = 1.0
-        
-          drop_shadow = true
-          shadow_range = 4
-          shadow_render_power = 3
-          col.shadow = rgba(1a1a1aee)
-        
+
+          # drop_shadow = true
+          # shadow_range = 4
+          # shadow_render_power = 3
+          # col.shadow = rgba(1a1a1aee)
+
           # https://wiki.hyprland.org/Configuring/Variables/#blur
           blur {
             enabled = true
@@ -165,12 +143,7 @@
             contrast = 1.17
             vibrancy = 0.1696
             brightness = ''
-      + (
-        if (config.stylix.polarity == "dark")
-        then "0.8"
-        else "1.25"
-      )
-      + ''
+      + (if (config.stylix.polarity == "dark") then "0.8" else "1.25") + ''
             xray = true
           }
         }

@@ -1,10 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
-with config.lib.stylix.colors; let
+{ userSettings, pkgs, config, lib, ... }:
+with config.lib.stylix.colors;
+let
   baseColor = base0E;
   activeColor = base09;
   tabLeftEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
@@ -17,23 +13,24 @@ with config.lib.stylix.colors; let
   tabActiveTextColor = "{fmt.fg._${base01}}{fmt.bg._${baseColor}}";
   tabActiveLabelColor = "{fmt.fg._${activeColor}}{fmt.bg._${base03}}";
 in {
-  home.packages = with pkgs; [
-    kitty
-  ];
+  home.packages = with pkgs; [ kitty ];
   programs.kitty.enable = true;
   programs.kitty.settings = {
     background = "#${base00}";
     foreground = "#${base05}";
     background_opacity = lib.mkForce "0.75";
     modify_font = "cell_width 90%";
+    font_family = userSettings.font;
     tab_bar_margin_width = "0";
     tab_bar_margin_height = "2 0";
     tab_bar_style = "separator";
     tab_bar_min_tabs = 2;
     tab_separator = "·";
     tab_bar_background = "none";
-    tab_title_template = "${tabLeftEdgeColor}${tabLabelColor} ${tabTextColor}[{index}] {title[:15] + (title[15:] and '…')} ${tabRightEdgeColor} ";
-    active_tab_title_template = "${tabActiveLeftEdgeColor}${tabActiveLabelColor}  ${tabActiveTextColor} {title[:40] + (title[40:] and '…')} ${tabActiveRightEdgeColor} ";
+    tab_title_template =
+      "${tabLeftEdgeColor}${tabLabelColor} ${tabTextColor}[{index}] {title[:15] + (title[15:] and '…')} ${tabRightEdgeColor} ";
+    active_tab_title_template =
+      "${tabActiveLeftEdgeColor}${tabActiveLabelColor}  ${tabActiveTextColor} {title[:40] + (title[40:] and '…')} ${tabActiveRightEdgeColor} ";
     color0 = "#${base00}";
     color8 = "#${base02}";
     color1 = "#${base08}";
@@ -50,5 +47,6 @@ in {
     color14 = "#${base0C}";
     color7 = "#${base05}";
     color15 = "#${base07}";
+
   };
 }

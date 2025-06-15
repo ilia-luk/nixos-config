@@ -34,6 +34,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = false;
 
+  # Use latest kerenel
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
+
   # Define hostname
   networking.hostName = systemSettings.hostname;
   networking.networkmanager.enable = true;
