@@ -5,12 +5,12 @@ let
   activeColor = base09;
   tabLeftEdgeColor = "{fmt.fg._${base02}}{fmt.bg.default}";
   tabRightEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
-  tabTextColor = "{fmt.fg._${baseColor}}{fmt.bg._${base03}}";
+  tabTextColor = "{fmt.fg._${base02}}{fmt.bg._${base03}}";
   tabLabelColor = "{fmt.fg._${activeColor}}{fmt.bg._${base02}}";
 
   tabActiveLeftEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
   tabActiveRightEdgeColor = "{fmt.fg._${baseColor}}{fmt.bg.default}";
-  tabActiveTextColor = "{fmt.fg._${base01}}{fmt.bg._${baseColor}}";
+  tabActiveTextColor = "{fmt.fg._${base02}}{fmt.bg._${baseColor}}";
   tabActiveLabelColor = "{fmt.fg._${activeColor}}{fmt.bg._${base03}}";
 in {
   home.packages = with pkgs; [ kitty ];
