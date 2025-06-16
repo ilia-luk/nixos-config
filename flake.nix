@@ -17,7 +17,8 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixvim, sops-nix, stylix, ... }:
+  outputs =
+    inputs@{ self, nixpkgs, nixpkgs-unstable, nixvim, sops-nix, stylix, ... }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
@@ -68,28 +69,25 @@
       };
 
       # ---------- PKGS --------- #
+      pkgs-config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+        permittedInsecurePackages = [ "openssl-1.1.1w" ];
+      };
       overlay-unstable = final: prev: {
-        unstable = import inputs.nixpkgs-unstable {
+        unstable = import nixpkgs-unstable {
           system = systemSettings.system;
-          config = {
-            allowUnfree = true;
-            allowUnfreePredicate = _: true;
-            permittedInsecurePackages = [ "openssl-1.1.1w" ];
-          };
+          config = pkgs-config;
         };
       };
-      pkgs = import inputs.nixpkgs {
+      pkgs = import nixpkgs {
         system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-          permittedInsecurePackages = [ "openssl-1.1.1w" ];
-        };
+        config = pkgs-config;
         overlays = [ overlay-unstable ];
       };
 
       # ---------- LIB ---------- #
-      lib = inputs.nixpkgs.lib;
+      lib = nixpkgs.lib;
 
       # ------ HOME MANAGER ----- #
       home-manager = inputs.home-manager;
@@ -111,13 +109,13 @@
           modules = [
             ({ config, pkgs, ... }: {
               nixpkgs.overlays = [ overlay-unstable ];
+              nixpkgs.config = pkgs-config;
             })
             (./. + "/profiles" + ("/" + systemSettings.profile)
               + "/configuration.nix")
           ];
           specialArgs = {
             # pass config variables from above
-            inherit pkgs;
             inherit systemSettings;
             inherit userSettings;
             inherit inputs;
@@ -131,12 +129,12 @@
           modules = [
             ({ config, pkgs, ... }: {
               nixpkgs.overlays = [ overlay-unstable ];
+              nixpkgs.config = pkgs-config;
             })
             (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")
           ];
           extraSpecialArgs = {
             # pass config variables from above
-            inherit pkgs;
             inherit systemSettings;
             inherit userSettings;
             inherit inputs;
