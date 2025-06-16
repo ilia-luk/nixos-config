@@ -99,6 +99,10 @@ with config.lib.stylix.colors; {
       # Update the status line every seconds
       set -g status-interval 1
 
+      set-window-option -g pane-border-status bottom
+      set-window-option -g pane-border-format ""
+
+
       set -g visual-activity off
       set -g visual-bell off
       set -g visual-silence off
