@@ -1,12 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, config, ... }:
 with config.lib.stylix.colors; {
-  home.packages = with pkgs; [
-    tmux
-  ];
+  home.packages = with pkgs; [ tmux ];
 
   programs.tmux.enable = true;
   programs.tmux = {
@@ -19,35 +13,30 @@ with config.lib.stylix.colors; {
     baseIndex = 1;
     aggressiveResize = true;
     escapeTime = 50;
+    focusEvents = true;
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.vim-tmux-focus-events
+      tmuxPlugins.tmux-fzf
       {
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
-          set -g @catppuccin_window_left_separator ""
-          set -g @catppuccin_window_right_separator " "
-          set -g @catppuccin_window_middle_separator " █"
-          set -g @catppuccin_window_number_position "right"
-
-          set -g @catppuccin_window_default_fill "number"
-          set -g @catppuccin_window_default_text "#W"
-
-          set -g @catppuccin_window_current_fill "number"
-          set -g @catppuccin_window_current_text "#W"
-
-          set -g @catppuccin_status_modules_right "directory application session"
-          set -g @catppuccin_status_left_separator  " "
-          set -g @catppuccin_status_right_separator ""
-          set -g @catppuccin_status_fill "icon"
-          set -g @catppuccin_status_connect_separator "no"
-
-          set -g @catppuccin_directory_text "#{pane_current_path}"
           set -g @catppuccin_flavor "mocha"
+
+          set -g @catppuccin_window_status_style 'rounded'
+          set -g @catppuccin_window_number_position 'right'
+
+          set -g @catppuccin_status_background "default"
+          set -g @catppuccin_status_left_separator  ""
+          set -g @catppuccin_status_right_separator " "
+          set -g @catppuccin_status_connect_separator "no"
 
           set -g @catppuccin_pane_border_style "fg=#${base03}"
           set -g @catppuccin_pane_active_border_style "fg=#${base03}"
+
+          set -g @catppuccin_date_time_text '%d.%m -- %H:%M'
         '';
       }
       # {
@@ -63,92 +52,77 @@ with config.lib.stylix.colors; {
       # }
     ];
     extraConfig = ''
-       # Enable mouse
-       set-option -g mouse
-       set -g mouse on
-       bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
-       bind -n WheelDownPane select-pane -t= \; send-keys -M
+      # Splitting panes with | and -
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
 
-       # Set the default terminal mode to 256color mode
-       set -g default-terminal "xterm-256color"
-       set -ga terminal-overrides ",*256col*:Tc"
+      # Reload the source file with Prefix r
+      bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
-       # Setting window to capture entire visible space
-       set-window-option -g aggressive-resize
+      # Moving between panes with Prefix h,j,k,l
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
-       # Setting the delay between prefix and command
-       set -s escape-time 1
+      # Quick window selection
+      bind -r C-h select-window -t:-
+      bind -r C-l select-window -t:+
 
-       # Set the base index of windows tp 1 instead of 0
-       set -g base-index 1
+      # Resizing panes with Prefix H,J,K,L
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
 
-       # Set the base index for panes to 1 instead of 0
-       set -g pane-base-index 1
+      # Copy
+      bind Escape copy-mode
+      unbind p
+      bind p paste-buffer
 
-       # Splitting panes with | and -
-       bind | split-window -h -c "#{pane_current_path}"
-       bind - split-window -v -c "#{pane_current_path}"
+      # Log output to a text file on demand
+      bind P pipe-pane -o "cat >>~/#W.log" \; display "Toggled logging to ~/#W.log"
 
-       # Reload the source file with Prefix r
-       bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+      # Shortcut for synchronize-panes toggle
+      bind C-s set-window-option synchronize-panes
 
-       # Moving between panes with Prefix h,j,k,l
-       bind h select-pane -L
-       bind j select-pane -D
-       bind k select-pane -U
-       bind l select-pane -R
+      # Clear the screen with prefix Ctrl-l
+      bind C-l send-keys 'C-l'
 
-       # Quick window selection
-       bind -r C-h select-window -t:-
-       bind -r C-l select-window -t:+
+      # Don't rename windows automatically
+      set-option -g allow-rename off
+      setw -g automatic-rename off
 
-      # bind -n M-h select-pane -L
-      # bind -n M-j select-pane -D
-      # bind -n M-k select-pane -U
-      # bind -n M-l select-pane -R
+      # 2x C-a goes back and fourth between most recent windows
+      bind-key C-a last-window
 
-      # bind -n M-H previous-window
-      # bind -n M-L next-window
+      # Update the status line every seconds
+      set -g status-interval 1
 
-       # Resizing panes with Prefix H,J,K,L
-       bind -r H resize-pane -L 5
-       bind -r J resize-pane -D 5
-       bind -r K resize-pane -U 5
-       bind -r L resize-pane -R 5
+      set -g visual-activity off
+      set -g visual-bell off
+      set -g visual-silence off
+      setw -g monitor-activity off
+      set -g bell-action none
 
-       # Enable vi keys
-       setw -g mode-keys vi
-       bind Escape copy-mode
-       unbind p
-       bind p paste-buffer
+      # Define theme
+      thm_bg="#${base00}"
 
-       # Log output to a text file on demand
-       bind P pipe-pane -o "cat >>~/#W.log" \; display "Toggled logging to ~/#W.log"
+      # set left and right status bar
+      set -g allow-rename off
+      set -g status-position bottom
+      set -g status-interval 5
+      set -g status-left-length 100
+      set -g status-right-length 100
+      set -g status-left '#{E:@catppuccin_status_session}'
+      set -g status-right "#{E:@catppuccin_status_directory}"
+      set -ag status-right "#{E:@catppuccin_status_application}"
+      set -ag status-right "#{E:@catppuccin_status_uptime}"
+      set -ag status-right '#{E:@catppuccin_status_date_time}'
 
-       # Shortcut for synchronize-panes toggle
-       bind C-s set-window-option synchronize-panes
-
-       # Clear the screen with prefix Ctrl-l
-       bind C-l send-keys 'C-l'
-
-       # Don't rename windows automatically
-       set-option -g allow-rename off
-       setw -g automatic-rename off
-
-       # 2x C-a goes back and fourth between most recent windows
-       bind-key C-a last-window
-
-       # For neovim
-       set -g focus-events on
-
-       # Update the status line every seconds
-       set -g status-interval 1
-
-       set -g visual-activity off
-       set -g visual-bell off
-       set -g visual-silence off
-       setw -g monitor-activity off
-       set -g bell-action none
+      #set inactive/active window styles
+      set -g window-style "fg=#${base00}"
+      set -g window-active-style "fg=#${base00}"
     '';
   };
 

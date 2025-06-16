@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  userSettings,
-  ...
-}:
+{ pkgs, config, userSettings, ... }:
 with config.lib.stylix.colors; {
   programs.waybar.enable = true;
   programs.waybar.package = pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -19,9 +14,10 @@ with config.lib.stylix.colors; {
     height = 35;
     margin = "7 7 3 7";
     spacing = 2;
-    modules-left = ["custom/os" "custom/hyprprofile" "pulseaudio" "cpu" "memory"];
-    modules-center = ["hyprland/workspaces"];
-    modules-right = ["idle_inhibitor" "clock"];
+    modules-left =
+      [ "custom/os" "custom/hyprprofile" "pulseaudio" "cpu" "memory" ];
+    modules-center = [ "hyprland/workspaces" ];
+    modules-right = [ "idle_inhibitor" "clock" ];
     "custom/os" = {
       "format" = " {} ";
       "exec" = ''echo "" '';
@@ -30,7 +26,7 @@ with config.lib.stylix.colors; {
     };
     "custom/hyprprofile" = {
       "format" = "   {}";
-      "exec" = ''cat ~/.hyprprofile'';
+      "exec" = "cat ~/.hyprprofile";
       "interval" = 3;
       "on-click" = "hyprprofile-dmenu";
     };
@@ -65,7 +61,7 @@ with config.lib.stylix.colors; {
       "on-scroll-down" = "hyprctl dispatch workspace e-1";
       #"all-outputs" = true;
       #"active-only" = true;
-      "ignore-workspaces" = ["scratch" "-"];
+      "ignore-workspaces" = [ "scratch" "-" ];
       #"show-special" = false;
       #"persistent-workspaces" = {
       #    # this block doesn't seem to work for whatever reason
@@ -98,10 +94,8 @@ with config.lib.stylix.colors; {
         <big>{:%Y %B}</big>
         <tt><small>{calendar}</small></tt>'';
     };
-    cpu = {
-      "format" = "{usage}% ";
-    };
-    memory = {"format" = "{}% ";};
+    cpu = { "format" = "{usage}% "; };
+    memory = { "format" = "{}% "; };
     pulseaudio = {
       "scroll-step" = 1;
       "format" = "{volume}% {icon}  {format_source}";
@@ -117,28 +111,43 @@ with config.lib.stylix.colors; {
         "phone" = "";
         "portable" = "";
         "car" = "";
-        "default" = ["" "" ""];
+        "default" = [ "" "" "" ];
       };
-      "on-click" = "pypr toggle pavucontrol && hyprctl dispatch bringactivetotop";
+      "on-click" =
+        "pypr toggle pavucontrol && hyprctl dispatch bringactivetotop";
     };
   };
-  programs.waybar.style =
-    ''
-      * {
-          /* `otf-font-awesome` is required to be installed for icons */
-          font-family: FontAwesome, ''
-    + userSettings.font
-    + ''      ;
+  programs.waybar.style = ''
+    * {
+        /* `otf-font-awesome` is required to be installed for icons */
+        font-family: FontAwesome, '' + userSettings.font + ''
+      ;
               font-size: 20px;
           }
           window#waybar {
-              background-color: rgba(30, 30, 46, 0.55);
-              border-radius: 8px;
-              color: #${base07};
-              transition-property: background-color;
-              transition-duration: .2s;
+              background-color: transparent;
           }
-          tooltip {
+          .modules-left,
+          .modules-right,
+          #workspaces {
+            background-color: rgba(30, 30, 46, 0.85);
+            border-radius: 8px;
+            color: #${base07};
+            transition-property: background-color;
+            transition-duration: .2s;
+            padding: 0 12px;
+          }
+          .modules-left {
+            margin-left: 0;
+          }
+          .modules-right {
+            margin-right: 0;
+          }
+          #window,
+          #workspaces {
+              margin: 2px 4px 2px;
+          }
+          .tooltip {
             color: #${base07};
             background-color: rgba(30, 30, 46,  0.9);
             border-style: solid;
@@ -204,23 +213,11 @@ with config.lib.stylix.colors; {
           #scratchpad,
           #mpd {
               padding: 6px 10px;
-      	margin: 2px 4px 4px;
+      	      margin: 2px 4px 4px;
               color: #${base07};
               border: none;
               border-radius: 8px;
               background-color: transparent;
-          }
-          #window,
-          #workspaces {
-              margin: 2px 4px 2px;
-          }
-          /* If workspaces is the leftmost module, omit left margin */
-          .modules-left > widget:first-child > #workspaces {
-              margin-left: 0;
-          }
-          /* If workspaces is the rightmost module, omit right margin */
-          .modules-right > widget:last-child > #workspaces {
-              margin-right: 0;
           }
           #clock {
               color: #${base0D};
