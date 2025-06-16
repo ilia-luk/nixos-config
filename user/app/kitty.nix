@@ -1,7 +1,7 @@
 { userSettings, pkgs, config, lib, ... }:
 with config.lib.stylix.colors;
 let
-  baseColor = base0E;
+  baseColor = base09;
   activeColor = base09;
   tabLeftEdgeColor = "{fmt.fg._${base02}}{fmt.bg.default}";
   tabRightEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
