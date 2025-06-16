@@ -8,7 +8,7 @@ with config.lib.stylix.colors; {
     enableNushellIntegration = true;
     settings = {
       log = { enabled = false; };
-      manager = {
+      mgr = {
         show_hidden = true;
         sort_by = "mtime";
         sort_dir_first = true;
@@ -75,10 +75,18 @@ with config.lib.stylix.colors; {
           bg = "#${base0E}";
           bold = true;
         };
+        normal_alt = {
+          fg = "#${base0E}";
+          bg = "#${base03}";
+        };
         select_main = {
           fg = "#${base04}";
           bg = "#${base0C}";
           bold = true;
+        };
+        select_alt = {
+          fg = "#${base04}";
+          bg = "#${base0B}";
         };
         unset_main = {
           fg = "#${base04}";
@@ -88,8 +96,8 @@ with config.lib.stylix.colors; {
       };
       status = {
         overall = {
-          fg = "#${base05}";
-          bg = "#${base03}";
+          fg = "#${base07}";
+          bg = "#${base00}";
         };
         sep_left = {
           open = "";

@@ -3,10 +3,10 @@ with config.lib.stylix.colors;
 let
   baseColor = base0E;
   activeColor = base09;
-  tabLeftEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
+  tabLeftEdgeColor = "{fmt.fg._${base02}}{fmt.bg.default}";
   tabRightEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
   tabTextColor = "{fmt.fg._${baseColor}}{fmt.bg._${base03}}";
-  tabLabelColor = "{fmt.fg._${activeColor}}{fmt.bg._${base03}}";
+  tabLabelColor = "{fmt.fg._${activeColor}}{fmt.bg._${base02}}";
 
   tabActiveLeftEdgeColor = "{fmt.fg._${base03}}{fmt.bg.default}";
   tabActiveRightEdgeColor = "{fmt.fg._${baseColor}}{fmt.bg.default}";
@@ -54,7 +54,7 @@ in {
     tab_bar_min_tabs = 2;
     tab_separator = "·";
     tab_title_template =
-      "${tabLeftEdgeColor}${tabLabelColor} ${tabTextColor}[{index}] {title[:15] + (title[15:] and '…')} ${tabRightEdgeColor} ";
+      "${tabLeftEdgeColor}${tabLabelColor} {index} ${tabTextColor} {title[:15] + (title[15:] and '…')} ${tabRightEdgeColor} ";
     active_tab_title_template =
       "${tabActiveLeftEdgeColor}${tabActiveLabelColor}  ${tabActiveTextColor} {title[:40] + (title[40:] and '…')} ${tabActiveRightEdgeColor} ";
     # The 16 terminal colors
