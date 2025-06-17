@@ -101,6 +101,7 @@
     dig
     xh
     hyprshot
+    gimp3
   ];
 
   # Enable zsh and nushell
