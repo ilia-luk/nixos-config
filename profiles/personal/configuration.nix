@@ -100,6 +100,7 @@
     home-manager
     dig
     xh
+    hyprshot
   ];
 
   # Enable zsh and nushell

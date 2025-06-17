@@ -258,6 +258,11 @@
         bind = $mainMod, P, pseudo, # dwindle
         bind = $mainMod, J, togglesplit, # dwindle
 
+        # Hyprshot
+        bind = $mainMod ALT, 2, exec, hyprshot -m output
+        bind = $mainMod ALT, 3, exec, hyprshot -m window
+        bind = $mainMod ALT, 4, exec, hyprshot -m region
+
         # Move focus with mainMod + arrow keys
         bind = $mainMod, left, movefocus, l
         bind = $mainMod, right, movefocus, r
@@ -299,6 +304,10 @@
         # Move/resize windows with mainMod + LMB/RMB and dragging
         bindm = $mainMod, mouse:272, movewindow
         bindm = $mainMod, mouse:273, resizewindow
+
+        # change focus to another window and bring to top
+        bind = $mainMod, Tab, cyclenext,
+        bind = $mainMod, Tab, bringactivetotop,
 
 
         ##############################

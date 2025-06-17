@@ -86,6 +86,7 @@
       XDG_ORG_DIR = "${config.home.homeDirectory}/Org";
       XDG_PODCAST_DIR = "${config.home.homeDirectory}/Media/Podcasts";
       XDG_BOOK_DIR = "${config.home.homeDirectory}/Media/Books";
+      XDG_PICTURES_DIR = "${config.home.homeDirectory}/Media/Pictures";
     };
   };
   xdg.mime.enable = true;
