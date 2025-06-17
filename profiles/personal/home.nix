@@ -22,6 +22,7 @@
     ../../user/app/carapace.nix
     ../../user/app/atuin.nix
     ../../user/app/zoxide.nix
+    ../../user/app/feh.nix
     # ../../user/app/nixvim/nixvim.nix
     ../../user/app/thunderbird.nix
     #../../user/hardware/bluetooth.nix
@@ -87,6 +88,7 @@
       XDG_PODCAST_DIR = "${config.home.homeDirectory}/Media/Podcasts";
       XDG_BOOK_DIR = "${config.home.homeDirectory}/Media/Books";
       XDG_PICTURES_DIR = "${config.home.homeDirectory}/Media/Pictures";
+      XDG_VIDEOS_DIR = "${config.home.homeDirectory}/Media/Videos";
     };
   };
   xdg.mime.enable = true;
