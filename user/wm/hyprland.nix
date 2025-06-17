@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, userSettings, systemSettings, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../app/kitty.nix
     # (import ../../app/dmenu-scripts/networkmanager-dmenu.nix {
@@ -56,6 +56,10 @@
       $terminal = kitty
       $fileManager = kitty yazi
       $menu = fuzzel
+      $passwordManager = 1password
+      $mail = thunderbird
+      $messenger = discord
+      $browser = firefox
 
 
       #################
@@ -67,6 +71,7 @@
 
       exec-once = nm-applet -- indicator
       exec-once = waybar
+      exec-once = hypridle
       # exec-once = hyprpaper
 
 
@@ -109,7 +114,8 @@
       + config.lib.stylix.colors.base0E + " " + "0xff"
       + config.lib.stylix.colors.base0F + " " + ''
         270deg
-                col.inactive_border = 0xaa'' + config.lib.stylix.colors.base02
+
+               col.inactive_border = 0xaa'' + config.lib.stylix.colors.base02
       + ''
 
           # Set to true enable resizing windows by clicking and dragging on borders and gaps
@@ -241,12 +247,14 @@
         $mainMod = SUPER # Sets "Windows" key as main modifier
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-        bind = $mainMod, Q, exec, $terminal
-        bind = $mainMod, C, killactive,
+        bind = $mainMod, L, exec, hyprlock
+        bind = $mainMod, T, exec, $terminal
+        bind = $mainMod, Q, killactive,
         bind = $mainMod, M, exit,
         bind = $mainMod, E, exec, $fileManager
-        bind = $mainMod, V, togglefloating,
+        bind = $mainMod, F, togglefloating,
         bind = $mainMod, R, exec, $menu
+        bind = $mainMod, B, exec, $browser
         bind = $mainMod, P, pseudo, # dwindle
         bind = $mainMod, J, togglesplit, # dwindle
 

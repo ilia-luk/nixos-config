@@ -19,7 +19,6 @@
     ../../user/app/starship.nix
     ../../user/app/tmux.nix
     ../../user/app/zellij.nix
-    ../../user/app/hyprpaper.nix
     ../../user/app/carapace.nix
     ../../user/app/atuin.nix
     ../../user/app/zoxide.nix
@@ -33,6 +32,9 @@
     ../../user/shell/direnv.nix
     ../../user/shell/devenv.nix
     ../../user/wm/hyprland.nix
+    ../../user/wm/hyprpaper.nix
+    ../../user/wm/hyprlock.nix
+    ../../user/wm/hypridle.nix
   ];
 
   # Leave this unchanged for compatibility purposes
