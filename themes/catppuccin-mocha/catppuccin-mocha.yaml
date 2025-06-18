@@ -16,7 +16,7 @@ base0B: "a6e3a1" # green
 base0C: "94e2d5" # teal
 base0D: "89b4fa" # blue
 base0E: "cba6f7" # mauve
-base0F: "f2cdcd" # cdd6f4lamingo
+base0F: "f2cdcd" # flamingo
 # base 24 extension:
 base10: "181825" # mantle - darker background
 base11: "11111b" # crust - darkest background
@@ -27,7 +27,10 @@ base15: "89dceb" # sky - bright cyan
 base16: "74c7ec" # sapphire - bright blue
 base17: "f5c2e7" # pink - bright purple
 # additonal colors:
-base18: "bac2de"
+base18: "bac2de" # subtext0
 base19: "a6adc8"
 base20: "6c7086"
 base21: "11111b"
+base22: "6c7086" # overlay0
+base23: "7f849c" # overlay1
+base24: "9399b2" # overlay2

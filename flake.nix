@@ -38,6 +38,14 @@
         username = "ilia"; # username
         ghUsername = "ilia-luk";
         name = "Ilia"; # name/identifier
+        avatar = builtins.path {
+          path = ./misc/avatar.png;
+          name = "my-awesome-avatar";
+        };
+        lockOverlay = builtins.path {
+          path = ./misc/lock_overlay.png;
+          name = "my-awesome-overlay";
+        };
         email =
           "ilia@domusnetwork.io"; # email (used for certain configurations)
         dotfilesDir = "~/.dotfiles"; # absolute path of the local repo

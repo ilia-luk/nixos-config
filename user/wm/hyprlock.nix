@@ -14,62 +14,80 @@
       forward_pass = true;
     };
     animations = { enabled = true; };
-    background = [{
-      path = "${config.stylix.image}";
-      blur_passes = 3;
-      blur_size = 8;
-    }];
-    input-field = [{
-      size = "320, 36";
-      position = "0, 300";
+    background = [
+      {
+        path = "${config.stylix.image}";
+        blur_passes = 3;
+        blur_size = 8;
+        color = "rgb(${config.lib.stylix.colors.base00})";
+        zindex = -2;
+      }
+      {
+        path = userSettings.lockOverlay;
+        zindex = -1;
+      }
+    ];
+    image = {
       monitor = "";
-      dots_center = true;
-      fade_on_empty = false;
-      font_family = userSettings.font;
-      font_color = "rgba(255, 255, 255, 0.9)";
-      inner_color =
-        "rgba(255, 255, 255, 0.1)"; # Semi-transparent white for glass effect
-      outer_color = "rgba(255, 255, 255, 0.2)"; # Slightly more opaque border
-      outline_thickness = 2;
-      placeholder_text = ''<span foreground="##cad3f5">Password...</span>'';
-      shadow_passes = 4; # More shadow passes for depth
-      shadow_size = 8; # Shadow size for glow effect
-      shadow_color = "rgba(0, 0, 0, 0.2)"; # Subtle shadow
-      # Glossy/glass effect settings
-      rounding = 8; # Rounded corners
-      border_size = 1;
-      border_color = "rgba(255, 255, 255, 0.9)"; # Bright border for highlight
-      # Add authentication feedback
-      check_color = "rgba(34, 204, 136, 0.8)"; # Semi-transparent green
-      fail_color = "rgba(204, 34, 34, 0.8)"; # Semi-transparent red
-      fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-      fail_transition = 300;
-      # Additional glass effects
-      capslock_color = "rgba(255, 193, 7, 0.8)"; # Caps lock indicator
-      numlock_color = "rgba(108, 117, 125, 0.8)"; # Num lock indicator
+      path = userSettings.avatar;
+      size = 100;
+      border_color = "rgb(${config.lib.stylix.colors.base0E})";
+      position = "0, 75";
       halign = "center";
-      valign = "bottom";
+      valign = "center";
+    };
+    input-field = [{
+      monitor = "";
+      size = "300, 60";
+      outline_thickness = 4;
+      dots_size = 0.2;
+      dots_spacing = 0.2;
+      dots_center = true;
+      outer_color = "rgb(${config.lib.stylix.colors.base0E})";
+      inner_color = "rgb(${config.lib.stylix.colors.base02})";
+      font_color = "rgb(${config.lib.stylix.colors.base05})";
+      fade_on_empty = false;
+      placeholder_text = ''
+        <span foreground="##${config.lib.stylix.colors.base05}"><i>󰌾 Logged in as </i><span foreground="##${config.lib.stylix.colors.base0E}">$USER</span></span>'';
+      hide_input = false;
+      check_color = "rgb(${config.lib.stylix.colors.base0E})";
+      fail_color = "rgb(${config.lib.stylix.colors.base08})";
+      fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+      capslock_color = "rgb(${config.lib.stylix.colors.base0A})";
+      position = "0, -47";
+      halign = "center";
+      valign = "center";
     }];
     # Clock/Time display
     label = [
       {
         monitor = "";
-        text = ''cmd[update:1000] echo "$(date +"%H:%M")"'';
-        color = "rgb(24, 25, 38)";
-        font_size = 55;
+        text = "Layout: $LAYOUT";
+        color = "rgb(${config.lib.stylix.colors.base05})";
+        font_size = 25;
         font_family = userSettings.font;
-        position = "0, -150";
-        halign = "center";
+        position = "30, -30";
+        halign = "left";
         valign = "top";
       }
       {
         monitor = "";
-        text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
-        color = "rgb(24, 25, 38)";
+        text = ''cmd[update:1000] echo "$(date +"%H:%M")"'';
+        color = "rgb(${config.lib.stylix.colors.base05})";
+        font_size = 90;
+        font_family = userSettings.font;
+        position = "-30, 0";
+        halign = "right";
+        valign = "top";
+      }
+      {
+        monitor = "";
+        text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
+        color = "rgb(${config.lib.stylix.colors.base05})";
         font_size = 25;
         font_family = userSettings.font;
-        position = "0, -250";
-        halign = "center";
+        position = "-30, -150";
+        halign = "right";
         valign = "top";
       }
       {

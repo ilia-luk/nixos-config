@@ -15,6 +15,90 @@
     size = 36;
   };
 
+  home.file.".config/hypr/mocha.conf".text = ''
+    ################
+    ## CATPPUCCIN ##
+    ################
+
+    $rosewater = rgb(${config.lib.stylix.colors.base06})
+    $rosewaterAlpha = ${config.lib.stylix.colors.base06}
+
+    $flamingo = rgb(${config.lib.stylix.colors.base0F})
+    $flamingoAlpha = ${config.lib.stylix.colors.base0F}
+
+    $pink = rgb(${config.lib.stylix.colors.base17})
+    $pinkAlpha = ${config.lib.stylix.colors.base17}
+
+    $mauve = rgb(${config.lib.stylix.colors.base0E})
+    $mauveAlpha = ${config.lib.stylix.colors.base0E}
+
+    $red = rgb(${config.lib.stylix.colors.base08})
+    $redAlpha = ${config.lib.stylix.colors.base08}
+
+    $maroon = rgb(${config.lib.stylix.colors.base12})
+    $maroonAlpha = ${config.lib.stylix.colors.base12}
+
+    $peach = rgb(${config.lib.stylix.colors.base09})
+    $peachAlpha = ${config.lib.stylix.colors.base09}
+
+    $yellow = rgb(${config.lib.stylix.colors.base0A})
+    $yellowAlpha = ${config.lib.stylix.colors.base0A}
+
+    $green = rgb(${config.lib.stylix.colors.base0B})
+    $greenAlpha = ${config.lib.stylix.colors.base0B}
+
+    $teal = rgb(${config.lib.stylix.colors.base0C})
+    $tealAlpha = ${config.lib.stylix.colors.base0C}
+
+    $sky = rgb(${config.lib.stylix.colors.base15})
+    $skyAlpha = ${config.lib.stylix.colors.base15}
+
+    $sapphire = rgb(${config.lib.stylix.colors.base16})
+    $sapphireAlpha = ${config.lib.stylix.colors.base16}
+
+    $blue = rgb(${config.lib.stylix.colors.base0D})
+    $blueAlpha = ${config.lib.stylix.colors.base0D}
+
+    $lavender = rgb(${config.lib.stylix.colors.base07})
+    $lavenderAlpha = ${config.lib.stylix.colors.base07}
+
+    $text = rgb(${config.lib.stylix.colors.base05})
+    $textAlpha = ${config.lib.stylix.colors.base05}
+
+    $subtext1 = rgb(${config.lib.stylix.colors.base06})
+    $subtext1Alpha = ${config.lib.stylix.colors.base06}
+
+    $subtext0 = rgb(${config.lib.stylix.colors.base18})
+    $subtext0Alpha = ${config.lib.stylix.colors.base18}
+
+    $overlay2 = rgb(${config.lib.stylix.colors.base24})
+    $overlay2Alpha = ${config.lib.stylix.colors.base24}
+
+    $overlay1 = rgb(${config.lib.stylix.colors.base23})
+    $overlay1Alpha = ${config.lib.stylix.colors.base23}
+
+    $overlay0 = rgb(${config.lib.stylix.colors.base22})
+    $overlay0Alpha = ${config.lib.stylix.colors.base22}
+
+    $surface2 = rgb(${config.lib.stylix.colors.base04})
+    $surface2Alpha = ${config.lib.stylix.colors.base04}
+
+    $surface1 = rgb(${config.lib.stylix.colors.base03})
+    $surface1Alpha = ${config.lib.stylix.colors.base03}
+
+    $surface0 = rgb(${config.lib.stylix.colors.base02})
+    $surface0Alpha = ${config.lib.stylix.colors.base02}
+
+    $base = rgb(${config.lib.stylix.colors.base00})
+    $baseAlpha = ${config.lib.stylix.colors.base00}
+
+    $mantle = rgb(${config.lib.stylix.colors.base10})
+    $mantleAlpha = ${config.lib.stylix.colors.base10}
+
+    $crust = rgb(${config.lib.stylix.colors.base11})
+    $crustAlpha = ${config.lib.stylix.colors.base11}
+  '';
+
   # This is an example Hyprland config file.
   # Refer to the wiki for more information.
   # https://wiki.hyprland.org/Configuring/Configuring-Hyprland/
@@ -29,6 +113,8 @@
     package = null;
     portalPackage = null;
     extraConfig = ''
+
+
       ################
       ### MONITORS ###
       ################
