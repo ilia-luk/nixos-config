@@ -24,6 +24,8 @@
       }
       {
         path = userSettings.lockOverlay;
+        blur_passes = 1;
+        blur_size = 1;
         zindex = -1;
       }
     ];
@@ -31,15 +33,17 @@
       monitor = "";
       path = userSettings.avatar;
       size = 100;
-      border_color = "rgb(${config.lib.stylix.colors.base0E})";
-      position = "0, 75";
+      border_size = 2;
+      border_color = "rgb(${config.lib.stylix.colors.base05})";
+      position = "0, 16";
       halign = "center";
       valign = "center";
     };
     input-field = [{
       monitor = "";
       size = "300, 60";
-      outline_thickness = 4;
+      position = "0, -110";
+      outline_thickness = 10;
       dots_size = 0.2;
       dots_spacing = 0.2;
       dots_center = true;
@@ -54,7 +58,6 @@
       fail_color = "rgb(${config.lib.stylix.colors.base08})";
       fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
       capslock_color = "rgb(${config.lib.stylix.colors.base0A})";
-      position = "0, -47";
       halign = "center";
       valign = "center";
     }];
@@ -93,12 +96,12 @@
       {
         monitor = "";
         text = "You shall not pass!";
-        color = "rgba(255, 255, 255, 0.8)";
+        color = "rgb(${config.lib.stylix.colors.base05})";
         font_size = 14;
         font_family = userSettings.font;
-        position = "0, 348";
+        position = "0, -175";
         halign = "center";
-        valign = "bottom";
+        valign = "center";
       }
     ];
   };
