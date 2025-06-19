@@ -24,8 +24,6 @@
       }
       {
         path = userSettings.lockOverlay;
-        blur_passes = 1;
-        blur_size = 1;
         zindex = -1;
       }
     ];

@@ -113,7 +113,7 @@ with config.lib.stylix.colors; {
       thm_bg="#${base00}"
 
       # set left and right status bar
-      set -g allow-rename off
+      set -g allow-rename on
       set -g status-position bottom
       set -g status-interval 5
       set -g status-left-length 100
@@ -125,8 +125,8 @@ with config.lib.stylix.colors; {
       set -ag status-right '#{E:@catppuccin_status_date_time}'
 
       #set inactive/active window styles
-      set -g window-style "fg=#${base00}"
-      set -g window-active-style "fg=#${base00}"
+      set -g window-style "fg=#${base05}"
+      set -g window-active-style "fg=#${base05}"
     '';
   };
 
