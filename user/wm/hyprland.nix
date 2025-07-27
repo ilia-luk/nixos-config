@@ -157,8 +157,8 @@ with config.lib.stylix.colors; {
       # Or execute your favorite apps at launch like this:
 
       exec-once = nm-applet -- indicator
-      exec-once = waybar
       exec-once = hypridle
+      exec-once = hyprpanel
       # exec-once = hyprpaper
 
 

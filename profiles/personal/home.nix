@@ -11,7 +11,7 @@
     ../../user/app/kitty.nix
     ../../user/app/yazi.nix
     ../../user/app/bat.nix
-    ../../user/app/waybar.nix
+    # ../../user/app/waybar.nix
     ../../user/app/fuzzel.nix
     # ../../user/app/mako.nix
     ../../user/app/neovim.nix

@@ -1,4 +1,5 @@
 { config, inputs, pkgs, systemSettings, userSettings, ... }: {
+  programs.hyprpanel.enable = true;
 
   programs.hyprpanel = {
     # Configure and theme almost all options from the GUI.
@@ -9,13 +10,22 @@
       # Configure bar layouts for monitors.
       # See 'https://hyprpanel.com/configuration/panel.html'.
       # Default: null
-      layout = {
-        bar.layouts = {
-          "0" = {
-            left = [ "dashboard" "workspaces" ];
-            middle = [ "media" ];
-            right = [ "volume" "systray" "notifications" ];
-          };
+
+      bar.layouts = {
+        "*" = {
+          left = [ "dashboard" "ram" "cpu" "cputemp" "storage" "netstat" ];
+          middle = [ "workspaces" "windowtitle" ];
+          right = [
+            "microphone"
+            "volume"
+            "network"
+            "bluetooth"
+            # "systray"
+            "kbinput"
+            "clock"
+            "updates"
+            "notifications"
+          ];
         };
       };
 
@@ -31,7 +41,7 @@
       };
 
       menus.dashboard.directories.enabled = false;
-      menus.dashboard.stats.enable_gpu = true;
+      menus.dashboard.stats.enable_gpu = false;
 
       theme.bar.transparent = true;
 

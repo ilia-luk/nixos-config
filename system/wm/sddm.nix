@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  sddm-astronaut = pkgs.unstable.sddm-astronaut.override {
+  sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "hyprland_kath";
     themeConfig = {
       ScreenWidth = 3840;
