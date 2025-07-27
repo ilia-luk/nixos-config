@@ -1,5 +1,7 @@
-{ config, inputs, pkgs, userSettings, ... }: {
-  home.packages = with pkgs; [ hyprpanel ];
+{ config, inputs, pkgs, systemSettings, userSettings, ... }: {
+  programs.hyprpanel = {
+    package = inputs.hyprpanel.packages.${systemSettings.system}.default;
+  };
 
   programs.hyprpanel.enable = true;
 
