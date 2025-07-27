@@ -1,4 +1,5 @@
-{ config, inputs, userSettings, ... }: {
+{ config, inputs, pkgs, userSettings, ... }: {
+  home.packages = with pkgs; [ hyprpanel ];
 
   programs.hyprpanel.enable = true;
 
