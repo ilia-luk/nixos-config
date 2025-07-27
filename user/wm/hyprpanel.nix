@@ -1,9 +1,4 @@
 { config, inputs, pkgs, systemSettings, userSettings, ... }: {
-  programs.hyprpanel = {
-    package = inputs.hyprpanel.packages.${systemSettings.system}.default;
-  };
-
-  programs.hyprpanel.enable = true;
 
   programs.hyprpanel = {
     # Configure and theme almost all options from the GUI.

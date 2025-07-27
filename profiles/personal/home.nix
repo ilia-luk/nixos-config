@@ -95,6 +95,8 @@
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
 
+  programs.hyprpanel.enable = true;
+
   home.sessionVariables = {
     EDITOR = userSettings.editor;
     SPAWNEDITOR = userSettings.spawnEditor;
