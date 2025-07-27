@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+with config.lib.stylix.colors; {
   imports = [
     ../app/kitty.nix
     # (import ../../app/dmenu-scripts/networkmanager-dmenu.nix {
@@ -20,83 +21,83 @@
     ## CATPPUCCIN ##
     ################
 
-    $rosewater = rgb(${config.lib.stylix.colors.base06})
-    $rosewaterAlpha = ${config.lib.stylix.colors.base06}
+    $rosewater = rgb(${base06})
+    $rosewaterAlpha = ${base06}
 
-    $flamingo = rgb(${config.lib.stylix.colors.base0F})
-    $flamingoAlpha = ${config.lib.stylix.colors.base0F}
+    $flamingo = rgb(${base0F})
+    $flamingoAlpha = ${base0F}
 
-    $pink = rgb(${config.lib.stylix.colors.base17})
-    $pinkAlpha = ${config.lib.stylix.colors.base17}
+    $pink = rgb(${base17})
+    $pinkAlpha = ${base17}
 
-    $mauve = rgb(${config.lib.stylix.colors.base0E})
-    $mauveAlpha = ${config.lib.stylix.colors.base0E}
+    $mauve = rgb(${base0E})
+    $mauveAlpha = ${base0E}
 
-    $red = rgb(${config.lib.stylix.colors.base08})
-    $redAlpha = ${config.lib.stylix.colors.base08}
+    $red = rgb(${base08})
+    $redAlpha = ${base08}
 
-    $maroon = rgb(${config.lib.stylix.colors.base12})
-    $maroonAlpha = ${config.lib.stylix.colors.base12}
+    $maroon = rgb(${base12})
+    $maroonAlpha = ${base12}
 
-    $peach = rgb(${config.lib.stylix.colors.base09})
-    $peachAlpha = ${config.lib.stylix.colors.base09}
+    $peach = rgb(${base09})
+    $peachAlpha = ${base09}
 
-    $yellow = rgb(${config.lib.stylix.colors.base0A})
-    $yellowAlpha = ${config.lib.stylix.colors.base0A}
+    $yellow = rgb(${base0A})
+    $yellowAlpha = ${base0A}
 
-    $green = rgb(${config.lib.stylix.colors.base0B})
-    $greenAlpha = ${config.lib.stylix.colors.base0B}
+    $green = rgb(${base0B})
+    $greenAlpha = ${base0B}
 
-    $teal = rgb(${config.lib.stylix.colors.base0C})
-    $tealAlpha = ${config.lib.stylix.colors.base0C}
+    $teal = rgb(${base0C})
+    $tealAlpha = ${base0C}
 
-    $sky = rgb(${config.lib.stylix.colors.base15})
-    $skyAlpha = ${config.lib.stylix.colors.base15}
+    $sky = rgb(${base15})
+    $skyAlpha = ${base15}
 
-    $sapphire = rgb(${config.lib.stylix.colors.base16})
-    $sapphireAlpha = ${config.lib.stylix.colors.base16}
+    $sapphire = rgb(${base16})
+    $sapphireAlpha = ${base16}
 
-    $blue = rgb(${config.lib.stylix.colors.base0D})
-    $blueAlpha = ${config.lib.stylix.colors.base0D}
+    $blue = rgb(${base0D})
+    $blueAlpha = ${base0D}
 
-    $lavender = rgb(${config.lib.stylix.colors.base07})
-    $lavenderAlpha = ${config.lib.stylix.colors.base07}
+    $lavender = rgb(${base07})
+    $lavenderAlpha = ${base07}
 
-    $text = rgb(${config.lib.stylix.colors.base05})
-    $textAlpha = ${config.lib.stylix.colors.base05}
+    $text = rgb(${base05})
+    $textAlpha = ${base05}
 
-    $subtext1 = rgb(${config.lib.stylix.colors.base06})
-    $subtext1Alpha = ${config.lib.stylix.colors.base06}
+    $subtext1 = rgb(${base06})
+    $subtext1Alpha = ${base06}
 
-    $subtext0 = rgb(${config.lib.stylix.colors.base18})
-    $subtext0Alpha = ${config.lib.stylix.colors.base18}
+    $subtext0 = rgb(${base18})
+    $subtext0Alpha = ${base18}
 
-    $overlay2 = rgb(${config.lib.stylix.colors.base24})
-    $overlay2Alpha = ${config.lib.stylix.colors.base24}
+    $overlay2 = rgb(${base24})
+    $overlay2Alpha = ${base24}
 
-    $overlay1 = rgb(${config.lib.stylix.colors.base23})
-    $overlay1Alpha = ${config.lib.stylix.colors.base23}
+    $overlay1 = rgb(${base23})
+    $overlay1Alpha = ${base23}
 
-    $overlay0 = rgb(${config.lib.stylix.colors.base22})
-    $overlay0Alpha = ${config.lib.stylix.colors.base22}
+    $overlay0 = rgb(${base22})
+    $overlay0Alpha = ${base22}
 
-    $surface2 = rgb(${config.lib.stylix.colors.base04})
-    $surface2Alpha = ${config.lib.stylix.colors.base04}
+    $surface2 = rgb(${base04})
+    $surface2Alpha = ${base04}
 
-    $surface1 = rgb(${config.lib.stylix.colors.base03})
-    $surface1Alpha = ${config.lib.stylix.colors.base03}
+    $surface1 = rgb(${base03})
+    $surface1Alpha = ${base03}
 
-    $surface0 = rgb(${config.lib.stylix.colors.base02})
-    $surface0Alpha = ${config.lib.stylix.colors.base02}
+    $surface0 = rgb(${base02})
+    $surface0Alpha = ${base02}
 
-    $base = rgb(${config.lib.stylix.colors.base00})
-    $baseAlpha = ${config.lib.stylix.colors.base00}
+    $base = rgb(${base00})
+    $baseAlpha = ${base00}
 
-    $mantle = rgb(${config.lib.stylix.colors.base10})
-    $mantleAlpha = ${config.lib.stylix.colors.base10}
+    $mantle = rgb(${base10})
+    $mantleAlpha = ${base10}
 
-    $crust = rgb(${config.lib.stylix.colors.base11})
-    $crustAlpha = ${config.lib.stylix.colors.base11}
+    $crust = rgb(${base11})
+    $crustAlpha = ${base11}
   '';
 
   # This is an example Hyprland config file.
@@ -191,52 +192,47 @@
         border_size = 2
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        col.active_border = 0xff'' + config.lib.stylix.colors.base08 + " "
-      + "0xff" + config.lib.stylix.colors.base09 + " " + "0xff"
-      + config.lib.stylix.colors.base0A + " " + "0xff"
-      + config.lib.stylix.colors.base0B + " " + "0xff"
-      + config.lib.stylix.colors.base0C + " " + "0xff"
-      + config.lib.stylix.colors.base0D + " " + "0xff"
-      + config.lib.stylix.colors.base0E + " " + "0xff"
-      + config.lib.stylix.colors.base0F + " " + ''
+        col.active_border = 0xff'' + base08 + " " + "0xff" + base09 + " "
+      + "0xff" + base0A + " " + "0xff" + base0B + " " + "0xff" + base0C + " "
+      + "0xff" + base0D + " " + "0xff" + base0E + " " + "0xff" + base0F + " "
+      + ''
         270deg
 
-               col.inactive_border = 0xaa'' + config.lib.stylix.colors.base02
-      + ''
+               col.inactive_border = 0xaa'' + base02 + ''
 
-          # Set to true enable resizing windows by clicking and dragging on borders and gaps
-          resize_on_border = false 
+            # Set to true enable resizing windows by clicking and dragging on borders and gaps
+            resize_on_border = false 
 
-          # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
-          allow_tearing = false
+            # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+            allow_tearing = false
 
-          layout = dwindle
-        }
-
-        # https://wiki.hyprland.org/Configuring/Variables/#decoration
-        decoration {
-          rounding = 8
-
-          # Change transparency of focused and unfocused windows
-          active_opacity = 1.0
-          inactive_opacity = 1.0
-
-          shadow {
-            enabled = true
-            range = 4
-            render_power = 3
-            color = rgba(1a1a1aee)
+            layout = dwindle
           }
-          
-          # https://wiki.hyprland.org/Configuring/Variables/#blur
-          blur {
-            enabled = true
-            size = 5
-            passes = 2
-            ignore_opacity = true
-            contrast = 1.17
-            vibrancy = 0.1696
-            brightness = ''
+
+          # https://wiki.hyprland.org/Configuring/Variables/#decoration
+          decoration {
+            rounding = 8
+
+            # Change transparency of focused and unfocused windows
+            active_opacity = 1.0
+            inactive_opacity = 1.0
+
+            shadow {
+              enabled = true
+              range = 4
+              render_power = 3
+              color = rgba(1a1a1aee)
+            }
+            
+            # https://wiki.hyprland.org/Configuring/Variables/#blur
+            blur {
+              enabled = true
+              size = 5
+              passes = 2
+              ignore_opacity = true
+              contrast = 1.17
+              vibrancy = 0.1696
+              brightness = ''
       + (if (config.stylix.polarity == "dark") then "0.8" else "1.25") + ''
             xray = true
           }

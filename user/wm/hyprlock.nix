@@ -1,4 +1,5 @@
-{ config, pkgs, userSettings, ... }: {
+{ config, pkgs, userSettings, ... }:
+with config.lib.stylix.colors; {
   home.packages = with pkgs; [ hyprlock ];
 
   programs.hyprlock.enable = true;
@@ -19,7 +20,7 @@
         path = "${config.stylix.image}";
         blur_passes = 3;
         blur_size = 8;
-        color = "rgb(${config.lib.stylix.colors.base00})";
+        color = "rgb(${base00})";
         zindex = -2;
       }
       {
@@ -32,7 +33,7 @@
       path = userSettings.avatar;
       size = 100;
       border_size = 2;
-      border_color = "rgb(${config.lib.stylix.colors.base05})";
+      border_color = "rgb(${base05})";
       position = "0, 16";
       halign = "center";
       valign = "center";
@@ -45,17 +46,17 @@
       dots_size = 0.2;
       dots_spacing = 0.2;
       dots_center = true;
-      outer_color = "rgb(${config.lib.stylix.colors.base0E})";
-      inner_color = "rgb(${config.lib.stylix.colors.base02})";
-      font_color = "rgb(${config.lib.stylix.colors.base05})";
+      outer_color = "rgb(${base0E})";
+      inner_color = "rgb(${base02})";
+      font_color = "rgb(${base05})";
       fade_on_empty = false;
       placeholder_text = ''
-        <span foreground="##${config.lib.stylix.colors.base05}"><i>󰌾 Logged in as </i><span foreground="##${config.lib.stylix.colors.base0E}">$USER</span></span>'';
+        <span foreground="##${base05}"><i>󰌾 Logged in as </i><span foreground="##${base0E}">$USER</span></span>'';
       hide_input = false;
-      check_color = "rgb(${config.lib.stylix.colors.base0E})";
-      fail_color = "rgb(${config.lib.stylix.colors.base08})";
+      check_color = "rgb(${base0E})";
+      fail_color = "rgb(${base08})";
       fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-      capslock_color = "rgb(${config.lib.stylix.colors.base0A})";
+      capslock_color = "rgb(${base0A})";
       halign = "center";
       valign = "center";
     }];
@@ -64,7 +65,7 @@
       {
         monitor = "";
         text = "Layout: $LAYOUT";
-        color = "rgb(${config.lib.stylix.colors.base05})";
+        color = "rgb(${base05})";
         font_size = 25;
         font_family = userSettings.font;
         position = "30, -30";
@@ -74,7 +75,7 @@
       {
         monitor = "";
         text = ''cmd[update:1000] echo "$(date +"%H:%M")"'';
-        color = "rgb(${config.lib.stylix.colors.base05})";
+        color = "rgb(${base05})";
         font_size = 90;
         font_family = userSettings.font;
         position = "-30, 0";
@@ -84,7 +85,7 @@
       {
         monitor = "";
         text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
-        color = "rgb(${config.lib.stylix.colors.base05})";
+        color = "rgb(${base05})";
         font_size = 25;
         font_family = userSettings.font;
         position = "-30, -150";
@@ -94,7 +95,7 @@
       {
         monitor = "";
         text = "You shall not pass!";
-        color = "rgb(${config.lib.stylix.colors.base05})";
+        color = "rgb(${base05})";
         font_size = 14;
         font_family = userSettings.font;
         position = "0, -175";

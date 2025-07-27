@@ -13,7 +13,7 @@
     ../../user/app/bat.nix
     ../../user/app/waybar.nix
     ../../user/app/fuzzel.nix
-    ../../user/app/mako.nix
+    # ../../user/app/mako.nix
     ../../user/app/neovim.nix
     ../../user/app/lazygit.nix
     ../../user/app/starship.nix
@@ -36,6 +36,7 @@
     ../../user/wm/hyprpaper.nix
     ../../user/wm/hyprlock.nix
     ../../user/wm/hypridle.nix
+    ../../user/wm/hyprpanel.nix
   ];
 
   # Leave this unchanged for compatibility purposes
