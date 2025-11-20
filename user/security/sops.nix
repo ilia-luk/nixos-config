@@ -22,6 +22,7 @@
       ilia-password = { };
       gh-oauth = { };
       openai-api-key = { };
+      claude-api-key = { };
     };
   };
 }

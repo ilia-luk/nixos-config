@@ -59,6 +59,7 @@ in {
     # for editing directly to config.nu 
     envFile.text = ''
       $env.OPENAI_API_KEY = (cat ${config.sops.secrets.openai-api-key.path})
+      $env.CLAUDE_API_KEY = (cat ${config.sops.secrets.claude-api-key.path})
     '';
     configFile.text = ''
       # Defaults

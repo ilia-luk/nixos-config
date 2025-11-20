@@ -8,23 +8,36 @@
   services.postgresql = {
     enable = true;
     settings = {
-      port = 5432;
+      port = 5454;
       log_connections = true;
       log_statement = "all";
       logging_collector = true;
       log_disconnections = true;
       log_destination = lib.mkForce "syslog";
     };
-    ensureUsers = [{
-      name = "admin";
-      ensureDBOwnership = true;
-      ensureClauses = {
-        superuser = true;
-        createrole = true;
-        createdb = true;
-      };
-    }];
-    ensureDatabases = [ "mydatabase" "admin" ];
+    extensions = with pkgs.unstable.postgresql.pkgs; [ pgvector ];
+    package = pkgs.postgresql_17;
+    ensureUsers = [
+      {
+        name = "admin";
+        ensureDBOwnership = true;
+        ensureClauses = {
+          superuser = true;
+          createrole = true;
+          createdb = true;
+        };
+      }
+      {
+        name = "postgres";
+        ensureDBOwnership = true;
+        ensureClauses = {
+          superuser = true;
+          createrole = true;
+          createdb = true;
+        };
+      }
+    ];
+    ensureDatabases = [ "mydatabase" "admin" "postgres" ];
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
       #...

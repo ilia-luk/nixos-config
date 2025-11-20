@@ -27,6 +27,7 @@
       gh-oauth = { };
       gh-access-token = { };
       openai-api-key = { };
+      claude-api-key = { };
     };
   };
 }
