@@ -19,6 +19,7 @@
             "microphone"
             "volume"
             "network"
+            "custom/wgnord"
             "bluetooth"
             # "systray"
             "kbinput"
