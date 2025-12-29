@@ -170,9 +170,9 @@ let
     "custom/wgnord" = {
       icon = {
         off = "󰖂";
-        on = "󰖂";
-        th = "󰖂";
-        il = "󰖂";
+        on = "󰌘";
+        th = "󰌘";
+        il = "󰌘";
         default = "󰖂";
       };
 
