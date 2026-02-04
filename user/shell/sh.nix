@@ -41,6 +41,7 @@ in {
     ngrok
     shfmt
     shellcheck
+    unstable.tree-sitter
   ];
 
   programs.zsh = {
