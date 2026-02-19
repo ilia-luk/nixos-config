@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ hypridle ];
+  home.packages = with pkgs; [ hypridle playerctl ];
 
   services.hypridle.enable = true;
 
@@ -17,16 +17,17 @@
         on-resume = "notify-send 'Welcome back!'";
       }
       {
-        timeout = 600;
-        on-timeout = "loginctl lock-session";
+        timeout = 1500;
+        on-timeout =
+          "if ! playerctl -a status | grep -q Playing; then loginctl lock-session; fi";
       }
       {
-        timeout = 1200;
+        timeout = 3000;
         on-timeout = "hyprctl dispatch dpms off";
         on-resume = "hyprctl dispatch dpms on";
       }
       {
-        timeout = 1800;
+        timeout = 6000;
         on-timeout = "systemctl suspend";
       }
     ];
