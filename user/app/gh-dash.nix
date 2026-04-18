@@ -130,7 +130,7 @@ with config.lib.stylix.colors; {
       }];
       prs = [
         {
-          key = "g";
+          key = "G";
           name = "lazygit on pr branch";
           # This switches the branch AND opens lazygit
           command =
