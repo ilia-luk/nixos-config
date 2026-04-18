@@ -24,6 +24,7 @@
     ../../system/db/redis.nix
     ../../system/db/rabbitmq.nix
     ../../system/db/postgresql.nix
+    ../../system/apps/docker.nix
     ../../system/apps/dropbox.nix
     ../../system/apps/wgnord.nix
     ../../system/apps/openvpn3.nix
@@ -102,6 +103,7 @@
     xh
     hyprshot
     gimp3
+    inkscape
   ];
 
   # Enable zsh and nushell

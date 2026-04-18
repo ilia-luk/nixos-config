@@ -3,7 +3,6 @@
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     enableNushellIntegration = true;
     nix-direnv.enable = true;
     config = {
@@ -12,6 +11,8 @@
         prefix = [
           "${config.home.homeDirectory}/dev/ehouse/"
           "${config.home.homeDirectory}/dev/domusnetwork/"
+          "${config.home.homeDirectory}/dev/accountant/"
+          "${config.home.homeDirectory}/dev/riverpool/"
         ];
       };
     };
