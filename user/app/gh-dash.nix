@@ -1,10 +1,18 @@
-{ pkgs, config, ... }:
+{ pkgs, config, userSettings, ... }:
 with config.lib.stylix.colors; {
   home.packages = with pkgs; [ (lib.hiPrio unstable.gh-dash) ];
 
   programs.gh-dash.enable = true;
 
   programs.gh-dash.settings = {
+    repoPaths = {
+      "riverpool-ai/riverpool" =
+        "/home/${userSettings.username}/dev/riverpool-devenv/riverpool";
+      "Domusnetwork/accountant" =
+        "/home/${userSettings.username}/dev/accountant/accountant";
+      ":owner/:repo" =
+        "/home/${userSettings.username}/dev/:owner/:repo"; # Keep as fallback
+    };
     prSections = [
       {
         title = "My Pull Requests";
@@ -120,12 +128,21 @@ with config.lib.stylix.colors; {
         command = ''
           zellij run --floating --cwd {{.RepoPath}} --name "lazygit" -- lazygit'';
       }];
-      prs = [{
-        key = "C";
-        name = "code review";
-        command =
-          "zellij run --floating --cwd {{.RepoPath}} --name \"PR-{{.PrNumber}}\" -- nu -c 'gh pr checkout {{.PrNumber}}; nvim'";
-      }];
+      prs = [
+        {
+          key = "g";
+          name = "lazygit on pr branch";
+          # This switches the branch AND opens lazygit
+          command =
+            "zellij run --floating --cwd {{.RepoPath}} --name \"lazygit\" -- nu -c 'gh pr checkout {{.PrNumber}}; lazygit'";
+        }
+        {
+          key = "C";
+          name = "code review";
+          command =
+            "zellij run --floating --cwd {{.RepoPath}} --name \"PR-{{.PrNumber}}\" -- nu -c 'gh pr checkout {{.PrNumber}}; nvim'";
+        }
+      ];
     };
     theme = {
       colors = {
