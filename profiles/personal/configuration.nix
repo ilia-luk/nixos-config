@@ -104,6 +104,7 @@
     hyprshot
     gimp3
     inkscape
+    diffnav
   ];
 
   # Enable zsh and nushell

@@ -16,6 +16,7 @@
     # ../../user/app/mako.nix
     ../../user/app/neovim.nix
     ../../user/app/lazygit.nix
+    ../../user/app/gh-dash.nix
     ../../user/app/starship.nix
     ../../user/app/tmux.nix
     ../../user/app/zellij.nix

@@ -1,22 +1,12 @@
-{
-  pkgs,
-  userSettings,
-  ...
-}: {
-  home.packages = with pkgs; [ 
-    gh
-    git
-    git-credential-oauth
-  ];
-  
+{ pkgs, userSettings, ... }: {
+  home.packages = with pkgs; [ gh git git-credential-oauth ];
+
   programs.gh = {
-   enable = true;
-   # settings = {
-   #   git_protocol = "ssh";
-   # };
-   gitCredentialHelper = {
-     enable = false;
-   };
+    enable = true;
+    # settings = {
+    #   git_protocol = "ssh";
+    # };
+    gitCredentialHelper = { enable = false; };
   };
 
   programs.git = {
@@ -36,7 +26,5 @@
     };
   };
 
-  programs.git-credential-oauth = {
-    enable = true;
-  };
+  programs.git-credential-oauth = { enable = true; };
 }
