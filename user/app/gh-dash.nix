@@ -140,7 +140,7 @@ with config.lib.stylix.colors; {
           key = "C";
           name = "code review";
           command =
-            "zellij run --floating --cwd {{.RepoPath}} --name \"PR-{{.PrNumber}}\" -- nu -c 'gh pr checkout {{.PrNumber}}; nvim'";
+            "zellij run --floating --cwd {{.RepoPath}} --name \"PR-{{.PrNumber}}\" -- nu -c 'gh pr checkout {{.PrNumber}}; nvim .'";
         }
       ];
     };

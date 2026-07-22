@@ -53,6 +53,7 @@
     _1password-gui
     postman
     figma-linux
+    blender
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
