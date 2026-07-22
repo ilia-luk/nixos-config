@@ -158,7 +158,6 @@ with config.lib.stylix.colors; {
 
       exec-once = nm-applet -- indicator
       exec-once = hypridle
-      exec-once = hyprpanel
       # exec-once = hyprpaper
 
 

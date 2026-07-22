@@ -7,13 +7,12 @@
 
   imports = [
     ../../user/style/stylix.nix
+    ../../user/app/noctalia.nix
     ../../user/app/git.nix
     ../../user/app/kitty.nix
     ../../user/app/yazi.nix
     ../../user/app/bat.nix
-    # ../../user/app/waybar.nix
     ../../user/app/fuzzel.nix
-    # ../../user/app/mako.nix
     ../../user/app/neovim.nix
     ../../user/app/lazygit.nix
     ../../user/app/gh-dash.nix
@@ -24,11 +23,7 @@
     ../../user/app/atuin.nix
     ../../user/app/zoxide.nix
     ../../user/app/feh.nix
-    # ../../user/app/nixvim/nixvim.nix
     ../../user/app/thunderbird.nix
-    #../../user/hardware/bluetooth.nix
-    #../../user/lang/cc.nix
-    #../../user/lang/haskell.nix
     ../../user/security/sops.nix
     ../../user/shell/sh.nix
     ../../user/shell/direnv.nix
@@ -37,12 +32,12 @@
     ../../user/wm/hyprpaper.nix
     ../../user/wm/hyprlock.nix
     ../../user/wm/hypridle.nix
-    ../../user/wm/hyprpanel.nix
   ];
 
   # Leave this unchanged for compatibility purposes
   home.stateVersion = "24.05";
 
+  # Applications that don't need special configurations
   home.packages = with pkgs; [
     firefox
     unstable.discord
@@ -59,12 +54,12 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+    # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # symlink to the Nix store copy.
+    # # ".screenrc".source = dotfiles/screenrc;
 
-    # # You can also set the file content immediately.
+    # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
@@ -96,8 +91,6 @@
   };
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
-
-  programs.hyprpanel.enable = true;
 
   home.sessionVariables = {
     EDITOR = userSettings.editor;

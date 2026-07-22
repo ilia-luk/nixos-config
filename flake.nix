@@ -4,17 +4,32 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-unstable.url = "github:nix-community/home-manager";
-    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:nix-community/stylix/release-25.05";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.inputs.home-manager.follows = "home-manager";
-    nixvim.url = "github:nix-community/nixvim/nixos-25.05";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
+      # this line is optional, prevents downloading two versions of nixpkgs but disables cache
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -22,22 +37,23 @@
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
-        system = "x86_64-linux"; # system arch
-        hostname = "nexus"; # hostname
-        profile =
-          "personal"; # select a profile defined from my profiles directory
-        timezone = "Asia/Bangkok"; # select timezone
-        locale = "en_US.UTF-8"; # select locale
-        bootMode = "uefi"; # uefi or bios
-        bootMountPath =
-          "/boot"; # mount path for efi boot partition; only used for uefi boot mode
+        system = "x86_64-linux";
+        hostname = "nexus";
+        # select a profile defined from my profiles directory
+        profile = "personal";
+        timezone = "Asia/Bangkok";
+        locale = "en_US.UTF-8";
+        # uefi or bios
+        bootMode = "uefi";
+        # mount path for efi boot partition; only used for uefi boot mode
+        bootMountPath = "/boot";
       };
 
       # ----- USER SETTINGS ----- #
       userSettings = rec {
-        username = "ilia"; # username
+        username = "ilia";
         ghUsername = "ilia-luk";
-        name = "Ilia"; # name/identifier
+        name = "Ilia";
         avatar = builtins.path {
           path = ./misc/avatar.png;
           name = "my-awesome-avatar";
@@ -46,22 +62,25 @@
           path = ./misc/lock_overlay.png;
           name = "my-awesome-overlay";
         };
-        email =
-          "ilia@domusnetwork.io"; # email (used for certain configurations)
-        dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
-        theme =
-          "catppuccin-mocha"; # selcted theme from my themes directory (./themes/)
-        wm =
-          "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm
-        wmType = "wayland"; # window manager type (hyprland or x11) translator
-        browser =
-          "firefox"; # Default browser; must select one from ./user/app/browser/
-        term = "kitty"; # Default terminal command;
-        font = "Fira Code"; # Selected font
-        fontPkg = pkgs.nerd-fonts.fira-code; # Font package
-        editor = "nvim"; # Default editor;
-        defaultRoamDir =
-          "Personal.p"; # Default org roam directory relative to ~/Org
+        # email (used for certain configurations)
+        email = "ilia@domusnetwork.io";
+        # absolute path of the local repo
+        dotfilesDir = "~/.dotfiles";
+        # selcted theme from my themes directory (./themes/)
+        theme = "catppuccin-mocha";
+        # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm
+        wm = "hyprland";
+        # window manager type (hyprland or x11) translator
+        wmType = "wayland";
+        # Default browser; must select one from ./user/app/browser/
+        browser = "firefox";
+        # Default terminal command;
+        term = "kitty";
+        font = "Fira Code";
+        fontPkg = pkgs.nerd-fonts.fira-code;
+        editor = "nvim";
+        # Default org roam directory relative to ~/Org
+        defaultRoamDir = "Personal.p";
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
         # EDITOR and TERM session variables must be set in home.nix or other module
@@ -99,16 +118,6 @@
 
       # ------ HOME MANAGER ----- #
       home-manager = inputs.home-manager;
-
-      # -------- SYSTEMS -------- #
-      # Systems that can run tests:
-      # supportedSystems = ["aarch64-linux" "i686-linux" "x86_64-linux"];
-
-      # Function to generate a set based on supported systems:
-      # forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-
-      # Attribute set of nixpkgs for each system:
-      # nixpkgsFor = forAllSystems (system: import inputs.nixpkgs {inherit system;});
 
     in {
       nixosConfigurations = {
@@ -149,25 +158,5 @@
           };
         };
       };
-
-      # packages = forAllSystems (system: {
-      #   let pkgs = nixpkgsFor.${system};
-      #   in {
-      #     default = self.packages.${system}.install;
-      #     install = pkgs.writeShellApplication {
-      #       name = "install";
-      #       runtimeInputs = with pkgs; [ git ];
-      #       text = ''${./install.sh} "$@"'';
-      #     };
-      #   }
-      #  });
-
-      #  apps = forAllSystems (system: {
-      #    default = self.apps.${system}.install;
-      #    install = {
-      #      type = "app";
-      #      program = "${self.packages.${system}.install}/bin/install";
-      #    };
-      #  });
     };
 }
