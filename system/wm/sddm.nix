@@ -11,6 +11,7 @@ let
     };
   };
 in {
+  services.displayManager.defaultSession = "hyprland";
   # Configure display manager (login screen)
   services.displayManager.sddm = {
     enable = true;
@@ -22,3 +23,4 @@ in {
   };
   environment.systemPackages = [ sddm-astronaut ];
 }
+
