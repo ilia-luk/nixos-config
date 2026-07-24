@@ -36,7 +36,7 @@
   boot.loader.grub.enable = false;
 
   # Use latest kerenel
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Define hostname
   networking.hostName = systemSettings.hostname;

@@ -1,6 +1,6 @@
 { pkgs, lib, userSettings, ... }: {
   environment.systemPackages = with pkgs; [
-    unstable.postgresql
+    postgresql_17
     unstable.pgadmin
     unstable.dbeaver-bin
   ];
@@ -15,7 +15,7 @@
       log_disconnections = true;
       log_destination = lib.mkForce "syslog";
     };
-    extensions = with pkgs.unstable.postgresql.pkgs; [ pgvector ];
+    extensions = with pkgs.postgresql_17.pkgs; [ pgvector ];
     package = pkgs.postgresql_17;
     ensureUsers = [
       {
