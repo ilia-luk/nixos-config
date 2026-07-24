@@ -27,16 +27,12 @@
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
   # This fixes a bug in the kernel for nvidia drivers introducting unknown device
   # that upon changing hyprland workspace 2 crashes the system because it switches
   # to the unknown device.
-  boot.kernelParams = [
-    "loglevel=4"
-    "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-    "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
-  ];
+  boot.kernelParams =
+    [ "loglevel=4" "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 }
