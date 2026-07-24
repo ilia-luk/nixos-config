@@ -28,8 +28,7 @@
     };
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, nixpkgs-unstable, nixvim, sops-nix, stylix, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, sops-nix, stylix, ... }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
