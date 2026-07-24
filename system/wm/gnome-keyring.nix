@@ -3,7 +3,7 @@
 {
   services.gnome = {
     gnome-keyring.enable = true;
-    gcr-ssh-agent.enable = false;
+    gcr-ssh-agent.enable = true;
   };
 
   # Security
