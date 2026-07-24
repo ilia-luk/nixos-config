@@ -104,6 +104,7 @@ with config.lib.stylix.colors;
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     xwayland = {
       enable = true;
     };
