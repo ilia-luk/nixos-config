@@ -124,7 +124,7 @@
   xdg.portal.enable = true;
 
   # Limit boot to 5 generations of kernels
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   # Leave this unchanged for compatibility purposes
   system.stateVersion = "24.05";
