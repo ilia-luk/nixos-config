@@ -6,7 +6,7 @@
   services.hyprpaper.settings = {
     ipc = "on";
     splash = true;
-    splash_offset = 2.0;
+    splash_offset = 2;
     preload = [ "${config.stylix.image}" ];
     wallpaper = [ "DP-1, ${config.stylix.image}" ];
   };
