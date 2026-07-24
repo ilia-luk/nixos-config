@@ -1,7 +1,6 @@
 { pkgs, lib, userSettings, ... }: {
   environment.systemPackages = with pkgs; [
     postgresql_17
-    unstable.pgadmin
     unstable.dbeaver-bin
   ];
 
@@ -47,14 +46,6 @@
       host  all      all     127.0.0.1/32   trust
       # ipv6
       host all       all     ::1/128        trust
-    '';
-  };
-
-  services.pgadmin = {
-    enable = true;
-    initialEmail = userSettings.email;
-    initialPasswordFile = pkgs.writeText "pgadminPW" ''
-      rootadmin
     '';
   };
 }

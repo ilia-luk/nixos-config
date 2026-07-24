@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ redis redisinsight ];
+  environment.systemPackages = with pkgs; [ redis ];
 
   services.redis.servers."talos" = {
     enable = true;

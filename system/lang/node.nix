@@ -7,6 +7,6 @@
     nodejs_22
     html-tidy
     stylelint
-    nodePackages.js-beautify
+    js-beautify
   ];
 }

@@ -2,7 +2,6 @@
   environment.systemPackages = with pkgs; [
     unstable.mongodb-7_0
     mongodb-tools
-    robo3t
     mongodb-compass
     # lsb-release # For mongodb-memory-server
     # openssl

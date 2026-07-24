@@ -93,7 +93,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    nixfmt-classic
+    nixfmt
     wget
     zsh
     nushell
