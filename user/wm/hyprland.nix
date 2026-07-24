@@ -109,7 +109,7 @@ with config.lib.stylix.colors;
       enable = true;
     };
     systemd = {
-      enable = true;
+      enable = false;
       variables = [ "--all" ];
     };
     package = null;

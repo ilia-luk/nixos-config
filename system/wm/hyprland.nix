@@ -1,8 +1,17 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Import wayland config
-  imports = [ ./wayland.nix ./pipewire.nix ./dbus.nix ];
+  imports = [
+    ./wayland.nix
+    ./pipewire.nix
+    ./dbus.nix
+  ];
 
   # Get hyprland
   environment.systemPackages = with pkgs; [ xdg-desktop-portal-hyprland ];
@@ -11,7 +20,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    withUWSM = false;
+    withUWSM = true;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 }

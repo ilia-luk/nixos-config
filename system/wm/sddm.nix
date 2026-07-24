@@ -10,8 +10,9 @@ let
       ForceHideCompletePassword = true;
     };
   };
-in {
-  services.displayManager.defaultSession = "hyprland";
+in
+{
+  services.displayManager.defaultSession = "hyprland-uwsm";
   # Configure display manager (login screen)
   services.displayManager.sddm = {
     enable = true;
@@ -23,4 +24,3 @@ in {
   };
   environment.systemPackages = [ sddm-astronaut ];
 }
-

@@ -1,7 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{ config, pkgs, systemSettings, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  systemSettings,
+  userSettings,
+  ...
+}:
+{
   imports = [
     ../../system/hardware-configuration.nix
     ../../system/security/sops.nix
@@ -59,23 +66,25 @@
 
   # Decrypt user-password to /run/secrets-for-users/ so it can be used to create the user
   sops.secrets."${userSettings.username}-password".neededForUsers = true;
-  users.mutableUsers =
-    false; # Required for password to be set via sops during system activation!
+  users.mutableUsers = false; # Required for password to be set via sops during system activation!
 
   # User account
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    hashedPasswordFile =
-      config.sops.secrets."${userSettings.username}-password".path;
+    hashedPasswordFile = config.sops.secrets."${userSettings.username}-password".path;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "input" "dialout" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "dialout"
+    ];
     packages = [ ];
     uid = 1000;
   };
 
   # Enable ssh
   programs.ssh = {
-    startAgent = true;
     enableAskPassword = true;
     extraConfig = ''
       Host github
@@ -108,7 +117,10 @@
   ];
 
   # Enable zsh and nushell
-  environment.shells = with pkgs; [ zsh nushell ];
+  environment.shells = with pkgs; [
+    zsh
+    nushell
+  ];
   users.defaultUserShell = pkgs.nushell;
 
   # Enable nix-ld
@@ -131,13 +143,19 @@
 
   # Enable flakes
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    allowed-users = [ "@wheel" "ilia" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    allowed-users = [
+      "@wheel"
+      "ilia"
+    ];
     substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys =
-      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     extra-substituters = [ "https://noctalia.cachix.org" ];
-    extra-trusted-public-keys =
-      [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
   };
 }
