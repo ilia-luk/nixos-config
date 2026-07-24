@@ -1,13 +1,17 @@
 { config, pkgs, ... }:
-with config.lib.stylix.colors; {
+with config.lib.stylix.colors;
+{
   home.packages = [ pkgs.yazi ];
 
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
+    shellWrapperName = "y";
     settings = {
-      log = { enabled = false; };
+      log = {
+        enabled = false;
+      };
       mgr = {
         show_hidden = true;
         sort_by = "mtime";
@@ -17,13 +21,17 @@ with config.lib.stylix.colors; {
     };
     theme = {
       mgr = {
-        cwd = { fg = "#${base0C}"; };
+        cwd = {
+          fg = "#${base0C}";
+        };
         # Hovered
         hovered = {
           fg = "#${base05}";
           bg = "#${base02}";
         };
-        preview_hovered = { underline = true; };
+        preview_hovered = {
+          underline = true;
+        };
         # Find
         find_keyword = {
           fg = "#${base0A}";
@@ -49,7 +57,9 @@ with config.lib.stylix.colors; {
         };
         # Border
         border_symbol = "│";
-        border_style = { fg = "#${base03}"; };
+        border_style = {
+          fg = "#${base03}";
+        };
       };
       tabs = {
         active = {
@@ -121,40 +131,78 @@ with config.lib.stylix.colors; {
           bg = "#${base00}";
         };
         # Permissions
-        perm_type = { fg = "#${base0D}"; };
-        perm_read = { fg = "#${base0A}"; };
-        perm_write = { fg = "#${base08}"; };
-        perm_exec = { fg = "#${base0C}"; };
-        perm_sep = { fg = "#${base04}"; };
+        perm_type = {
+          fg = "#${base0D}";
+        };
+        perm_read = {
+          fg = "#${base0A}";
+        };
+        perm_write = {
+          fg = "#${base08}";
+        };
+        perm_exec = {
+          fg = "#${base0C}";
+        };
+        perm_sep = {
+          fg = "#${base04}";
+        };
       };
       which = {
-        mask = { bg = "#${base03}"; };
-        cand = { fg = "#${base0C}"; };
-        rest = { fg = "#${base03}"; };
-        desc = { fg = "#${base09}"; };
+        mask = {
+          bg = "#${base03}";
+        };
+        cand = {
+          fg = "#${base0C}";
+        };
+        rest = {
+          fg = "#${base03}";
+        };
+        desc = {
+          fg = "#${base09}";
+        };
         separator = "  ";
-        separator_style = { fg = "#${base03}"; };
+        separator_style = {
+          fg = "#${base03}";
+        };
       };
       input = {
-        border = { fg = "#${base03}"; };
+        border = {
+          fg = "#${base03}";
+        };
         title = { };
         value = { };
-        selected = { reversed = true; };
+        selected = {
+          reversed = true;
+        };
       };
       cmp = {
-        border = { fg = "#${base03}"; };
-        active = { fg = "#${base09}"; };
+        border = {
+          fg = "#${base03}";
+        };
+        active = {
+          fg = "#${base09}";
+        };
         inactive = { };
       };
       tasks = {
-        border = { fg = "#${base03}"; };
+        border = {
+          fg = "#${base03}";
+        };
         title = { };
-        hovered = { underline = true; };
+        hovered = {
+          underline = true;
+        };
       };
       help = {
-        on = { fg = "#${base09}"; };
-        run = { fg = "#${base0C}"; };
-        desc = { fg = "#${base03}"; };
+        on = {
+          fg = "#${base09}";
+        };
+        run = {
+          fg = "#${base0C}";
+        };
+        desc = {
+          fg = "#${base03}";
+        };
         hovered = {
           bg = "#${base03}";
           bold = true;

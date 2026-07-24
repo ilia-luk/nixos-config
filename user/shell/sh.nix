@@ -18,7 +18,8 @@ let
   #   LV_BRANCH = "release-1.4/neovim-0.9";
   # };
 
-in {
+in
+{
   home.packages = with pkgs; [
     disfetch
     onefetch
@@ -50,6 +51,7 @@ in {
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     shellAliases = myAliases;
+    dotDir = config.home.homeDirectory;
     # variables = myVariables;
   };
 
@@ -57,7 +59,7 @@ in {
     enable = true;
     # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
     # configFile.source = ./.../config.nu;
-    # for editing directly to config.nu 
+    # for editing directly to config.nu
     envFile.text = ''
       $env.OPENAI_API_KEY = (cat ${config.sops.secrets.openai-api-key.path})
       $env.CLAUDE_API_KEY = (cat ${config.sops.secrets.claude-api-key.path})

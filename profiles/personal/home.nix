@@ -1,4 +1,10 @@
-{ config, pkgs, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
   # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = userSettings.username;
   home.homeDirectory = "/home/" + userSettings.username;
@@ -70,6 +76,7 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+    setSessionVariables = true;
     music = "${config.home.homeDirectory}/Media/Music";
     videos = "${config.home.homeDirectory}/Media/Videos";
     pictures = "${config.home.homeDirectory}/Media/Pictures";
@@ -79,14 +86,14 @@
     desktop = null;
     publicShare = null;
     extraConfig = {
-      XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dotfiles";
-      XDG_ARCHIVE_DIR = "${config.home.homeDirectory}/Archive";
-      XDG_VM_DIR = "${config.home.homeDirectory}/Machines";
-      XDG_ORG_DIR = "${config.home.homeDirectory}/Org";
-      XDG_PODCAST_DIR = "${config.home.homeDirectory}/Media/Podcasts";
-      XDG_BOOK_DIR = "${config.home.homeDirectory}/Media/Books";
-      XDG_PICTURES_DIR = "${config.home.homeDirectory}/Media/Pictures";
-      XDG_VIDEOS_DIR = "${config.home.homeDirectory}/Media/Videos";
+      DOTFILES = "${config.home.homeDirectory}/.dotfiles";
+      ARCHIVE = "${config.home.homeDirectory}/Archive";
+      VM = "${config.home.homeDirectory}/Machines";
+      ORG = "${config.home.homeDirectory}/Org";
+      PODCAST = "${config.home.homeDirectory}/Media/Podcasts";
+      BOOK = "${config.home.homeDirectory}/Media/Books";
+      PICTURES = "${config.home.homeDirectory}/Media/Pictures";
+      VIDEOS = "${config.home.homeDirectory}/Media/Videos";
     };
   };
   xdg.mime.enable = true;
