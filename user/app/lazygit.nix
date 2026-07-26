@@ -1,5 +1,6 @@
 { pkgs, config, ... }:
-with config.lib.stylix.colors; {
+with config.lib.stylix.colors;
+{
   home.packages = with pkgs; [ lazygit ];
 
   programs.lazygit.enable = true;
@@ -24,18 +25,26 @@ with config.lib.stylix.colors; {
     };
     gui = {
       theme = {
-        activeBorderColor = [ "#${base06}" "bold" ];
-        inactiveBorderColor = [ "#${base04}" ];
+        activeBorderColor = [
+          "#${base0E}"
+          "bold"
+        ];
+        inactiveBorderColor = [ "#${base19}" ];
         optionsTextColor = [ "#${base0D}" ];
         selectedLineBgColor = [ "#${base02}" ];
         cherryPickedCommitBgColor = [ "#${base03}" ];
-        cherryPickedCommitFgColor = [ "#${base06}" ];
-        unstagedChangesColor = [ "#${base0F}" ];
+        cherryPickedCommitFgColor = [ "#${base0E}" ];
+        unstagedChangesColor = [ "#${base08}" ];
         defaultFgColor = [ "#${base05}" ];
-        searchingActiveBorderColor = [ "#${base0A}" ];
+        searchingActiveBorderColor = [
+          "#${base0A}"
+          "bold"
+        ];
       };
       nerdFontsVersion = "3";
-      authorColors = { "*" = "#${base07}"; };
+      authorColors = {
+        "*" = "#${base07}";
+      };
     };
   };
 }
