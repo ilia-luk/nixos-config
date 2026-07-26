@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, userSettings, ... }: {
   imports = [ inputs.noctalia.homeModules.default ];
 
   programs.noctalia.enable = true;
@@ -24,6 +24,7 @@
         "ram"
         "network_rx"
         "network_tx"
+        "media"
       ];
       center = [
         "launcher"
@@ -50,6 +51,8 @@
       thickness = 36;
       widget_spacing = 12;
     };
+
+    location.address = userSettings.location;
 
     control_center.width = 1200;
 
@@ -111,7 +114,15 @@
       cpu.interactive = false;
       keyboard_layout.capsule = true;
       launcher.capsule = true;
-      media.enabled = false;
+      media = {
+        artist_first = true;
+        capsule = true;
+        color = "primary";
+        enabled = true;
+        hide_album_art = true;
+        hide_when_no_media = true;
+        title_scroll = "on_hover";
+      };
       network = {
         capsule = true;
         show_label = false;

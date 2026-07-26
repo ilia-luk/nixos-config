@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  systemSettings,
+  ...
+}:
 let
   zjstatus = pkgs.fetchurl {
     name = "zjstatus-v0.22.0.wasm";
@@ -230,7 +235,7 @@ with config.lib.stylix.colors;
 
                     datetime          "{format}"
                     datetime_format   "%Y-%m-%d    %H:%M"
-                    datetime_timezone "Asia/Bangkok"
+                    datetime_timezone "${systemSettings.timezone}"
                 }
             }
         }

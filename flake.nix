@@ -54,6 +54,7 @@
       # ----- USER SETTINGS ----- #
       userSettings = rec {
         username = "ilia";
+        location = "Bangkok";
         ghUsername = "ilia-luk";
         name = "Ilia";
         avatar = builtins.path {
