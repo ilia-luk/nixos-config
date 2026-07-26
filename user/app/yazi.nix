@@ -9,9 +9,6 @@ with config.lib.stylix.colors;
     enableNushellIntegration = true;
     shellWrapperName = "y";
     settings = {
-      log = {
-        enabled = false;
-      };
       mgr = {
         show_hidden = true;
         sort_by = "mtime";
@@ -23,14 +20,6 @@ with config.lib.stylix.colors;
       mgr = {
         cwd = {
           fg = "#${base0C}";
-        };
-        # Hovered
-        hovered = {
-          fg = "#${base05}";
-          bg = "#${base02}";
-        };
-        preview_hovered = {
-          underline = true;
         };
         # Find
         find_keyword = {
@@ -268,6 +257,19 @@ with config.lib.stylix.colors;
             fg = "#${base0D}";
           }
         ];
+      };
+      indicator = {
+        parent = {
+          fg = "#${base05}";
+          bg = "#${base02}";
+        };
+        current = {
+          fg = "#${base05}";
+          bg = "#${base02}";
+        };
+        preview = {
+          underline = true;
+        };
       };
     };
     initLua = ''
