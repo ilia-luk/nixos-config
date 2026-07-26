@@ -7,9 +7,9 @@ let
   };
 
   room = pkgs.fetchurl {
-    name = "room-v1.1.0-final-v5.wasm";
-    url = "https://github.com/rvcas/room/releases/download/v1.1.0/room.wasm";
-    sha256 = "sha256-nYxZ1eOIkr1mFiAyWS9H/1i9jKnlRtORygMeyniS9QU=";
+    name = "room-v1.2.1.wasm";
+    url = "https://github.com/rvcas/room/releases/download/v1.2.1/room.wasm";
+    sha256 = "sha256-kLSDpAt2JGj7dYYhYFh6BfvtzVwTrcs+0jHwG/nActE=";
   };
 in
 with config.lib.stylix.colors;
