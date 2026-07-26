@@ -62,7 +62,7 @@ with config.lib.stylix.colors;
     location.address = userSettings.location;
 
     calendar = {
-      enabled = true;
+      enabled = false;
       account = {
         ilia_zoho = {
           type = "caldav";
