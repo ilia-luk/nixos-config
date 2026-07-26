@@ -3,10 +3,6 @@ with config.lib.stylix.colors;
 {
   imports = [
     ../app/kitty.nix
-    # (import ../../app/dmenu-scripts/networkmanager-dmenu.nix {
-    #   dmenu_command = "fuzzel -d"; inherit config lib pkgs;
-    # })
-    # ../input/nihongo.nix
   ];
   gtk.cursorTheme = {
     package = pkgs.quintom-cursor-theme;
@@ -143,7 +139,7 @@ with config.lib.stylix.colors;
       # Set programs that you use
       $terminal = kitty
       $fileManager = kitty yazi
-      $menu = fuzzel
+      $menu = noctalia msg panel-toggle launcher
       $passwordManager = 1password
       $mail = thunderbird
       $messenger = discord
@@ -356,6 +352,12 @@ with config.lib.stylix.colors;
       bind = $mainMod, B, exec, $browser
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, layoutmsg, togglesplit
+
+      # Nocualia
+      bind = $mainMod, SPACE, exec, $menu
+      bind = $mainMod, C, exec, noctalia msg panel-toggle control-center
+      bind = $mainMod, comma, exec, noctalia msg settings-toggle
+      bind = ALT, Tab, exec, noctalia msg window-switcher
 
       # Hyprshot
       bind = $mainMod ALT, 2, exec, hyprshot -m output

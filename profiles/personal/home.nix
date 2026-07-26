@@ -18,7 +18,6 @@
     ../../user/app/kitty.nix
     ../../user/app/yazi.nix
     ../../user/app/bat.nix
-    ../../user/app/fuzzel.nix
     ../../user/app/neovim.nix
     ../../user/app/lazygit.nix
     ../../user/app/gh-dash.nix
