@@ -62,7 +62,7 @@ with config.lib.stylix.colors;
     location.address = userSettings.location;
 
     calendar = {
-      enabled = false;
+      enabled = true;
       account = {
         ilia_zoho = {
           type = "caldav";
@@ -72,11 +72,11 @@ with config.lib.stylix.colors;
           server_url = "https://calendar.zoho.com";
           username = "ilia@domusnetwork.io";
         };
-        xpression = {
-          type = "google";
-          name = "Xpression Cal";
-          color = "#${base16}";
-        };
+        # xpression = {
+        #   type = "google";
+        #   name = "Xpression Cal";
+        #   color = "#${base16}";
+        # };
       };
     };
 
