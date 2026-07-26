@@ -66,6 +66,8 @@
 
     location.address = userSettings.location;
 
+    calendar.enabled = true;
+
     lockscreen.enabled = false;
 
     control_center.width = 1200;
