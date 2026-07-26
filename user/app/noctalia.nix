@@ -64,14 +64,14 @@ with config.lib.stylix.colors;
     calendar = {
       enabled = true;
       account = {
-        ilia_zoho = {
-          type = "caldav";
-          name = "Ilia Zoho Cal";
-          color = "#${base13}";
-          provider = "custom";
-          server_url = "https://calendar.zoho.com/caldav/dwrS1_LrRlWQ7eR_W8V3Jg==/user";
-          username = "ilia@domusnetwork.io";
-        };
+        # ilia_zoho = {
+        #   type = "caldav";
+        #   name = "Ilia Zoho Cal";
+        #   color = "#${base13}";
+        #   provider = "custom";
+        #   server_url = "https://calendar.zoho.com/caldav/dwrS1_LrRlWQ7eR_W8V3Jg==/user";
+        #   username = "ilia@domusnetwork.io";
+        # };
         xpression = {
           type = "google";
           name = "Xpression Cal";
