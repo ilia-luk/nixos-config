@@ -69,7 +69,7 @@ with config.lib.stylix.colors;
           name = "Ilia Zoho Cal";
           color = "#${base13}";
           provider = "custom";
-          server_url = "https://calendar.zoho.com/caldav/dwrS1_LrRlWQ7eR_W8V3Jg==/events/";
+          server_url = "https://calendar.zoho.com/caldav/dwrS1_LrRlWQ7eR_W8V3Jg==/user";
           username = "ilia@domusnetwork.io";
         };
         xpression = {
