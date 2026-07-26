@@ -27,7 +27,15 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, sops-nix, stylix, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      sops-nix,
+      stylix,
+      ...
+    }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
@@ -70,7 +78,7 @@
         browser = "firefox";
         # Default terminal command;
         term = "kitty";
-        font = "Fira Code";
+        font = "FiraCode Nerd Font";
         fontPkg = pkgs.nerd-fonts.fira-code;
         editor = "nvim";
         # Default org roam directory relative to ~/Org
@@ -79,14 +87,16 @@
         # generates a command that can be used to spawn editor inside a gui
         # EDITOR and TERM session variables must be set in home.nix or other module
         # I set the session variable SPAWNEDITOR to this in my home.nix for convenience
-        spawnEditor = if (editor == "emacsclient") then
-          "emacsclient -c -a 'emacs'"
-        else
-          (if ((editor == "vim") || (editor == "nvim")
-            || (editor == "nano")) then
-            "exec " + term + " -e " + editor
+        spawnEditor =
+          if (editor == "emacsclient") then
+            "emacsclient -c -a 'emacs'"
           else
-            editor);
+            (
+              if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
+                "exec " + term + " -e " + editor
+              else
+                editor
+            );
       };
 
       # ---------- PKGS --------- #
@@ -112,7 +122,8 @@
       # ------ HOME MANAGER ----- #
       home-manager = inputs.home-manager;
 
-    in {
+    in
+    {
       nixosConfigurations = {
         nexus = lib.nixosSystem {
           system = systemSettings.system;
@@ -121,8 +132,7 @@
               nixpkgs.overlays = [ overlay-unstable ];
               nixpkgs.config = pkgs-config;
             })
-            (./. + "/profiles" + ("/" + systemSettings.profile)
-              + "/configuration.nix")
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
           ];
           specialArgs = {
             # pass config variables from above
