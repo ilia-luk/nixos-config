@@ -1,8 +1,10 @@
 {
   inputs,
   userSettings,
+  config,
   ...
 }:
+with config.lib.stylix.colors;
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
@@ -59,7 +61,24 @@
 
     location.address = userSettings.location;
 
-    calendar.enabled = true;
+    calendar = {
+      enabled = true;
+      account = {
+        ilia_zoho = {
+          type = "caldav";
+          name = "Ilia Zoho Cal";
+          color = "#${base13}";
+          provider = "custom";
+          server_url = "https://calendar.zoho.com";
+          username = "ilia@domusnetwork.io";
+        };
+        xpression = {
+          type = "google";
+          name = "Xpression Cal";
+          color = "#${base16}";
+        };
+      };
+    };
 
     lockscreen.enabled = false;
 
