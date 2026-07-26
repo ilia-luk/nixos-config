@@ -345,7 +345,7 @@ with config.lib.stylix.colors;
       bind = $mainMod, L, exec, hyprlock
       bind = $mainMod, T, exec, $terminal
       bind = $mainMod, Q, killactive,
-      bind = $mainMod, M, exit,
+      bind = $mainMod, M, exec, noctalia msg panel-toggle session
       bind = $mainMod, E, exec, $fileManager
       bind = $mainMod, F, togglefloating,
       bind = $mainMod, R, exec, $menu
