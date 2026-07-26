@@ -1,20 +1,18 @@
 {
+  pkgs,
   inputs,
   userSettings,
-  pkgs,
   ...
 }:
 {
+  home.packages = with pkgs; [
+    khal
+  ];
+
   imports = [ inputs.noctalia.homeModules.default ];
 
   programs.noctalia.enable = true;
   programs.noctalia.systemd.enable = true;
-
-  programs.noctalia.package =
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override
-      {
-        calendarSupport = true;
-      };
 
   programs.noctalia.settings = {
     accessibility.ui_scale = 1.3;
