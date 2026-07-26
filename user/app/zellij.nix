@@ -1,10 +1,9 @@
 { pkgs, config, ... }:
 let
   zjstatus = pkgs.fetchurl {
-    name = "zjstatus-v0.17.0-final-v5.wasm";
-    url =
-      "https://github.com/dj95/zjstatus/releases/download/v0.17.0/zjstatus.wasm";
-    sha256 = "sha256-IgTfSl24Eap+0zhfiwTvmdVy/dryPxfEF7LhVNVXe+U=";
+    name = "zjstatus-v0.21.1.wasm";
+    url = "https://github.com/dj95/zjstatus/releases/download/v0.21.1/zjstatus.wasm";
+    sha256 = "sha256-3BmCogjCf2aHHmmBFFj7savbFeKGYv3bE2tXXWVkrho=";
   };
 
   room = pkgs.fetchurl {
@@ -12,7 +11,9 @@ let
     url = "https://github.com/rvcas/room/releases/download/v1.1.0/room.wasm";
     sha256 = "sha256-nYxZ1eOIkr1mFiAyWS9H/1i9jKnlRtORygMeyniS9QU=";
   };
-in with config.lib.stylix.colors; {
+in
+with config.lib.stylix.colors;
+{
   home.packages = [ pkgs.zellij ];
 
   # We enable the program but don't use the 'settings' or 'extraConfig' options
@@ -23,17 +24,122 @@ in with config.lib.stylix.colors; {
     theme "catppuccin"
     themes {
       catppuccin {
-        fg "#${base05}"
-        bg "#${base00}"
-        black "#${base02}"
-        red "#${base08}"
-        green "#${base0B}"
-        yellow "#${base0A}"
-        blue "#${base0D}"
-        magenta "#${base0E}"
-        cyan "#${base0C}"
-        white "#${base05}"
-        orange "#${base09}"
+        text_unselected {
+          base "#${base05}"
+          background "#${base01}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        text_selected {
+          base "#${base05}"
+          background "#${base04}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        ribbon_selected {
+          base "#${base01}"
+          background "#${base0B}"
+          emphasis_0 "#${base08}"
+          emphasis_1 "#${base09}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 "#${base0D}"
+        }
+        ribbon_unselected {
+          base "#${base01}"
+          background "#${base05}"
+          emphasis_0 "#${base08}"
+          emphasis_1 "#${base05}"
+          emphasis_2 "#${base0D}"
+          emphasis_3 "#${base0E}"
+        }
+        table_title {
+          base "#${base0B}"
+          background 0
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        table_cell_selected {
+          base "#${base05}"
+          background "#${base04}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        table_cell_unselected {
+          base "#${base05}"
+          background "#${base01}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        list_selected {
+          base "#${base05}"
+          background "#${base04}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        list_unselected {
+          base "#${base05}"
+          background "#${base01}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        frame_selected {
+          base "#${base0B}"
+          background 0
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 0
+        }
+        frame_highlight {
+          base "#${base09}"
+          background 0
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base09}"
+          emphasis_2 "#${base09}"
+          emphasis_3 "#${base09}"
+        }
+        exit_code_success {
+          base "#${base0B}"
+          background 0
+          emphasis_0 "#${base0C}"
+          emphasis_1 "#${base01}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 "#${base0D}"
+        }
+        exit_code_error {
+          base "#${base08}"
+          background 0
+          emphasis_0 "#${base0A}"
+          emphasis_1 0
+          emphasis_2 0
+          emphasis_3 0
+        }
+        multiplayer_user_colors {
+          player_1 "#${base0E}"
+          player_2 "#${base0D}"
+          player_3 0
+          player_4 "#${base0A}"
+          player_5 "#${base0C}"
+          player_6 0
+          player_7 "#${base08}"
+          player_8 0
+          player_9 0
+          player_10 0
+        }
       }
     }
 
@@ -49,7 +155,7 @@ in with config.lib.stylix.colors; {
         }
     }
 
-    pane_frames true
+    pane_frames false
     default_shell "nu"
     default_layout "default"
     copy_on_select true
