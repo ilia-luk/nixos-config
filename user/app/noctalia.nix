@@ -54,6 +54,8 @@
 
     location.address = userSettings.location;
 
+    lockscreen.enabled = false;
+
     control_center.width = 1200;
 
     nightlight.enabled = true;
@@ -78,6 +80,40 @@
         confirm_region = true;
         show_cursor = true;
       };
+      session.actions = [
+        {
+          action = "lock";
+          command = "pidof hyprlock || hyprlock";
+          enabled = true;
+          shortcut = "1";
+          variant = "default";
+        }
+        {
+          action = "logout";
+          enabled = true;
+          shortcut = "2";
+          variant = "default";
+        }
+        {
+          action = "lock_and_suspend";
+          command = "pidof hyprlock || hyprlock";
+          enabled = true;
+          shortcut = "3";
+          variant = "default";
+        }
+        {
+          action = "reboot";
+          enabled = true;
+          shortcut = "4";
+          variant = "default";
+        }
+        {
+          action = "shutdown";
+          enabled = true;
+          shortcut = "5";
+          variant = "destructive";
+        }
+      ];
     };
 
     theme = {
