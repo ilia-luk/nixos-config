@@ -72,11 +72,11 @@ with config.lib.stylix.colors;
           server_url = "https://calendar.zoho.com";
           username = "ilia@domusnetwork.io";
         };
-        # xpression = {
-        #   type = "google";
-        #   name = "Xpression Cal";
-        #   color = "#${base16}";
-        # };
+        xpression = {
+          type = "google";
+          name = "Xpression Cal";
+          color = "#${base16}";
+        };
       };
     };
 
