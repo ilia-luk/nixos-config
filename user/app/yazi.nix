@@ -260,11 +260,11 @@ with config.lib.stylix.colors;
           }
           # Fallback
           {
-            name = "*";
+            url = "*";
             fg = "#${base05}";
           }
           {
-            name = "*/";
+            url = "*/";
             fg = "#${base0D}";
           }
         ];
