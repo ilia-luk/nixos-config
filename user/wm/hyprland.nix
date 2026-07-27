@@ -166,6 +166,7 @@ with config.lib.stylix.colors;
 
       env = XCURSOR_SIZE,24
       env = HYPRCURSOR_SIZE,24
+      env = MOZ_ENABLE_WAYLAND,0
 
       # nvidia patch
       env = LIBVA_DRIVER_NAME,nvidia
