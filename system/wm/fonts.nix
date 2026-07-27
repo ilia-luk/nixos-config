@@ -10,6 +10,5 @@
     ubuntu-classic
     terminus_font
     nerd-fonts.fira-code
-    fira-code
   ];
 }
