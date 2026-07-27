@@ -1,4 +1,4 @@
-{ pkgs, lib, userSettings, ... }: {
+{ pkgs, lib, ... }: {
   environment.systemPackages = with pkgs; [
     postgresql_17
     unstable.dbeaver-bin
@@ -36,8 +36,15 @@
         };
       }
     ];
-    ensureDatabases = [ "mydatabase" "admin" "postgres" ];
+    ensureDatabases = [
+      "mydatabase"
+      "admin"
+      "postgres"
+    ];
     enableTCPIP = true;
+    # trust auth deliberate: local dev only, mock data by definition.
+    # Threat model accepted: any local process can reach these DBs;
+    # the user account/session is the actual security perimeter here.
     authentication = pkgs.lib.mkOverride 10 ''
       #...
       #type database DBuser origin-address auth-method

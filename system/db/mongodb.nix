@@ -6,6 +6,7 @@
     mongodb-compass
   ];
 
+  # no authentication deliberate: local dev only, mock data — see note in postgresql.nix
   services.mongodb = {
     enable = true;
     package = pkgs.mongodb-ce;
