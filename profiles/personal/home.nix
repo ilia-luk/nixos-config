@@ -104,6 +104,9 @@
     "x-scheme-handler/https" = [ "librewolf.desktop" ];
     "text/html" = [ "librewolf.desktop" ];
   };
+  xdg.configFile."uwsm/env".text = ''
+    export MOZ_ENABLE_WAYLAND=0
+  '';
 
   home.sessionVariables = {
     EDITOR = userSettings.editor;
