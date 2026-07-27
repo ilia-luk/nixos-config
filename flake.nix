@@ -72,7 +72,7 @@
         # window manager type (hyprland or x11) translator
         wmType = "wayland";
         # Default browser; must select one from ./user/app/browser/
-        browser = "firefox";
+        browser = "librewolf";
         # Default terminal command;
         term = "kitty";
         font = "FiraCode Nerd Font";

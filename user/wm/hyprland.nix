@@ -143,7 +143,7 @@ with config.lib.stylix.colors;
       $passwordManager = 1password
       $mail = thunderbird
       $messenger = discord
-      $browser = firefox
+      $browser = librewolf
 
 
       #################

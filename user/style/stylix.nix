@@ -1,14 +1,23 @@
-{ lib, pkgs, inputs, userSettings, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  userSettings,
+  ...
+}:
 let
-  themePath = "../../../themes"
-    + ("/" + userSettings.theme + "/" + userSettings.theme) + ".yaml";
-  themePolarity = lib.removeSuffix "\n" (builtins.readFile
-    (./. + "../../../themes" + ("/" + userSettings.theme) + "/polarity.txt"));
-  backgroundUrl = builtins.readFile (./. + "../../../themes"
-    + ("/" + userSettings.theme) + "/backgroundurl.txt");
-  backgroundSha256 = builtins.readFile (./. + "../../../themes/"
-    + ("/" + userSettings.theme) + "/backgroundsha256.txt");
-in {
+  themePath = "../../../themes" + ("/" + userSettings.theme + "/" + userSettings.theme) + ".yaml";
+  themePolarity = lib.removeSuffix "\n" (
+    builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/polarity.txt")
+  );
+  backgroundUrl = builtins.readFile (
+    ./. + "../../../themes" + ("/" + userSettings.theme) + "/backgroundurl.txt"
+  );
+  backgroundSha256 = builtins.readFile (
+    ./. + "../../../themes/" + ("/" + userSettings.theme) + "/backgroundsha256.txt"
+  );
+in
+{
   home.packages = with pkgs; [ noto-fonts-monochrome-emoji ];
 
   imports = [ inputs.stylix.homeModules.stylix ];
@@ -48,6 +57,14 @@ in {
     };
   };
   stylix.targets.firefox.enable = true;
+
+  stylix.targets.librewolf.enable = true;
+  stylix.targets.librewolf.profileNames = [
+    "ilia"
+    "xpression"
+    "accounts-domus"
+    "domusnetwork"
+  ];
 
   fonts.fontconfig.defaultFonts = {
     monospace = [ userSettings.font ];

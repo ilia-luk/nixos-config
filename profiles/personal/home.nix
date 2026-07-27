@@ -13,6 +13,7 @@
 
   imports = [
     ../../user/style/stylix.nix
+    ../../user/app/librewolf.nix
     ../../user/app/trash.nix
     ../../user/app/noctalia.nix
     ../../user/app/git.nix
@@ -98,6 +99,11 @@
   };
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/http" = [ "librewolf.desktop" ];
+    "x-scheme-handler/https" = [ "librewolf.desktop" ];
+    "text/html" = [ "librewolf.desktop" ];
+  };
 
   home.sessionVariables = {
     EDITOR = userSettings.editor;
