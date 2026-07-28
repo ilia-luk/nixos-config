@@ -18,8 +18,6 @@ let
   );
 in
 {
-  home.packages = with pkgs; [ noto-fonts-monochrome-emoji ];
-
   imports = [ inputs.stylix.homeModules.stylix ];
 
   home.file.".currenttheme".text = userSettings.theme;
@@ -38,12 +36,12 @@ in
       package = userSettings.fontPkg;
     };
     serif = {
-      name = userSettings.font;
-      package = userSettings.fontPkg;
+      name = userSettings.uiFont;
+      package = userSettings.uiFontPkg;
     };
     sansSerif = {
-      name = userSettings.font;
-      package = userSettings.fontPkg;
+      name = userSettings.uiFont;
+      package = userSettings.uiFontPkg;
     };
     emoji = {
       name = "Noto Emoji";
@@ -56,19 +54,13 @@ in
       desktop = 12;
     };
   };
-  stylix.targets.firefox.enable = true;
 
   stylix.targets.librewolf.enable = true;
-  stylix.targets.librewolf.profileNames = [
-    "ilia"
-    "xpression"
-    "accounts-domus"
-    "domusnetwork"
-  ];
+  stylix.targets.librewolf.profileNames = userSettings.browserProfiles;
 
   fonts.fontconfig.defaultFonts = {
     monospace = [ userSettings.font ];
-    sansSerif = [ userSettings.font ];
-    serif = [ userSettings.font ];
+    sansSerif = [ userSettings.uiFont ];
+    serif = [ userSettings.uiFont ];
   };
 }

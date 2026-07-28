@@ -73,10 +73,18 @@
         wmType = "wayland";
         # Default browser; must select one from ./user/app/browser/
         browser = "librewolf";
+        browserProfiles = [
+          "ilia"
+          "xpression"
+          "accounts-domus"
+          "domusnetwork"
+        ];
         # Default terminal command;
         term = "kitty";
         font = "FiraCode Nerd Font";
         fontPkg = pkgs.nerd-fonts.fira-code;
+        uiFont = "Ubuntu";
+        uiFontPkg = pkgs.ubuntu-classic;
         editor = "nvim";
         # Default org roam directory relative to ~/Org
         defaultRoamDir = "Personal.p";
