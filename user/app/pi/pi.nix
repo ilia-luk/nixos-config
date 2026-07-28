@@ -118,6 +118,6 @@ in
       # ANTHROPIC_API_KEY.file = config.sops.secrets."claude-api-key".path;  # Claude-when-it-matters, metered
       # OPENAI_API_KEY.file = config.sops.secrets."openai-api-key".path;  # Codex-when-it-matters, metered
     };
-    models = ./pi/models.json;
+    models = ./models.json;
   };
 }
