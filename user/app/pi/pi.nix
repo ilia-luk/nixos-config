@@ -3,6 +3,7 @@
 
   programs.pi.coding-agent = {
     enable = true;
+    models = ./models.json;
     settings = {
       enableInstallTelemetry = false;
       defaultProjectTrust = "ask";
