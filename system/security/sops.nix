@@ -1,7 +1,10 @@
 { inputs, pkgs, ... }: {
   imports = with inputs; [ sops-nix.nixosModules.sops ];
 
-  environment.systemPackages = with pkgs; [ age sops ];
+  environment.systemPackages = with pkgs; [
+    age
+    sops
+  ];
 
   # Enable sops
   sops = {
@@ -26,8 +29,6 @@
       ilia-nordtoken = { };
       gh-oauth = { };
       gh-access-token = { };
-      openai-api-key = { };
-      claude-api-key = { };
     };
   };
 }

@@ -21,6 +21,9 @@
       # this line is optional, prevents downloading two versions of nixpkgs but disables cache
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    pi = {
+      url = "github:lukasl-dev/pi.nix";
+    };
   };
 
   outputs =

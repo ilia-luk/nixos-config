@@ -23,6 +23,7 @@
       gh-oauth = { };
       openai-api-key = { };
       claude-api-key = { };
+      kimi-api-key = { };
     };
   };
 }

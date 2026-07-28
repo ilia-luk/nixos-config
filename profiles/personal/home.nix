@@ -13,6 +13,7 @@
 
   imports = [
     ../../user/style/stylix.nix
+    ../../user/app/pi.nix
     ../../user/app/librewolf.nix
     ../../user/app/trash.nix
     ../../user/app/noctalia.nix
