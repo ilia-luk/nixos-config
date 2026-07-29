@@ -1,0 +1,7 @@
+# the cloned client repo (dir name = projectName — rename after flake init)
+CHANGEME/
+
+# wrapper-local state
+.devenv/
+.direnv/
+.env

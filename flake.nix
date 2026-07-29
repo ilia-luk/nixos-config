@@ -169,5 +169,10 @@
           };
         };
       };
+
+      templates.wrapper = {
+        path = ./devenv/templates/wrapper;
+        description = "Client project wrapper: devenv + jailed pi + ceremonies (see devenv/wrapper-base.nix)";
+      };
     };
 }
