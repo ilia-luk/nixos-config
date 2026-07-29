@@ -123,7 +123,6 @@ in
       enable = true;
       permissions =
         combinators: with combinators; [
-          # defaults being replaced — keep explicitly
           network
           mount-cwd
 
@@ -134,10 +133,23 @@ in
             pkgs.jq
             pkgs.gnumake
             pkgs.tmux
-            pkgs.diffutils # wrapper needs cmp inside the jail
+            pkgs.diffutils
           ])
+
           (try-readonly (noescape "~/.gitconfig"))
-          (try-readonly (noescape "~/.config/sops-nix"))
+
+          # sops secrets: bind the stable runtime root (generation dirs live under it)
+          # and the ~/.config/sops-nix path so the module's secret paths resolve.
+          (add-runtime ''
+            secrets_root="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/secrets.d"
+            if [ -d "$secrets_root" ]; then
+              RUNTIME_ARGS+=(--ro-bind "$secrets_root" "$secrets_root")
+            fi
+            sops_cfg="$HOME/.config/sops-nix"
+            if [ -e "$sops_cfg" ]; then
+              RUNTIME_ARGS+=(--ro-bind "$sops_cfg" "$sops_cfg")
+            fi
+          '')
         ];
     };
   };
