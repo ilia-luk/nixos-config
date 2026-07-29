@@ -42,6 +42,7 @@ in
           pkgs.tmux
           pkgs.diffutils
           pkgs.gnugrep
+          pkgs.findutils
         ]
         ++ extraPkgs
       ))
