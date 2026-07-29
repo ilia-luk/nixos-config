@@ -47,12 +47,23 @@ in
       ))
       (try-readonly (noescape "~/.gitconfig"))
       (add-runtime (
-        lib.concatMapStrings (name: ''
+        (lib.concatMapStrings (name: ''
           link="$HOME/.config/sops-nix/secrets/${name}"
           if [ -e "$link" ]; then
             RUNTIME_ARGS+=(--ro-bind "$(realpath "$link")" "$link")
           fi
-        '') (builtins.attrValues piKeys)
+        '') (builtins.attrValues piKeys))
+        + ''
+          # themes are HM-managed store symlinks; bind their targets so they
+          # resolve inside the jail (no wholesale /nix/store mount by design)
+          for t in "$HOME/.pi/agent/themes"/*.json; do
+            [ -e "$t" ] || continue
+            rt="$(realpath "$t")"
+            case "$rt" in
+              /nix/store/*) RUNTIME_ARGS+=(--ro-bind "$rt" "$rt") ;;
+            esac
+          done
+        ''
       ))
     ];
 }
