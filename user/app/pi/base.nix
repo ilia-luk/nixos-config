@@ -54,14 +54,21 @@ in
           fi
         '') (builtins.attrValues piKeys))
         + ''
-          # themes are HM-managed store symlinks; bind their targets so they
-          # resolve inside the jail (no wholesale /nix/store mount by design)
+          # themes are HM-managed symlink CHAINS into the store; bind every hop
+          # so resolution survives inside the jail (no /nix/store mount by design)
           for t in "$HOME/.pi/agent/themes"/*.json; do
-            [ -e "$t" ] || continue
-            rt="$(realpath "$t")"
-            case "$rt" in
-              /nix/store/*) RUNTIME_ARGS+=(--ro-bind "$rt" "$rt") ;;
-            esac
+            [ -L "$t" ] || [ -e "$t" ] || continue
+            cur="$t"
+            while [ -L "$cur" ]; do
+              tgt="$(readlink "$cur")"
+              case "$tgt" in
+                /*) cur="$tgt" ;;
+                *) cur="$(dirname "$cur")/$tgt" ;;
+              esac
+              case "$cur" in
+                /nix/store/*) RUNTIME_ARGS+=(--ro-bind "$cur" "$cur") ;;
+              esac
+            done
           done
         ''
       ))
