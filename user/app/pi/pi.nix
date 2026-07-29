@@ -127,7 +127,6 @@ in
           network
           mount-cwd
 
-          # baseline toolchain visible to the agent
           (add-pkg-deps [
             pkgs.git
             pkgs.ripgrep
@@ -135,10 +134,10 @@ in
             pkgs.jq
             pkgs.gnumake
             pkgs.tmux
+            pkgs.diffutils # wrapper needs cmp inside the jail
           ])
-
-          # identity for commits; read-only, no keys
           (try-readonly (noescape "~/.gitconfig"))
+          (try-readonly (noescape "~/.config/sops-nix"))
         ];
     };
   };
