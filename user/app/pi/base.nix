@@ -43,6 +43,7 @@ in
           pkgs.diffutils
           pkgs.gnugrep
           pkgs.findutils
+          pkgs.gnused
         ]
         ++ extraPkgs
       ))
