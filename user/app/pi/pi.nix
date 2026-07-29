@@ -6,10 +6,9 @@
   ...
 }:
 let
-  piKeys = {
-    KIMI_API_KEY = "kimi-api-key";
-    # ANTHROPIC_API_KEY = "claude-api-key";
-    # OPENAI_API_KEY = "openai-api-key";
+  base = import ./base.nix {
+    inherit pkgs lib;
+    homeDir = config.home.homeDirectory;
   };
   piTheme = with config.lib.stylix.colors; {
     "$schema" =
@@ -113,44 +112,13 @@ in
 
   programs.pi.coding-agent = {
     enable = true;
-    settings = {
-      enableInstallTelemetry = false;
-      defaultProjectTrust = "ask";
-      theme = "stylix";
-    };
+    settings = base.settings;
     themes = [ (pkgs.writeText "stylix.json" (builtins.toJSON piTheme)) ];
-    environment = builtins.mapAttrs (_: name: {
-      file = config.sops.secrets.${name}.path;
-    }) piKeys;
+    environment = base.environment;
     models = ./models.json;
     jail = {
       enable = true;
-      permissions =
-        combinators: with combinators; [
-          network
-          mount-cwd
-          (add-pkg-deps [
-            pkgs.git
-            pkgs.ripgrep
-            pkgs.gnugrep
-            pkgs.fd
-            pkgs.jq
-            pkgs.gnumake
-            pkgs.tmux
-            pkgs.diffutils
-          ])
-          (try-readonly (noescape "~/.gitconfig"))
-
-          # bind exactly the secrets pi's environment references — nothing else
-          (add-runtime (
-            lib.concatMapStrings (name: ''
-              link="$HOME/.config/sops-nix/secrets/${name}"
-              if [ -e "$link" ]; then
-                RUNTIME_ARGS+=(--ro-bind "$(realpath "$link")" "$link")
-              fi
-            '') (builtins.attrValues piKeys)
-          ))
-        ];
+      permissions = base.jailPermissions [ ];
     };
   };
 }
