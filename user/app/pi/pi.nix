@@ -110,10 +110,11 @@ in
 {
   imports = [ inputs.pi.homeModules.default ];
 
+  home.file.".pi/agent/themes/stylix.json".text = builtins.toJSON piTheme;
+
   programs.pi.coding-agent = {
     enable = true;
     settings = base.settings;
-    themes = [ (pkgs.writeText "stylix.json" (builtins.toJSON piTheme)) ];
     environment = base.environment;
     models = ./models.json;
     jail = {
