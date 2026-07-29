@@ -119,5 +119,27 @@ in
       # OPENAI_API_KEY.file = config.sops.secrets."openai-api-key".path;  # Codex-when-it-matters, metered
     };
     models = ./models.json;
+    jail = {
+      enable = true;
+      permissions =
+        combinators: with combinators; [
+          # defaults being replaced — keep explicitly
+          network
+          mount-cwd
+
+          # baseline toolchain visible to the agent
+          (add-pkg-deps [
+            pkgs.git
+            pkgs.ripgrep
+            pkgs.fd
+            pkgs.jq
+            pkgs.gnumake
+            pkgs.tmux
+          ])
+
+          # identity for commits; read-only, no keys
+          (try-readonly (noescape "~/.gitconfig"))
+        ];
+    };
   };
 }
