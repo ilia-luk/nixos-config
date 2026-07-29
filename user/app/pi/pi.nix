@@ -5,6 +5,11 @@
   ...
 }:
 let
+  piKeys = {
+    KIMI_API_KEY = "kimi-api-key";
+    ANTHROPIC_API_KEY = "claude-api-key";
+    OPENAI_API_KEY = "openai-api-key";
+  };
   piTheme = with config.lib.stylix.colors; {
     "$schema" =
       "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json";
@@ -113,11 +118,9 @@ in
       theme = "stylix";
     };
     themes = [ (pkgs.writeText "stylix.json" (builtins.toJSON piTheme)) ];
-    environment = {
-      KIMI_API_KEY.file = config.sops.secrets."kimi-api-key".path;
-      # ANTHROPIC_API_KEY.file = config.sops.secrets."claude-api-key".path;  # Claude-when-it-matters, metered
-      # OPENAI_API_KEY.file = config.sops.secrets."openai-api-key".path;  # Codex-when-it-matters, metered
-    };
+    environment = builtins.mapAttrs (_: name: {
+      file = config.sops.secrets.${name}.path;
+    }) piKeys;
     models = ./models.json;
     jail = {
       enable = true;
@@ -125,7 +128,6 @@ in
         combinators: with combinators; [
           network
           mount-cwd
-
           (add-pkg-deps [
             pkgs.git
             pkgs.ripgrep
@@ -135,21 +137,17 @@ in
             pkgs.tmux
             pkgs.diffutils
           ])
-
           (try-readonly (noescape "~/.gitconfig"))
 
-          # sops secrets: bind the stable runtime root (generation dirs live under it)
-          # and the ~/.config/sops-nix path so the module's secret paths resolve.
-          (add-runtime ''
-            secrets_root="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/secrets.d"
-            if [ -d "$secrets_root" ]; then
-              RUNTIME_ARGS+=(--ro-bind "$secrets_root" "$secrets_root")
-            fi
-            sops_cfg="$HOME/.config/sops-nix"
-            if [ -e "$sops_cfg" ]; then
-              RUNTIME_ARGS+=(--ro-bind "$sops_cfg" "$sops_cfg")
-            fi
-          '')
+          # bind exactly the secrets pi's environment references — nothing else
+          (add-runtime (
+            lib.concatMapStrings (name: ''
+              link="$HOME/.config/sops-nix/secrets/${name}"
+              if [ -e "$link" ]; then
+                RUNTIME_ARGS+=(--ro-bind "$(realpath "$link")" "$link")
+              fi
+            '') (builtins.attrValues piKeys)
+          ))
         ];
     };
   };
