@@ -8,8 +8,8 @@
 let
   piKeys = {
     KIMI_API_KEY = "kimi-api-key";
-    ANTHROPIC_API_KEY = "claude-api-key";
-    OPENAI_API_KEY = "openai-api-key";
+    # ANTHROPIC_API_KEY = "claude-api-key";
+    # OPENAI_API_KEY = "openai-api-key";
   };
   piTheme = with config.lib.stylix.colors; {
     "$schema" =
@@ -132,6 +132,7 @@ in
           (add-pkg-deps [
             pkgs.git
             pkgs.ripgrep
+            pkgs.gnugrep
             pkgs.fd
             pkgs.jq
             pkgs.gnumake
