@@ -1,33 +1,80 @@
-# Shared devenv module for client project wrappers.
-# Imported at runtime by each wrapper's flake as
-#   "${inputs.dotfiles}/user/devenv/wrapper-base.nix"
-# so ceremony improvements ship to all wrappers via `env-sync`.
-
+# Shared devenv module for client project wrappers — species 2: imported by
+# reference ("${inputs.dotfiles}/devenv/wrapper-base.nix"), never copied.
+# Wrappers configure it via the `wrapper.*` options below.
 {
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
+let
+  cfg = config.wrapper;
+  homeDir = builtins.getEnv "HOME";
+  piBase = import "${inputs.dotfiles}/user/app/pi/base.nix" {
+    inherit pkgs lib homeDir;
+  };
+  agent = inputs.pi.lib.mkCodingAgent {
+    inherit pkgs;
+    modules = [
+      {
+        pi.coding-agent = {
+          environment = piBase.environment;
+          jail = {
+            enable = true;
+            permissions = piBase.jailPermissions cfg.piPackages;
+          };
+        };
+      }
+    ];
+  };
+in
 {
-  scripts = {
-    env-sync.exec = ''
-      set -e
-      echo ">> syncing wrapper against dotfiles..."
-      nix flake update dotfiles
-      git add flake.lock
-      echo ">> lock updated; direnv will reload on next prompt (or run: direnv reload)"
-    '';
+  options.wrapper = {
+    piPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "Project toolchain granted inside pi's jail.";
+    };
+    banner = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Extra enterShell lines (project-specific version prints).";
+    };
+  };
 
-    repo-clone.exec = ''
-      set -e
-      : "''${PROJECT_REPO_URL:?PROJECT_REPO_URL not set (define it in the wrapper env)}"
-      : "''${PROJECT_NAME:?PROJECT_NAME not set (define it in the wrapper env)}"
-      if [ -d "$PROJECT_NAME" ]; then
-        echo ">> $PROJECT_NAME already cloned"
-      else
-        git clone "$PROJECT_REPO_URL" "$PROJECT_NAME"
-      fi
+  config = {
+    devenv.root = lib.mkDefault (builtins.getEnv "PWD");
+    devenv.state = lib.mkForce (builtins.getEnv "PWD" + "/.devenv");
+
+    packages = [
+      agent.package
+      pkgs.bashInteractive
+      pkgs.tree
+    ];
+
+    scripts = {
+      env-sync.exec = ''
+        set -e
+        echo ">> syncing wrapper against dotfiles..."
+        nix flake update dotfiles
+        git add flake.lock
+        echo ">> lock updated; direnv reloads on next prompt (or: direnv reload)"
+      '';
+      repo-clone.exec = ''
+        set -e
+        : "''${PROJECT_REPO_URL:?PROJECT_REPO_URL not set}"
+        : "''${PROJECT_NAME:?PROJECT_NAME not set}"
+        if [ -d "$PROJECT_NAME" ]; then echo ">> $PROJECT_NAME already cloned"
+        else git clone "$PROJECT_REPO_URL" "$PROJECT_NAME"; fi
+      '';
+    };
+
+    enterShell = ''
+      echo ""
+      echo "wrapper: ''${PROJECT_NAME:-?} | pi jailed: yes | sync: env-sync"
+      ${cfg.banner}
+      echo ""
     '';
   };
 }
