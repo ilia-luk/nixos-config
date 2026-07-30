@@ -3,6 +3,14 @@
 [theme]
 # "terminal" inherits the host terminal's ANSI palette (kitty = stylix-themed,
 # so this follows userSettings.theme automatically). If the ANSI-derived UI
-# looks too crude, switch to the built-in "catppuccin" theme, and use
-# [theme.custom] hex overrides for any off-brand details.
+# looks too crude, switch to "catppuccin"; [theme.custom] hex overrides for details.
 name = "terminal"
+
+[ui]
+# borders on (default true, stated explicitly since we care) + agent labels in them
+pane_borders = true
+show_agent_labels_on_pane_borders = true
+
+[ui.toast]
+# route agent notifications through the OS service (= noctalia on this desktop)
+delivery = "system"
