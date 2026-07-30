@@ -1,0 +1,3 @@
+# worktrunk configuration — reference: `wt config create` writes a documented example
+# Default worktree path template creates siblings of the repo
+# (wrapper/accountant → wrapper/accountant.feat) — exactly where we want them.
