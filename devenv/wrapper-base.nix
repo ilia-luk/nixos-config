@@ -83,18 +83,15 @@ in
       herd.exec = ''
         exec herdr --session "''${PROJECT_NAME:?PROJECT_NAME not set (run inside a wrapper)}" "$@"
       '';
-      # Guard: worktrees belong to the client repo, not the wrapper repo.
-      # This script shadows worktrunk's `wt` on PATH inside wrapper shells and
-      # refuses creation when the current git toplevel IS the wrapper root —
-      # before wt runs, so no worktree/branch debris (wt's own pre-start hooks
-      # fire only after creation, too late to prevent).
+      # Guard: wt has no business in the WRAPPER repo — worktrees belong to the
+      # client repo inside it. Shadows worktrunk's binary on PATH in wrapper
+      # shells; blocks every invocation whose git toplevel is the wrapper root
+      # (incl. the interactive picker, which can create worktrees from its TUI).
       wt.exec = ''
         if [ "$(git rev-parse --show-toplevel 2>/dev/null)" = "$DEVENV_ROOT" ]; then
-          case " $* " in
-            *" -c "*|*" --create "*)
-              echo "wt guard: this is the WRAPPER repo — run wt from inside the project directory (the cloned client repo)." >&2
-              exit 1 ;;
-          esac
+          echo "wt guard: this is the WRAPPER repo — cd into the project directory (the cloned client repo) first." >&2
+          echo "  (escape hatch for debris cleanup: ${pkgs.unstable.worktrunk}/bin/wt)" >&2
+          exit 1
         fi
         exec ${pkgs.unstable.worktrunk}/bin/wt "$@"
       '';
