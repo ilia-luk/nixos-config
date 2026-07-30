@@ -1,5 +1,6 @@
 # the cloned client repo (dir name = projectName — rename after flake init)
-CHANGEME/
+# note the */ after CHANGEME, this is important for worktrunk trees not to get sources by wrapper.
+CHANGEME*/
 
 # wrapper-local state
 .devenv/
