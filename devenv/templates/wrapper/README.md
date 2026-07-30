@@ -28,10 +28,17 @@ equivalent) works inside its jail, and the enterShell banner names the project.
 
 ## Daily ceremonies
 
-- `env-sync` — pull the latest shared baseline from dotfiles
-  (`nix flake update dotfiles` + `git add flake.lock`; direnv reloads on next
-  prompt). Run after any dotfiles change to `wrapper-base.nix` or pi config.
+- `env-sync` — pull the latest shared baseline from dotfiles (updates the
+  `dotfiles` and `nixpkgs-unstable` locks; direnv reloads on next prompt).
 - `repo-clone` — (re)clone the client repo if the folder is missing. Idempotent.
+- `wrapper-doctor` — read-only health check: env, clone, git hygiene, sync
+  freshness, pi wiring, herdr staleness. Run it whenever something feels off.
+- `herd` — attach/create this project's own herdr session (never the default).
+- `herd-status` / `herd-reset` — inspect / stop+delete that session. Reset
+  after `env-sync` if a detached session still runs old binaries.
+- `wt` (worktrunk) — **run it from inside the cloned client repo, never the
+  wrapper root**; worktrees land as `<projectName>.<branch>/` siblings inside
+  the wrapper. At wrapper level, `wt` is guarded and will refuse.
 - Project-specific scripts live in `devenv.scripts/*.nix` — add a
   `watch_file` line in `.envrc` for each new module.
 
