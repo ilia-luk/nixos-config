@@ -21,6 +21,8 @@ in
     enableInstallTelemetry = false;
     defaultProjectTrust = "ask";
     theme = "stylix";
+    defaultProvider = "moonshot";
+    defaultModel = "kimi-k3";
   };
 
   environment = builtins.mapAttrs (_: name: {
