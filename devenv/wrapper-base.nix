@@ -28,6 +28,18 @@ let
       }
     ];
   };
+
+  # herdr identifies agents by process inspection; the bwrap jail's PID
+  # namespace hides pi, so bake the documented HERDR_AGENT hint onto the
+  # outermost wrapper (scoped to pi's process only, not a global export).
+  agentForHerdr = pkgs.symlinkJoin {
+    name = "pi-jailed-herdr";
+    paths = [ agent.package ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/pi --set HERDR_AGENT pi
+    '';
+  };
 in
 {
   options.wrapper = {
@@ -48,7 +60,7 @@ in
     devenv.state = lib.mkForce (builtins.getEnv "PWD" + "/.devenv");
 
     packages = [
-      agent.package
+      agentForHerdr
       pkgs.bashInteractive
       pkgs.tree
     ];
