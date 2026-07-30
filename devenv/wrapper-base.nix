@@ -80,6 +80,9 @@ in
         if [ -d "$PROJECT_NAME" ]; then echo ">> $PROJECT_NAME already cloned"
         else git clone "$PROJECT_REPO_URL" "$PROJECT_NAME"; fi
       '';
+      herd.exec = ''
+        exec herdr --session "''${PROJECT_NAME:?PROJECT_NAME not set (run inside a wrapper)}" "$@"
+      '';
     };
 
     enterShell = ''
