@@ -175,10 +175,10 @@ with config.lib.stylix.colors;
         {
           key = "B";
           name = "agent review (pi)";
-          # worktree + pi asked to review; findings land in the tuicr session
-          # via the skill (tuicr review add), reviewable in your TUI
+          # left: tuicr on the PR (host side — session pre-opened for you);
+          # right: jailed pi in a PR worktree, handed the exact session slug
           command = ''
-            zellij run --close-on-exit --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "agent-review-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}; pi 'Review this branch diff against main. Post each finding into the tuicr review session for this repo via tuicr review add --username pi (see your tuicr skill). If no session exists, tell me to start tuicr and wait.'"
+            zellij run --close-on-exit --floating --x 0 --y 0 --width "50%" --height "95%" --cwd {{.RepoPath}} --name "tuicr-{{.PrNumber}}" -- tuicr pr {{.PrNumber}}; zellij run --close-on-exit --floating --x "50%" --y 0 --width "50%" --height "95%" --cwd {{.RepoPath}} --name "agent-review-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}; pi 'A tuicr review session for this PR is already open beside me (slug: gh:{{.RepoName}}/pr/{{.PrNumber}}). Review this branch diff against main and post each finding via tuicr review add --username pi --session gh:{{.RepoName}}/pr/{{.PrNumber}}. If that session is not yet listed as active, wait a few seconds and re-check tuicr review list.'"
           '';
         }
       ];
