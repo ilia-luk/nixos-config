@@ -87,6 +87,24 @@ in
           # so make the tuicr skill's environment detection report "none" and
           # take its documented wait-for-the-user fallback instead of failing.
           RUNTIME_ARGS+=(--unsetenv ZELLIJ --unsetenv TMUX --unsetenv HERDR_ENV)
+
+          # git worktrees: a linked worktree's .git is a FILE pointing at the
+          # primary repo's .git/worktrees/<name>; without that dir the jail
+          # has no working git at all. Bind the primary .git (rw — index,
+          # refs, and object writes live there) so agents launched in a
+          # worktree are fully git-capable. Same-client data only; the
+          # cross-client geometry is untouched.
+          if [ -f "$PWD/.git" ]; then
+            wt_gitdir="$(sed -n 's/^gitdir: //p' "$PWD/.git")"
+            case "$wt_gitdir" in
+              /*)
+                git_common="$(cd "$wt_gitdir/../.." 2>/dev/null && pwd)"
+                if [ -n "$git_common" ] && [ -d "$git_common" ]; then
+                  RUNTIME_ARGS+=(--bind "$git_common" "$git_common")
+                fi
+                ;;
+            esac
+          fi
         ''
       ))
     ];

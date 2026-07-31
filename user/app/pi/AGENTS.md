@@ -13,3 +13,4 @@
   - a PR: `tuicr pr <number>`
 - Prefer file/CLI interaction (`tuicr review list` / `comments` / `add`) over
   anything that needs a visible terminal.
+- no remote git access — ask the human to push/fetch
