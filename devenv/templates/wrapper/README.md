@@ -41,6 +41,8 @@ equivalent) works inside its jail, and the enterShell banner names the project.
   the wrapper. At wrapper level, `wt` is guarded and will refuse.
 - Project-specific scripts live in `devenv.scripts/*.nix` — add a
   `watch_file` line in `.envrc` for each new module.
+- Reviewing with tuicr: `tuicr -w` (uncommitted) or `tuicr pr <n>` in the client repo;
+  from `gh-dash` use the review binds. Agents read/write the same sessions via `tuicr review` when an agent asks you to start tuicr, this is what it means.
 
 ## Layout
 
