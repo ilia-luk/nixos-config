@@ -148,37 +148,37 @@ with config.lib.stylix.colors;
     keybindings = {
       universal = [
         {
-          key = "g";
+          key = "z";
           name = "lazygit";
           command = ''
-            zellij run --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "lazygit" -- lazygit
+            zellij run --close-on-exit --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "lazygit" -- lazygit
           '';
         }
       ];
       prs = [
         {
-          key = "v";
+          key = "b";
           name = "review (tuicr)";
           command = ''
-            zellij run --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "review-{{.PrNumber}}" -- tuicr pr {{.PrNumber}}
+            zellij run --close-on-exit --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "review-{{.PrNumber}}" -- tuicr pr {{.PrNumber}}
           '';
         }
         {
-          key = "C";
+          key = "E";
           name = "checkout worktree";
           # nu -e: run then stay interactive — wt's cd handshake works, the
           # floating pane lands IN the worktree; launch nvim/pi/etc from there
           command = ''
-            zellij run --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "PR-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}"
+            zellij run --close-on-exit --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "PR-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}"
           '';
         }
         {
-          key = "A";
+          key = "B";
           name = "agent review (pi)";
           # worktree + pi asked to review; findings land in the tuicr session
           # via the skill (tuicr review add), reviewable in your TUI
           command = ''
-            zellij run --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "agent-review-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}; pi 'Review this branch diff against main. Post each finding into the tuicr review session for this repo via tuicr review add --username pi (see your tuicr skill). If no session exists, tell me to start tuicr and wait.'"
+            zellij run --close-on-exit --floating --width "90%" --height "90%" --cwd {{.RepoPath}} --name "agent-review-{{.PrNumber}}" -- nu -e "wt switch pr:{{.PrNumber}}; pi 'Review this branch diff against main. Post each finding into the tuicr review session for this repo via tuicr review add --username pi (see your tuicr skill). If no session exists, tell me to start tuicr and wait.'"
           '';
         }
       ];
