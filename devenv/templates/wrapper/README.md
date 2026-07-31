@@ -44,6 +44,33 @@ equivalent) works inside its jail, and the enterShell banner names the project.
 - Reviewing with tuicr: `tuicr -w` (uncommitted) or `tuicr pr <n>` in the client repo;
   from `gh-dash` use the review binds. Agents read/write the same sessions via `tuicr review` when an agent asks you to start tuicr, this is what it means.
 
+## Code review workflows (tuicr × pi × gh-dash)
+
+**PR review, human:** in gh-dash press `b` — floating tuicr on the PR.
+Comment, then `:submit` to publish to GitHub, or `y` to export markdown.
+
+**PR review, agent + human:** press `B` — tuicr opens on the left, a jailed
+pi in a PR worktree on the right, pointed at the same session. The agent
+posts findings (`--username pi`); reload the tuicr pane to see them, add
+your own, submit. (Submitted comments publish under _your_ GitHub account.)
+
+**Address PR feedback:** tell pi — "open the tuicr session for PR <n> and
+address the comments." Covers colleagues' GitHub comments too (tuicr syncs
+them into the session). If no session exists yet, open one (`tuicr pr <n>`
+or the `b` bind) when pi asks.
+
+**Review the agent's local work (human-led):** run `tuicr -w` in the repo,
+comment, then tell pi "open my tuicr session and address my comments."
+
+**Agent self-review (agent-led):** tell pi "review your code in tuicr."
+It will ask you to open `tuicr -w`, then post its findings for you to read
+in the TUI. Follow up with "address the comments" to act on them.
+
+Notes: local sessions hold drafts only — submitting to GitHub exists in PR
+sessions. The TUI loads drafts at startup; reload it to see comments added
+while it was open. Agents cannot reach GitHub (no `gh` in the sandbox) —
+pushing and submitting are always yours.
+
 ## Layout
 
 ```bash
