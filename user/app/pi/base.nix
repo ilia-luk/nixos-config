@@ -62,7 +62,7 @@ in
           # HM-managed agent resources (themes, skills) are symlink CHAINS into
           # the store; bind every hop so resolution survives inside the jail
           # (no /nix/store mount by design).
-          for t in "$HOME/.pi/agent/themes"/*.json "$HOME/.pi/agent/skills"/* "$HOME/.pi/agent/AGENT.md"; do
+          for t in "$HOME/.pi/agent/themes"/*.json "$HOME/.pi/agent/skills"/* "$HOME/.pi/agent/AGENTS.md"; do
             [ -L "$t" ] || [ -e "$t" ] || continue
             cur="$t"
             while [ -L "$cur" ]; do
