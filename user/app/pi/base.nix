@@ -46,6 +46,7 @@ in
           pkgs.gnugrep
           pkgs.findutils
           pkgs.gnused
+          pkgs.unstable.tuicr
         ]
         ++ extraPkgs
       ))
@@ -58,9 +59,10 @@ in
           fi
         '') (builtins.attrValues piKeys))
         + ''
-          # themes are HM-managed symlink CHAINS into the store; bind every hop
-          # so resolution survives inside the jail (no /nix/store mount by design)
-          for t in "$HOME/.pi/agent/themes"/*.json; do
+          # HM-managed agent resources (themes, skills) are symlink CHAINS into
+          # the store; bind every hop so resolution survives inside the jail
+          # (no /nix/store mount by design).
+          for t in "$HOME/.pi/agent/themes"/*.json "$HOME/.pi/agent/skills"/*; do
             [ -L "$t" ] || [ -e "$t" ] || continue
             cur="$t"
             while [ -L "$cur" ]; do
@@ -74,6 +76,17 @@ in
               esac
             done
           done
+
+          # tuicr review sessions: shared data plane between the human's TUI
+          # (host) and the agent's `tuicr review` CLI (jail). Read-write, file
+          # data only — no exec capability, unlike multiplexer sockets.
+          mkdir -p "$HOME/.local/share/tuicr/reviews"
+          RUNTIME_ARGS+=(--bind "$HOME/.local/share/tuicr/reviews" "$HOME/.local/share/tuicr/reviews")
+
+          # honest multiplexer posture: sockets are never bound into the jail,
+          # so make the tuicr skill's environment detection report "none" and
+          # take its documented wait-for-the-user fallback instead of failing.
+          RUNTIME_ARGS+=(--unsetenv ZELLIJ --unsetenv TMUX --unsetenv HERDR_ENV)
         ''
       ))
     ];

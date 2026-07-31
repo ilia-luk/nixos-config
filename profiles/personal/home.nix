@@ -13,6 +13,7 @@
 
   imports = [
     ../../user/style/stylix.nix
+    ../../user/app/tuicr/tuicr.nix
     ../../user/app/worktrunk/worktrunk.nix
     ../../user/app/herdr/herdr.nix
     ../../user/app/pi/pi.nix

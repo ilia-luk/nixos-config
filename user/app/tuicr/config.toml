@@ -1,0 +1,4 @@
+# tuicr configuration — bundled catppuccin-mocha matches the system scheme.
+# (If userSettings.theme ever changes off catppuccin, a stylix-generated local
+# theme in ~/.config/tuicr/themes/ is the upgrade path.)
+theme = "catppuccin-mocha"
