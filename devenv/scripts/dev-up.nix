@@ -1,62 +1,28 @@
-# dev-up: create-or-attach this project's zellij session with the standard
-# five-tab layout (editor / services / agents / reviews / shell). Layout is
-# generated per-wrapper so the editor tab opens inside the client repo.
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-let
-  repoDir = config.env.PROJECT_NAME or "CHANGEME";
-  layout = pkgs.writeText "wrapper-layout.kdl" ''
-    layout {
-        default_tab_template {
-            pane size=1 borderless=true {
-                plugin location="zellij:tab-bar"
-            }
-            children
-            pane size=2 borderless=true {
-                plugin location="zellij:status-bar"
-            }
-        }
-        tab name="editor" focus=true cwd="${repoDir}" {
-            pane split_direction="vertical" {
-                pane command="nvim" size="55%" {
-                    args "."
-                }
-                pane stacked=true {
-                    pane command="pi"
-                    pane
-                }
-            }
-        }
-        tab name="services" {
-            pane
-        }
-        tab name="agents" {
-            pane command="herd"
-        }
-        tab name="reviews" {
-            pane command="gh-dash"
-        }
-        tab name="shell" {
-            pane
-        }
-    }
-  '';
-in
+# dev-up: create-or-attach this project's zellij session using the shared
+# "wrapper" layout (defined HM-side in user/app/zellij.nix, where the
+# stylix/zjstatus theming lives). Launched from inside the client repo so
+# the layout's relative cwds resolve: editor tabs = repo, others = wrapper.
+{ ... }:
 {
   scripts.dev-up.exec = ''
     : "''${PROJECT_NAME:?PROJECT_NAME not set (run inside a wrapper)}"
+    if [ "$PROJECT_NAME" = "CHANGEME" ]; then
+      echo "dev-up: flake.nix still has CHANGEME placeholders — edit projectName/projectRepoUrl first" >&2
+      exit 1
+    fi
+    if [ ! -d "$DEVENV_ROOT/$PROJECT_NAME" ]; then
+      echo "dev-up: client repo '$PROJECT_NAME/' not found — run: repo-clone" >&2
+      exit 1
+    fi
     if [ -n "''${ZELLIJ:-}" ]; then
       echo "dev-up: already inside a zellij session — run from a plain terminal" >&2
       exit 1
     fi
+    cd "$DEVENV_ROOT/$PROJECT_NAME"
     if zellij list-sessions 2>/dev/null | grep -q "^$PROJECT_NAME\b\|^$PROJECT_NAME "; then
       exec zellij attach "$PROJECT_NAME"
     else
-      exec zellij --session "$PROJECT_NAME" --new-session-with-layout ${layout}
+      exec zellij --session "$PROJECT_NAME" --new-session-with-layout wrapper
     fi
   '';
 }

@@ -4,6 +4,7 @@
   systemSettings,
   ...
 }:
+with config.lib.stylix.colors;
 let
   zjstatus = pkgs.fetchurl {
     name = "zjstatus-v0.22.0.wasm";
@@ -16,8 +17,74 @@ let
     url = "https://github.com/rvcas/room/releases/download/v1.2.1/room.wasm";
     sha256 = "sha256-kLSDpAt2JGj7dYYhYFh6BfvtzVwTrcs+0jHwG/nActE=";
   };
+
+  tabTemplate = ''
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="file:${zjstatus}" {
+                color_rosewater "#${base06}"
+                color_flamingo "#${base0F}"
+                color_pink "#${base17}"
+                color_mauve "#${base0E}"
+                color_red "#${base08}"
+                color_maroon "#${base12}"
+                color_peach "#${base09}"
+                color_yellow "#${base0A}"
+                color_green "#${base0B}"
+                color_teal "#${base0C}"
+                color_sky "#${base15}"
+                color_sapphire "#${base16}"
+                color_blue "#${base0D}"
+                color_lavender "#${base07}"
+                color_text "#${base05}"
+                color_subtext1 "#${base18}"
+                color_subtext0 "#${base19}"
+                color_overlay2 "#${base24}"
+                color_overlay1 "#${base23}"
+                color_overlay0 "#${base22}"
+                color_surface2 "#${base04}"
+                color_surface1 "#${base03}"
+                color_surface0 "#${base02}"
+                color_base "#${base00}"
+                color_mantle "#${base01}"
+                color_crust "#${base11}"
+
+                format_left   "#[bg=$surface0,fg=$sapphire]#[bg=$sapphire,fg=$crust,bold] {session} #[bg=$surface0] {mode}#[bg=$surface0] {tabs}"
+                format_center "{notifications}"
+                format_right  "#[bg=$surface0,fg=$flamingo]#[fg=$crust,bg=$flamingo] #[bg=$surface1,fg=$flamingo,bold] {command_user}@{command_host}#[bg=$surface0,fg=$surface1]#[bg=$surface0,fg=$maroon]#[bg=$maroon,fg=$crust]󰔠 #[bg=$surface1,fg=$maroon,bold] {datetime}#[bg=$surface0,fg=$surface1]"
+                format_space  "#[bg=$surface0]"
+                
+                hide_frame_for_single_pane "false"
+
+                mode_normal        "#[bg=$green,fg=$crust,bold] NORMAL#[bg=$surface0,fg=$green]"
+                mode_locked        "#[bg=$red,fg=$crust,bold] LOCKED#[bg=$surface0,fg=$red]"
+                mode_pane          "#[bg=$teal,fg=$crust,bold] PANE#[bg=$surface0,fg=$teal]"
+                mode_tab           "#[bg=$teal,fg=$crust,bold] TAB#[bg=$surface0,fg=$teal]"
+                mode_scroll        "#[bg=$flamingo,fg=$crust,bold] SCROLL#[bg=$surface0,fg=$flamingo]"
+                mode_resize        "#[bg=$yellow,fg=$crust,bold] RESIZE#[bg=$surface0,fg=$yellow]"
+                mode_session       "#[bg=$pink,fg=$crust,bold] SESSION#[bg=$surface0,fg=$pink]"
+
+                tab_normal              "#[bg=$surface0,fg=$blue]#[bg=$blue,fg=$crust,bold]{index} #[bg=$surface1,fg=$blue,bold] {name}#[bg=$surface0,fg=$surface1]"
+                tab_active              "#[bg=$surface0,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}#[bg=$surface0,fg=$surface1]"
+                tab_separator           "#[bg=$surface0] "
+
+                command_host_command    "uname -n"
+                command_host_format     "{stdout}"
+                command_host_interval   "3600"
+
+                command_user_command    "whoami"
+                command_user_format     "{stdout}"
+                command_user_interval   "10"
+
+                datetime          "{format}"
+                datetime_format   "%Y-%m-%d    %H:%M"
+                datetime_timezone "${systemSettings.timezone}"
+            }
+        }
+    }
+  '';
 in
-with config.lib.stylix.colors;
 {
   home.packages = [ pkgs.zellij ];
 
@@ -175,69 +242,35 @@ with config.lib.stylix.colors;
   # Keep your existing Layout file definition for zjstatus
   xdg.configFile."zellij/layouts/default.kdl".text = ''
     layout {
-        default_tab_template {
-            children
-            pane size=1 borderless=true {
-                plugin location="file:${zjstatus}" {
-                    color_rosewater "#${base06}"
-                    color_flamingo "#${base0F}"
-                    color_pink "#${base17}"
-                    color_mauve "#${base0E}"
-                    color_red "#${base08}"
-                    color_maroon "#${base12}"
-                    color_peach "#${base09}"
-                    color_yellow "#${base0A}"
-                    color_green "#${base0B}"
-                    color_teal "#${base0C}"
-                    color_sky "#${base15}"
-                    color_sapphire "#${base16}"
-                    color_blue "#${base0D}"
-                    color_lavender "#${base07}"
-                    color_text "#${base05}"
-                    color_subtext1 "#${base18}"
-                    color_subtext0 "#${base19}"
-                    color_overlay2 "#${base24}"
-                    color_overlay1 "#${base23}"
-                    color_overlay0 "#${base22}"
-                    color_surface2 "#${base04}"
-                    color_surface1 "#${base03}"
-                    color_surface0 "#${base02}"
-                    color_base "#${base00}"
-                    color_mantle "#${base01}"
-                    color_crust "#${base11}"
+      ${tabTemplate}
+    }
+  '';
 
-                    format_left   "#[bg=$surface0,fg=$sapphire]#[bg=$sapphire,fg=$crust,bold] {session} #[bg=$surface0] {mode}#[bg=$surface0] {tabs}"
-                    format_center "{notifications}"
-                    format_right  "#[bg=$surface0,fg=$flamingo]#[fg=$crust,bg=$flamingo] #[bg=$surface1,fg=$flamingo,bold] {command_user}@{command_host}#[bg=$surface0,fg=$surface1]#[bg=$surface0,fg=$maroon]#[bg=$maroon,fg=$crust]󰔠 #[bg=$surface1,fg=$maroon,bold] {datetime}#[bg=$surface0,fg=$surface1]"
-                    format_space  "#[bg=$surface0]"
-                    
-                    hide_frame_for_single_pane "false"
-
-                    mode_normal        "#[bg=$green,fg=$crust,bold] NORMAL#[bg=$surface0,fg=$green]"
-                    mode_locked        "#[bg=$red,fg=$crust,bold] LOCKED#[bg=$surface0,fg=$red]"
-                    mode_pane          "#[bg=$teal,fg=$crust,bold] PANE#[bg=$surface0,fg=$teal]"
-                    mode_tab           "#[bg=$teal,fg=$crust,bold] TAB#[bg=$surface0,fg=$teal]"
-                    mode_scroll        "#[bg=$flamingo,fg=$crust,bold] SCROLL#[bg=$surface0,fg=$flamingo]"
-                    mode_resize        "#[bg=$yellow,fg=$crust,bold] RESIZE#[bg=$surface0,fg=$yellow]"
-                    mode_session       "#[bg=$pink,fg=$crust,bold] SESSION#[bg=$surface0,fg=$pink]"
-
-                    tab_normal              "#[bg=$surface0,fg=$blue]#[bg=$blue,fg=$crust,bold]{index} #[bg=$surface1,fg=$blue,bold] {name}#[bg=$surface0,fg=$surface1]"
-                    tab_active              "#[bg=$surface0,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}#[bg=$surface0,fg=$surface1]"
-                    tab_separator           "#[bg=$surface0] "
-
-                    command_host_command    "uname -n"
-                    command_host_format     "{stdout}"
-                    command_host_interval   "3600"
-
-                    command_user_command    "whoami"
-                    command_user_format     "{stdout}"
-                    command_user_interval   "10"
-
-                    datetime          "{format}"
-                    datetime_format   "%Y-%m-%d    %H:%M"
-                    datetime_timezone "${systemSettings.timezone}"
+  xdg.configFile."zellij/layouts/wrapper.kdl".text = ''
+    layout {
+    ${tabTemplate}
+        tab name="editor" focus=true {
+            pane split_direction="vertical" {
+                pane command="nvim" size="55%" {
+                    args "."
+                }
+                pane stacked=true {
+                    pane command="pi"
+                    pane
                 }
             }
+        }
+        tab name="services" cwd=".." {
+            pane
+        }
+        tab name="agents" cwd=".." {
+            pane command="herd"
+        }
+        tab name="reviews" cwd=".." {
+            pane command="gh-dash"
+        }
+        tab name="shell" cwd=".." {
+            pane
         }
     }
   '';
