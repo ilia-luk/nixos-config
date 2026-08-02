@@ -255,21 +255,21 @@ in
                     args "."
                 }
                 pane stacked=true {
-                    pane command="pi"
                     pane
+                    pane command="pi"
                 }
             }
         }
-        tab name="services" cwd=".." {
+        tab name="services" {
             pane
         }
-        tab name="agents" cwd=".." {
+        tab name="agents" {
             pane command="herd"
         }
-        tab name="reviews" cwd=".." {
+        tab name="reviews" {
             pane command="gh-dash"
         }
-        tab name="shell" cwd=".." {
+        tab name="shell" {
             pane
         }
     }
