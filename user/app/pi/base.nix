@@ -55,7 +55,8 @@ in
         (lib.concatMapStrings (name: ''
           link="$HOME/.config/sops-nix/secrets/${name}"
           if [ -e "$link" ]; then
-            RUNTIME_ARGS+=(--ro-bind "$(realpath "$link")" "$link")
+            rp="$(realpath "$link")"
+            RUNTIME_ARGS+=(--ro-bind "$rp" "$rp" --ro-bind "$rp" "$link")
           fi
         '') (builtins.attrValues piKeys))
         + ''
