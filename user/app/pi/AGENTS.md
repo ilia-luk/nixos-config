@@ -13,4 +13,15 @@
   - a PR: `tuicr pr <number>`
 - Prefer file/CLI interaction (`tuicr review list` / `comments` / `add`) over
   anything that needs a visible terminal.
-- no remote git access — ask the human to push/fetch
+
+## Remote operations
+
+- You have no GitHub credentials and no `gh` — by policy, not accident.
+  Pushing, fetching, PR creation, and review submission are the human's.
+  When remote state must change, say exactly what you need done.
+
+## Review sessions
+
+- tuicr PR sessions (`gh:owner/repo/pr/N`) can be submitted to GitHub by
+  the human; local sessions (`-w`, ranges) hold drafts only. When findings
+  must reach a PR, post them into the PR session.
