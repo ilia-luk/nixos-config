@@ -12,6 +12,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ../../devenv/wrapper-init.nix
     ../../user/style/stylix.nix
     ../../user/app/tuicr/tuicr.nix
     ../../user/app/worktrunk/worktrunk.nix

@@ -47,6 +47,7 @@ in
     ./scripts/herdr.nix
     ./scripts/worktrunk.nix
     ./scripts/doctor.nix
+    ./scripts/dev-up.nix
   ];
 
   options.wrapper = {
