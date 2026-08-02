@@ -113,6 +113,7 @@ in
   home.file.".pi/agent/themes/stylix.json".text = builtins.toJSON piTheme;
   home.file.".pi/agent/skills/tuicr".source = "${pkgs.unstable.tuicr.src}/skills/tuicr";
   home.file.".pi/agent/AGENTS.md".source = ./AGENTS.md;
+  home.file.".pi/agent/prompts".source = ./prompts;
 
   programs.pi.coding-agent = {
     enable = true;
