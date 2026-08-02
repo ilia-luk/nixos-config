@@ -7,24 +7,33 @@ subdirectory, keeping their git history free of any of this.
 Shared baseline lives in the dotfiles repo (`devenv/wrapper-base.nix`) and is
 imported by reference — improvements arrive via `env-sync`, never by copying.
 
-## Creating a new project (from the template)
+## Creating a new project
 
 ```bash
-mkdir ~/dev/<project> && cd ~/dev/<project>
-nix flake init -t github:ilia-luk/nixos-config#wrapper   # or: -t ~/.dotfiles#wrapper
-
-# 1) edit the "project configuration" block at the top of flake.nix
-#    (projectName, projectRepoUrl, projectPkgs)
-# 2) rename the CHANGEME/ line in .gitignore to your projectName/
-
-git init && git add -A     # flakes only see TRACKED files — add before loading
-direnv allow               # builds the shell (first run takes a while)
-repo-clone                 # clones the client repo into ./<projectName>/
-cp .env.example .env       # then edit
+cd ~/dev
+wrapper-init <project> git@github.com:<org>/<repo>.git
+cd <project>             # first shell build takes a while
+repo-clone               # clones the client repo into ./<project>/
+cp .env.example .env     # then edit
+dev-up                   # themed five-tab project session
 ```
 
-Sanity check: `pi` starts themed, `!node --version` (or your stack's
-equivalent) works inside its jail, and the enterShell banner names the project.
+`wrapper-init` scaffolds from this template, fills `projectName`/`projectRepoUrl`
+and the `.gitignore` pattern, git-inits (flakes only see tracked files), and
+runs `direnv allow`. Two follow-ups per project:
+
+1. add the toolchain to `projectPkgs` in flake.nix (feeds both the shell and
+   pi's jail),
+2. add the repo to gh-dash's `repoPaths` (`user/app/gh-dash.nix` in dotfiles)
+   so the review keybinds resolve.
+
+Manual path (what wrapper-init automates): mkdir + `nix flake init -t
+~/.dotfiles#wrapper` + edit the project-configuration block + rename the
+CHANGEME gitignore line + `git init && git add -A` + `direnv allow`.
+
+Sanity check: `wrapper-doctor` reports green (expect only the not-cloned warn
+before `repo-clone`); `pi` starts themed and `!node --version` (or your
+stack's equivalent) works inside its jail.
 
 ## Daily ceremonies
 
@@ -33,6 +42,10 @@ equivalent) works inside its jail, and the enterShell banner names the project.
 - `repo-clone` — (re)clone the client repo if the folder is missing. Idempotent.
 - `wrapper-doctor` — read-only health check: env, clone, git hygiene, sync
   freshness, pi wiring, herdr staleness. Run it whenever something feels off.
+- `dev-up` — create or attach this project's zellij session: five tabs
+  (editor with nvim + stacked pi/shell, services, agents running `herd`,
+  reviews running `gh-dash`, shell at wrapper root). Run from a plain
+  terminal; it guards against unedited placeholders and a missing clone.
 - `herd` — attach/create this project's own herdr session (never the default).
 - `herd-status` / `herd-reset` — inspect / stop+delete that session. Reset
   after `env-sync` if a detached session still runs old binaries.
@@ -42,7 +55,8 @@ equivalent) works inside its jail, and the enterShell banner names the project.
 - Project-specific scripts live in `devenv.scripts/*.nix` — add a
   `watch_file` line in `.envrc` for each new module.
 - Reviewing with tuicr: `tuicr -w` (uncommitted) or `tuicr pr <n>` in the client repo;
-  from `gh-dash` use the review binds. Agents read/write the same sessions via `tuicr review` when an agent asks you to start tuicr, this is what it means.
+  from `gh-dash` use the review binds. Agents read/write the same sessions via
+  `tuicr review`. When an agent asks you to start tuicr, this is what it means.
 
 ## Code review workflows (tuicr × pi × gh-dash)
 
@@ -79,7 +93,7 @@ pushing and submitting are always yours.
 ├── .envrc # direnv glue (--impure: PWD/HOME plumbing)
 ├── devenv.scripts/ # project-specific devenv modules
 ├── AGENTS.md # notes for the coding agent
-└── <projectName>/ # the client repo (gitignored, cloned by repo-clone)
+└── <projectName>.<branch>/ # worktrees (created via `wt` from inside the repo)
 ```
 
 The coding agent (`pi`) runs bubblewrap-jailed: it sees this wrapper (rw),
