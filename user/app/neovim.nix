@@ -3,10 +3,12 @@
   config,
   ...
 }:
-with config.lib.stylix.colors; {
+with config.lib.stylix.colors;
+{
   home.packages = with pkgs; [
     unstable.neovim-unwrapped
   ];
 
-#programs.neovim.enable = true;
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/user/app/nvim";
 }
