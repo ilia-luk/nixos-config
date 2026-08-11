@@ -333,11 +333,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1785482215,
-        "narHash": "sha256-zhj7FHHO+mdnYLrGZNSNdOqAgDZls+bIq3vej7gorxI=",
+        "lastModified": 1786426319,
+        "narHash": "sha256-Klom65S/gcm3odaWZUssgbuolQpc4to7uR38F68flD8=",
         "owner": "lukasl-dev",
         "repo": "pi.nix",
-        "rev": "584dc9c0586f60d308587de13039e34c2e06348b",
+        "rev": "03b7c12779fd619c84444946948235b46adfc03d",
         "type": "github"
       },
       "original": {
