@@ -29,6 +29,11 @@ messages with usage hints (read those) — never redirect stderr away
   → qualified_name, file_path, start/end lines per hit.
 - `trace_path` — call/dependency chains between nodes.
 - `query_graph` — Cypher-style graph queries for complex relationships.
+  Use SINGLE-quoted string literals inside the Cypher
+  (`{name: 'formatDate'}`) — escaped double quotes (`\"`) break the
+  argument parser and surface as a misleading "query is required".
+  Example that works:
+  `'{"project": "<slug>", "query": "MATCH (caller)-[:CALLS]->(f {name: '"'"'formatDate'"'"'}) RETURN caller.name, caller.file_path"}'`
 - `get_architecture` — module/layer overview of the codebase.
 - `search_code` — full-text search over indexed content.
 - `get_code_snippet` — fetch a node's source by graph identity.
