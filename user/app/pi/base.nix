@@ -47,6 +47,7 @@ in
           pkgs.findutils
           pkgs.gnused
           pkgs.unstable.tuicr
+          pkgs.unstable.codebase-memory-mcp
         ]
         ++ extraPkgs
       ))
@@ -83,6 +84,15 @@ in
           # data only — no exec capability, unlike multiplexer sockets.
           mkdir -p "$HOME/.local/share/tuicr/reviews"
           RUNTIME_ARGS+=(--bind "$HOME/.local/share/tuicr/reviews" "$HOME/.local/share/tuicr/reviews")
+
+          # codebase-memory graph cache: per-wrapper root (client isolation —
+          # the index IS client code structure). rw so the jailed agent can
+          # index and query; same-build coordination guaranteed because jail
+          # and wrapper shell resolve cbm from the same wrapper lock.
+          if [ -n "''${CBM_CACHE_DIR:-}" ]; then
+            mkdir -p "$CBM_CACHE_DIR"
+            RUNTIME_ARGS+=(--bind "$CBM_CACHE_DIR" "$CBM_CACHE_DIR")
+          fi
 
           # honest multiplexer posture: sockets are never bound into the jail,
           # so make the tuicr skill's environment detection report "none" and

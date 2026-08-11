@@ -71,7 +71,10 @@ in
       agentForHerdr
       pkgs.bashInteractive
       pkgs.tree
+      pkgs.unstable.codebase-memory-mcp
     ];
+
+    env.CBM_CACHE_DIR = lib.mkDefault (builtins.getEnv "PWD" + "/.cbm");
 
     enterShell = ''
       echo ""

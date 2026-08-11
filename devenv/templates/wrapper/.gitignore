@@ -6,3 +6,4 @@ CHANGEME*/
 .devenv/
 .direnv/
 .env
+.cbm/
