@@ -91,7 +91,7 @@ in
           # and wrapper shell resolve cbm from the same wrapper lock.
           if [ -n "''${CBM_CACHE_DIR:-}" ]; then
             mkdir -p "$CBM_CACHE_DIR"
-            RUNTIME_ARGS+=(--bind "$CBM_CACHE_DIR" "$CBM_CACHE_DIR")
+            RUNTIME_ARGS+=(--bind "$CBM_CACHE_DIR" "$CBM_CACHE_DIR" --setenv CBM_CACHE_DIR "$CBM_CACHE_DIR")
           fi
 
           # honest multiplexer posture: sockets are never bound into the jail,
