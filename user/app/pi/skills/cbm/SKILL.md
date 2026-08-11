@@ -10,8 +10,9 @@ cycles. Everything runs locally via one-shot CLI calls:
 
     codebase-memory-mcp cli <tool> '<json-args>'
 
-Log lines on stderr (`level=info ...`) are noise — ignore them; the JSON on
-stdout is the answer.
+stderr carries BOTH `level=info` progress logs (ignore those) AND error
+messages with usage hints (read those) — never redirect stderr away
+(`2>/dev/null` hides the hints that tell you the correct arguments).
 
 ## Session start
 
