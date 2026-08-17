@@ -21,8 +21,10 @@ in
     enableInstallTelemetry = false;
     defaultProjectTrust = "ask";
     theme = "stylix";
-    defaultProvider = "moonshot";
-    defaultModel = "kimi-k3";
+    defaultProvider = "openai-codex";
+    defaultModel = "gpt-5.6-sol";
+    packages = [ "npm:pi-web-access@0.23.0" ];
+    npmCommand = "${pkgs.nodejs}/bin/npm";
   };
 
   environment = builtins.mapAttrs (_: name: {
