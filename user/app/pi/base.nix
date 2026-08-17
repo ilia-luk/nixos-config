@@ -66,7 +66,7 @@ in
           # HM-managed agent resources (themes, skills) are symlink CHAINS into
           # the store; bind every hop so resolution survives inside the jail
           # (no /nix/store mount by design).
-          for t in "$HOME/.pi/agent/themes"/*.json "$HOME/.pi/agent/skills"/* "$HOME/.pi/agent/AGENTS.md" "$HOME/.pi/agent/prompts" "$HOME/.pi/web-search.json"; do
+          for t in "$HOME/.pi/agent/themes"/*.json "$HOME/.pi/agent/skills"/* "$HOME/.pi/agent/AGENTS.md" "$HOME/.pi/agent/prompts"; do
             [ -L "$t" ] || [ -e "$t" ] || continue
             cur="$t"
             while [ -L "$cur" ]; do
@@ -86,6 +86,17 @@ in
           # data only — no exec capability, unlike multiplexer sockets.
           mkdir -p "$HOME/.local/share/tuicr/reviews"
           RUNTIME_ARGS+=(--bind "$HOME/.local/share/tuicr/reviews" "$HOME/.local/share/tuicr/reviews")
+
+          # pi-web-access config lives OUTSIDE the agent-dir mount (~/.pi/),
+          # so the hop-bind glob can't deliver it — bind the resolved store
+          # file AND the link path (sops-key pattern) so jailed pis get the
+          # same workflow settings as host pis (default = curator = silent
+          # ~20s stall per search in a jail).
+          ws="$HOME/.pi/web-search.json"
+          if [ -e "$ws" ]; then
+            wsrp="$(realpath "$ws")"
+            RUNTIME_ARGS+=(--ro-bind "$wsrp" "$wsrp" --ro-bind "$wsrp" "$ws")
+          fi
 
           # codebase-memory graph cache: per-wrapper root (client isolation —
           # the index IS client code structure). rw so the jailed agent can
