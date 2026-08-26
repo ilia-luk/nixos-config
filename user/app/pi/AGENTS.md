@@ -25,3 +25,13 @@
 - tuicr PR sessions (`gh:owner/repo/pr/N`) can be submitted to GitHub by
   the human; local sessions (`-w`, ranges) hold drafts only. When findings
   must reach a PR, post them into the PR session.
+
+## Output style
+
+- Lead with the answer. No preamble, no restating the question.
+- No summaries of what you just did unless asked.
+- No generic caveats, warnings, or "let me know if" closers.
+- Density over hand-holding: assume an expert reader; domain terms
+  are precision, use them.
+- Match response length to question weight — one-line questions
+  deserve short answers.
