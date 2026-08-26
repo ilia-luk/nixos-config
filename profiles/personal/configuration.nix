@@ -114,6 +114,7 @@
     gimp3
     inkscape
     diffnav
+    lutris
   ];
 
   # Enable zsh and nushell

@@ -81,6 +81,17 @@ in
             done
           done
 
+          # mask client secret files inside the jail: present but empty.
+          # (post-web-access: readable secrets + untrusted web content +
+          # fetch tools = exfil triangle). Walks the mount root so nested
+          # monorepo .envs are covered regardless of launch geometry;
+          # .env.example stays readable (structure, not values).
+          while IFS= read -r sf; do
+            RUNTIME_ARGS+=(--bind /dev/null "$sf")
+          done < <(find "$PWD" -maxdepth 4 \
+              \( -name node_modules -o -name .git -o -name .devenv -o -name ".cbm" \) -prune -o \
+              -type f \( -name ".env" -o -name ".env.*" \) ! -name ".env.example" -print 2>/dev/null)
+
           # tuicr review sessions: shared data plane between the human's TUI
           # (host) and the agent's `tuicr review` CLI (jail). Read-write, file
           # data only — no exec capability, unlike multiplexer sockets.
