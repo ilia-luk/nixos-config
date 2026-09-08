@@ -22,7 +22,7 @@ in
     defaultProjectTrust = "ask";
     theme = "stylix";
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.6-sol";
+    defaultModel = "gpt-6-astra";
     packages = [ "npm:pi-web-access@0.23.0" ];
     npmCommand = [ "${pkgs.nodejs}/bin/npm" ];
   };

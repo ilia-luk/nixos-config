@@ -3,7 +3,7 @@ return {
   config = function()
     require("pi").setup({
       provider = "openai-codex",
-      model = "gpt-5.6-sol",
+      model = "gpt-6-astra",
     })
     -- restore the claude-code-plugin workflow: mark lines, ask
     vim.keymap.set("n", "<leader>ai", ":PiAsk<CR>", { desc = "Ask pi (buffer)" })
