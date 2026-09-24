@@ -23,7 +23,10 @@ in
     theme = "stylix";
     defaultProvider = "openai-codex";
     defaultModel = "gpt-6-astra";
-    packages = [ "npm:pi-web-access@0.23.0" ];
+    packages = [
+      "npm:pi-web-access@0.23.0"
+      "npm:timestamp-pi"
+    ];
     npmCommand = [ "${pkgs.nodejs}/bin/npm" ];
   };
 
