@@ -26,6 +26,7 @@ in
     packages = [
       "npm:pi-web-access@0.23.0"
       "npm:timestamp-pi@0.2.1"
+      "npm:@jmcombs/pi-notify@1.1.0"
     ];
     npmCommand = [ "${pkgs.nodejs}/bin/npm" ];
   };
