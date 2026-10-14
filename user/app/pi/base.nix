@@ -22,9 +22,9 @@ in
     defaultProjectTrust = "ask";
     theme = "stylix";
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-6-sol";
+    defaultModel = "gpt-6-astra";
     packages = [
-      "npm:pi-web-access@0.23.0"
+      "npm:pi-web-access@0.40.0"
       "npm:timestamp-pi@0.2.1"
       "npm:@jmcombs/pi-notify@1.1.0"
     ];
