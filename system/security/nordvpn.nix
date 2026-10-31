@@ -27,7 +27,7 @@ let
         remote = builtins.elemAt remote 0;
         port = builtins.elemAt remote 1;
         dev = "tun";
-        proto-tcp = "no";
+        proto-tcp = if lib.hasPrefix "tcp" (directive "proto") then "yes" else "no";
         remote-cert-tls = "server";
         verify-x509-name = "subject:${directive "verify-x509-name"}";
         tls-version-min = "1.2";
@@ -52,9 +52,9 @@ in {
       environmentFiles = [ config.sops.templates."nordvpn.env".path ];
       profiles = {
         nordvpn-israel = mkProfile "Israel" "a9c2e5f1-718a-4b8f-9e27-04c62ef45101"
-          ../../misc/il100.nordvpn.com.udp_2.6.ovpn;
+          ../../misc/il99.nordvpn.com.tcp_2.6.ovpn;
         nordvpn-thailand = mkProfile "Thailand" "a9c2e5f1-718a-4b8f-9e27-04c62ef45102"
-          ../../misc/th56.nordvpn.com.udp_2.6.ovpn;
+          ../../misc/th59.nordvpn.com.tcp_2.6.ovpn;
       };
     };
   };
