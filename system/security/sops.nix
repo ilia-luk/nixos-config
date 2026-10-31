@@ -27,6 +27,8 @@
     secrets = {
       ilia-password = { };
       ilia-nordtoken = { };
+      nordvpn-service-username = { };
+      nordvpn-service-password = { };
       gh-oauth = { };
       gh-access-token = { };
     };

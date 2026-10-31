@@ -12,6 +12,7 @@
   imports = [
     ../../system/hardware-configuration.nix
     ../../system/security/sops.nix
+    ../../system/security/nordvpn.nix
     ../../system/hardware/systemd.nix
     ../../system/hardware/time.nix
     ../../system/hardware/opengl.nix

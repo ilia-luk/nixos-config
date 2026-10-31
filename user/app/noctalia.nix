@@ -16,6 +16,8 @@ with config.lib.stylix.colors;
 
     audio.enable_sounds = true;
 
+    plugins.enabled = [ "andrewdems/vpn-manager" ];
+
     bar.default = {
       background_opacity = 0.85;
       border = "shadow";
@@ -43,6 +45,7 @@ with config.lib.stylix.colors;
         "notifications"
         "clipboard"
         "network"
+        "andrewdems/vpn-manager:bar"
         "bluetooth"
         "volume"
         "keyboard_layout"
